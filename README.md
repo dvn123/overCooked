@@ -1,1 +1,7 @@
-Projecto de LBAW
+Este projeto destina-se à especificação e desenvolvimento de um sistema de informação com interface web para gerir uma comunidade de perguntas e respostas colaborativas no âmbito do mundo culinário: técnicas de cozinha; manuseamento de utensílios; culturas gastronómicas; receitas; etc.
+
+O sistema deve permitir a colocação e edição de perguntas utilizando um editor de texto e associação de título e tags à respetiva questão. Tanto as perguntas como as respostas podem ser votadas positiva ou negativamente, ficando assim ordenadas por grau de interesse, e ter comentários associados.
+
+O sistema deve ainda gerar páginas com os destaques baseado nas perguntas em aberto ou mais votadas.
+
+Os utilizadores não autenticados ficam restritos à leitura das perguntas, respostas e comentários. Os utilizadores autenticados estão habilitados à colocação e resposta a questões, elaboração de comentários e votação das respostas de acordo com a sua opinião relativamente ao conteúdo e relevância das mesmas. Cada utilizador tem uma pontuação associada que é calculada em função das votações das perguntas ou respostas submetidas, dando-lhe assim relevância entre os utilizadores. Os administradores além de beneficiarem de privilégios de moderação e gestão de utilizadores podem ainda promover utilizadores registados a moderadores, tendo estes últimos a capacidade de corrigir situações de má conduta pela edição ou remoção de perguntas, respostas ou comentários. 
