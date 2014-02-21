@@ -1,0 +1,12 @@
+Identifier      Name                Priority    Description
+V01             Login               high        Como Visitante quero autenticar-me no sistema para poder colocar e responder a questões.
+V02             Signin              high        Como Visitante quero registar-me no sistema para me poder autenticar no sistema.
+V03             Search              high        Como Visitante quero consultar toda a informação pública.
+LE01            Ask Question        high        Como Leitor/Escritor quero poder colocar questões para esclarecer as minhas dúvidas.
+LE02            Answer Question     high        Como Leitor/Escritor quero poder responder a questões para ajudar outros utilizadores.
+LE03            Vote Question       high        Como Leitor/Escritor quero votar nas melhores respostas para contribuir para uma melhor organização da informação.
+LE04            Comment Answer      high        Como Leitor/Escritor quero poder comentar as respostas de outros utilizador para aumentar o valor da resposta dada.
+LE05            Profile Editing     high        Como Leitor/Escritor quero alterar a informação comigo relacionada para a manter atualizada (por exemplo alterar a palavra-passe) 
+M01             Edit                high        Como Moderador quero poder alterar o conteúdo de questões, respostas e comentários para remover obscenidades.
+M02             Remove              high        Como Moderador quero poder remover conteúdos para melhorar a qualidade do website.
+M03             Ban/Unban           high        Como Moderador quero poder gerir a permissão de colocar conteúdos de outros utilizadares sem serem eles moderadores ou administradores para remover utilizadores reincidentes em quebrar as regras
