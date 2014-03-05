@@ -1,86 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>overCooked</title>
-
-    <link href="css/bootstrap-3.1.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/default.css" rel="stylesheet"/>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body>
-<div class="navbar navbar-inverse navbar-default" role="navigation">
-    <img id="logo" src="images/food-logo.png"/>
-
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><span id="title1">Over</span>
-                <span id="title2">Cooked</span></a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
-    </div>
-</div>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="..." alt="...">
-            <div class="carousel-caption">
-                ...
+<html>
+    <head>
+        <title>Bootstrap 3</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href = "css/bootstrap-3.1.1/css/bootstrap.css" rel = "stylesheet">
+        <link href = "css/styles.css" rel = "stylesheet">
+        <style>
+            img{
+                height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="nabo" class="container "> 
+            <div class="pull-right">
+                <h4><a class="">Registar</a> |
+                <a class="">Login</a></h4>
             </div>
         </div>
-        ...
-    </div>
+        
+        <div class = "navbar navbar-default navbar-static-top">
+            <div class = "container">
+                
+                <a href = "#" class = "navbar-brand"><img src="images/food-logo1.png"></a> 
+                
+                <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+                    <span class = "icon-bar"></span>
+                    <span class = "icon-bar"></span>
+                    <span class = "icon-bar"></span>
+                </button>
+                
+                <div class = "collapse navbar-collapse navHeaderCollapse">
+                    
+                    <ul class = "nav navbar-nav navbar-right">
+                        
+                        <li class = "active"><a href = "#">Home</a></li>
+                        <li><a href = "#">Blog</a></li>
+                        <li class = "dropdown">
+                            
+                            <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Social Media <b class = "caret"></b></a>
+                            <ul class = "dropdown-menu">
+                                <li><a href = "#">Twitter</a></li>
+                                <li><a href = "#">Facebook</a></li>
+                                <li><a href = "#">Google+</a></li>
+                                <li><a href = "#">Instagram</a></li>
+                            </ul>
+                            
+                        </li>
+                        <li><a href = "#">About</a></li>
+                        <li><a href = "#">Contact</a></li>
+                        
+                    </ul>
+                    
+                </div>
+                
+            </div>
+        </div>
+        <!-- style="width: 900px; margin: 0 auto; padding:0;" -->
+        <div class="container panel">
+            <div id="carousel-example-generic" class="carousel slide container" data-ride="carousel" style="padding:0;">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+                
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner text-center">
+                    <div class="item">
+                        <img src="images/1.jpg" alt="1" class="img-responsive" style="width:100%;">
+                        <div class="carousel-caption">
+                            UM
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="item active">
+                        <img src="images/2.jpg" alt="2" class="img-responsive" style="width:100%;">
+                        <div class="carousel-caption">
+                            DOIS
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="item">
+                        <img src="images/3.jpg" alt="3" class="img-responsive" style="width:100%;">
+                        <div class="carousel-caption">
+                            TRES
+                        </div>
+                    </div>
+                    
+                </div> 
+                
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+            
+        </div>
+        <div class="container">
+            <div class="jumbotron text-center">
+                <h1 >Bem vindo ao overCooked!</h1>
+                <p>orem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet placerat libero. Nulla commodo massa ultricies eleifend                       ultricies. Vivamus pulvinar metus id enim laoreet</p>
+                <a href="#" class="btn btn-info">link1</a>
+                <a href="#" class="btn btn-success">link2</a>
+            </div>
+        </div>
+        
+        <div class="container" style="width: 900px; margin: 0 auto;">
+            <ul class="nav nav-tabs">
+                  <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
 
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
-</div>
-
-<div class="container">
-    <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-            mostly barebones HTML document.</p>
-    </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="js/libs/bootstrap/bootstrap.min.js"></script>
-</body>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <div class="content">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet placerat libero. Nulla commodo massa ultricies eleifend ultricies. Vivamus pulvinar metus id enim laoreet suscipit. Mauris quis volutpat nisi. Morbi in nulla tincidunt, consequat nulla iaculis, vulputate metus. Fusce vitae libero sed leo vestibulum eleifend. Donec nibh dui, dignissim quis diam in, posuere ullamcorper nisl.    
+                    </div>
+                </div>
+              <div class="tab-pane" id="profile">...</div>
+              <div class="tab-pane" id="messages">...</div>
+              <div class="tab-pane" id="settings">...</div>
+            </div>
+        
+        </div>
+        <script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src = "js/libs/bootstrap/bootstrap.js"></script>
+        
+    </body>
 </html>
+
