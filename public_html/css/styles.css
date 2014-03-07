@@ -3,7 +3,7 @@
 	background-color: #a1a616;
 	border-color: #606E14;
     border-bottom-width: 2.5px;
-    border-top-width: 2.5px;
+   /*border-top-width: 2.5px;*/
     /*margin: -2px;
     height: 107px;*/
 }
@@ -92,3 +92,6 @@ img {
 	margin-top: -45px;
 }
 
+#idd {
+	text-shadow: 2px 2px grey;
+}
