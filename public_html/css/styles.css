@@ -113,7 +113,7 @@ img {
     zoom:1; /* hasLayout ie7 trigger */
   }
 
-  .nav-tabs, .nav-pills {
+  .nav-tabs .nav-pills{
     text-align:right;
   }
 
