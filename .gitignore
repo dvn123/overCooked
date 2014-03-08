@@ -1,6 +1,6 @@
 /config/
 /nbproject/
 /test/
-.idea/
 /.idea/
+/.idea/*
 *.iml
