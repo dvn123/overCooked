@@ -96,3 +96,15 @@ a:focus {
     color: #7d094a;
     text-decoration: underline;
 }
+
+/* nav-pills */
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+    color: #606E14;
+    background-color: #e2e4c0;
+}
+
+.nav-pills > li > a {
+    color: #606E14;
+}
