@@ -124,6 +124,11 @@ img{
 body {
     margin-bottom: 50px;
 }
+
+.nav-tabs, .nav-pills {
+    text-align: right;
+}
+
 /****    *******/
 .voffset  { margin-top: 2px; }
 .voffset1 { margin-top: 5px; }
