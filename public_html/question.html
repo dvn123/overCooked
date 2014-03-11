@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Bootstrap 3</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href = "css/bootstrap-3.1.1/css/bootstrap.css" rel = "stylesheet">
+  <link href = "css/styles.css" rel = "stylesheet">
+
+</head>
+<body>
+
+  <div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+      <a href="#" class="navbar-brand"><img src="images/food-logo1.png"></a>
+
+
+      <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse navHeaderCollapse">
+
+        <ul class="nav navbar-nav navbar-right pull-left">
+
+          <li class="active"><a href="#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a>
+          </li>
+          <li><a href="#">Fazer Pergunta</a></li>
+          <li><a href="#">Perguntas</a></li>
+                <!--<li class = "dropdown">
+
+<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Social Media <b class = "caret"></b></a>
+<ul class = "dropdown-menu">
+<li><a href = "#">Twitter</a></li>
+<li><a href = "#">Facebook</a></li>
+<li><a href = "#">Google+</a></li>
+<li><a href = "#">Instagram</a></li>
+</ul>
+
+</li>-->
+<li><a href="#">Sobre</a></li>
+<li><a href="#">Contacto</a></li>
+
+</ul>
+<ul class="nav navbar-nav navbar-right pull-right">
+  <li class="dropdown">
+    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login<strong class="caret"></strong></a>
+    <div class="dropdown-menu" style="width:320%;padding: 15px; padding-bottom: 15px;">
+      <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+        <input class="form-control" id="user_username" style="margin-bottom: 15px;" type="text" name="user[username]" size="30" />
+        <input class="form-control" id="user_password" style="margin-bottom: 15px;" type="password" name="user[password]" size="30" />
+        <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox" name="user[remember_me]" value="1" />
+        <label class="string optional" for="user_remember_me">Lembrar-me</label>
+
+        <input class="btn btn-primary" style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit" name="commit" value="Login" />
+      </form>
+    </div>
+  </li>
+  <li><a data-toggle="modal" data-target="#myModal">Registar</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container center col-lg-8 col-lg-offset-1">
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      Como fazer arroz integral?
+      <div class="pull-right panel panel-default">
+        <div class="panel-body"> joaomanuel
+          <span class="badge">20 pts</span>
+        </div>
+      </div></h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="col-xs-1">
+        <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+          <span class="glyphicon glyphicon-chevron-up"></span>
+        </button>
+        <div class="text-center btn btn-default disabled" style="min-width:50px;">10</div>
+        <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+          <span class="glyphicon glyphicon-chevron-down"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+          <span class="glyphicon glyphicon-pushpin"></span>
+        </button>
+      </div>
+      <div class="col-xs-8 col-lg-11 col-md-offset-0 col-xs-offset-1">
+        Qual a principal diferença se quiser fazer arroz integral?<br/>
+        Tentei fazer mas não deu certo.
+
+      </div>
+      <div class="highlight col-xs-11 bg-info col-xs-offset-1" style="margin-top:10px;">
+        <p>Isto é um comentário</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container col-lg-8 col-lg-offset-1" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">4 respostas</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="container col-lg-12">
+        <div class="panel panel-default">
+
+          <div class="panel-body">
+
+            <div class="col-xs-1">
+              <button type="button" class="btn btn-success btn-md disabled" style="min-width:50px; margin-bottom:10px;">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+              <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+              </button>
+              <div class="text-center btn btn-default disabled" style="min-width:50px;">2</div>
+              <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+              </button>
+
+            </div>
+
+
+
+            <div class="col-xs-8 col-lg-11 col-md-offset-0 col-xs-offset-1">
+              <div class="panel panel-default" style="float:right;">
+                <div class="panel-body" > rosanna
+                  <span class="badge">50 pts</span>
+                </div>
+              </div>
+              Tens que juntar mais água.<br/>
+              Vê neste site uma boa receita.
+              <a href="http://menoscaloriasmaisvida.wordpress.com/2008/08/20/dica-de-cozinha-nº-2-como-cozinhar-arroz-integral/">
+                http://menoscaloriasmaisvida.wordpress.com/2008/08/20/dica-de-cozinha-nº-2-como-cozinhar-arroz-integral/</a>
+                <br/><br/>
+                Espero que te seja util Espero que te seja util Espero que te seja util Espero que te seja util Espero que te seja util
+
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container col-lg-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+
+              <div class="col-xs-1">
+                <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+                  <span class="glyphicon glyphicon-chevron-up"></span>
+                </button>
+                <div class="text-center btn btn-default disabled" style="min-width:50px;">0</div>
+                <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+              </div>
+              <div class="col-xs-8 col-lg-11 col-md-offset-0 col-xs-offset-1">
+                              <div class="panel panel-default" style="float:right;">
+                <div class="panel-body" > mariajose
+                  <span class="badge">5 pts</span>
+                </div>
+              </div>
+                É dificl ajudar com poucos detalhes.... :(<br/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <ul class="pagination">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">&raquo;</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<script src = "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src = "js/libs/bootstrap/bootstrap.js"></script>
+
+</body>
+</html>
+
