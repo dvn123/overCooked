@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Bootstrap 3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <style>
+        img {
+            margin-top: -19px;
+            height: 90px;
+        }
+
+        .nav-tabs > li, .nav-pills > li {
+            float: none;
+            display: inline-block;
+            *display: inline; /* ie7 fix */
+            zoom: 1; /* hasLayout ie7 trigger */
+        }
+
+        .nav-tabs, .nav-pills {
+            text-align: right;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages: ["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Number of Visits'],
+                ['Portugal', 11],
+                ['United Kingdom', 2],
+                ['Zimbabwe', 2],
+                ['Djibouti', 2],
+                ['Botswana', 7]
+            ]);
+
+            var options = {
+                title: 'Number of Visits by Country',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+            chart.draw(data, options);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Number of Posts'],
+                ['Portugal', 5],
+                ['United Kingdom', 1],
+                ['Zimbabwe', 1],
+                ['Djibouti', 6],
+                ['Botswana', 1]
+            ]);
+
+            var options = {
+                title: 'Number of Posts by Country',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+            chart.draw(data, options);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Age', 'Number of Visits'],
+                ['0-10', 11],
+                ['10-20', 2],
+                ['20-35', 2],
+                ['35-50', 2],
+                ['50+', 7]
+            ]);
+
+            var options = {
+                title: 'Number of Visits by Age',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart3'));
+            chart.draw(data, options);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Age', 'Number of Posts'],
+                ['0-10', 2],
+                ['10-20', 11],
+                ['20-35', 2],
+                ['35-50', 2],
+                ['50+', 7]
+            ]);
+
+            var options = {
+                title: 'Number of Posts by Age',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart4'));
+            chart.draw(data, options);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Number of Visits'],
+                ['Portugal', 11],
+                ['United Kingdom', 2],
+                ['Zimbabwe', 2],
+                ['Djibouti', 2],
+                ['Botswana', 7]
+            ]);
+
+            var options = {
+                title: 'Number of Visits by Country',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart5'));
+            chart.draw(data, options);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Country', 'Number of Visits'],
+                ['Portugal', 11],
+                ['United Kingdom', 2],
+                ['Zimbabwe', 2],
+                ['Djibouti', 2],
+                ['Botswana', 7]
+            ]);
+
+            var options = {
+                title: 'Number of Visits by Country',
+                pieHole: 0.4
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('donutchart6'));
+            chart.draw(data, options);
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+        <a href="#" class="navbar-brand"><img src="images/food-logo1.png"></a>
+
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+
+            <ul class="nav navbar-nav navbar-right pull-left">
+
+                <li class="active"><a href="#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a>
+                </li>
+                <li><a href="#">Fazer Pergunta</a></li>
+                <li><a href="#">Perguntas</a></li>
+                <!--<li class = "dropdown">
+
+<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Social Media <b class = "caret"></b></a>
+<ul class = "dropdown-menu">
+<li><a href = "#">Twitter</a></li>
+<li><a href = "#">Facebook</a></li>
+<li><a href = "#">Google+</a></li>
+<li><a href = "#">Instagram</a></li>
+</ul>
+
+</li>-->
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Contacto</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login<strong class="caret"></strong></a>
+
+                    <div class="dropdown-menu" style="width:320%;padding: 15px; padding-bottom: 15px;">
+                        <form action="[YOUR ACTION]" method="post" accept-charset="UTF-8">
+                            <input class="form-control" id="user_username" style="margin-bottom: 15px;" type="text"
+                                   name="user[username]" size="30"/>
+                            <input class="form-control" id="user_password" style="margin-bottom: 15px;" type="password"
+                                   name="user[password]" size="30"/>
+                            <input id="user_remember_me" style="float: left; margin-right: 10px;" type="checkbox"
+                                   name="user[remember_me]" value="1"/>
+                            <label class="string optional" for="user_remember_me">Lembrar-me</label>
+
+                            <input class="btn btn-primary"
+                                   style="clear: left; width: 100%; height: 32px; font-size: 13px;" type="submit"
+                                   name="commit" value="Login"/>
+                        </form>
+                    </div>
+                </li>
+                <li><a data-toggle="modal" data-target="#myModal">Registar</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- <div class="container">
+<div class="jumbotron text-center ">
+<h2 ><b>Bem vindo ao overCooked!</b></h2>
+<h4>Não deixes que uma dúvida te impeça de ser um chefe bem sucedido!</h4><br>
+<a href="#" class="btn btn-info">Regista-te já!</a>
+</div>
+</div>-->
+
+<!-- <div class="container">
+<div class=" text-center col-md-2 center " >
+
+</div>
+<div class="jumbotron text-center col-md-8 center">
+<h2 ><b>Bem vindo ao overCooked!</b></h2>
+<h4>Não deixes que uma dúvida te impeça de ser um chefe bem sucedido!</h4><br>
+<a href="#" class="btn btn-info">Regista-te já!</a>
+</div>
+<div class=" text-center col-md-2 center">
+</div>
+</div> -->
+
+<div class="container">
+    <div class="row text-center"><h1 id="idd"><span style="color:#a1a616;">Statistics</span>
+    </h1></div>
+</div>
+
+<div class="container col-md-4">
+    <div id="donutchart" style="width: 550px; height: 500px;"></div>
+</div>
+
+<div class="container  col-md-4">
+    <div id="donutchart2" style="width: 550px; height: 500px;"></div>
+</div>
+
+<div class="container  col-md-4">
+    <div id="donutchart3" style="width: 550px; height: 500px;"></div>
+</div>
+
+<div class="container  col-md-4">
+    <div id="donutchart4" style="width: 550px; height: 500px;"></div>
+</div>
+
+<div class="container  col-md-4">
+    <div id="donutchart5" style="width: 550px; height: 500px;"></div>
+</div>
+
+<div class="container  col-md-4">
+    <div id="donutchart6" style="width: 550px; height: 500px;"></div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Registar</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-2 control-label">Nome</label>
+
+                        <div class="col-sm-10">
+                            <input type="name" class="form-control" id="inputName" placeholder="Nome Completo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCountry" class="col-sm-2 control-label">País</label>
+
+                        <div class="col-sm-10">
+                            <input type="dropdown" class="form-control" id="inputCountry" placeholder="País">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCity" class="col-sm-2 control-label">Cidade</label>
+
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="inputCity" placeholder="Cidade">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Regista-te!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="js/libs/bootstrap/bootstrap.js"></script>
+
+</body>
+</html>
