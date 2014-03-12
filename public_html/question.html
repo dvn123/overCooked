@@ -234,7 +234,7 @@
             console.log(comment_visible);
             if(!comment_visible) {
                 comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"padding-top:10px;min-width:50px;\">Submeter</button></div>" ).appendTo( $(this).parent());
+                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='padding-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
                 CKEDITOR.replace( 'inputText' );
             } else {
                 comment_visible = false;
@@ -246,7 +246,7 @@
             console.log(comment_visible);
             if(!comment_visible) {
                 comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"min-width:50px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
+                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
                 CKEDITOR.replace( 'inputText' );
             } else {
                 comment_visible = false;
@@ -257,7 +257,7 @@
         $('.answer-button').on('click', function() {
             if(!answer_visible) {
                 answer_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea class=\"answer-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"min-width:50px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
+                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"answer-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
                 CKEDITOR.replace( 'inputText' );
             } else {
                 answer_visible = false;
