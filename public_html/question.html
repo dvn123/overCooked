@@ -104,10 +104,10 @@
             <div class="col-xs-11 col-xs-offset-1">
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">arroz</span></a>
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">receita</span></a>
-                <button type="button" class="comment-button-question btn btn-default btn-md col-xs-offset-7" style="min-width:50px;">
+                <button type="button" class="comment-button-question btn btn-default btn-md col-xs-offset-7" style="position: absolute;bottom: 30px; right:45px;min-width:50px;min-width:50px;">
                     Comment
                 </button>
-                <button type="button" class="answer-button btn btn-default btn-md" style="min-width:50px;">
+                <button type="button" class="answer-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:135px;min-width:50px;min-width:50px;">
                     Answer
                 </button>
 
@@ -221,6 +221,19 @@
 </div>
 </div>
 
+<div class="navbar navbar-default navbar-fixed-bottom" style="border-bottom:0px;border-top:10px;border-color: #606E14;height: 35px;">
+    <div class="container">
+        <ul class="nav navbar-nav pull-left" style="position:relative;top: -8px;">
+            <li ><a href="#">@2014 overCooked Foundation</a></li>
+        </ul>
+            <ul class="nav navbar-nav pull-right" style="position:relative;top: -8px;">
+                <li ><a href="#">Quem Somos</a></li>
+                <li><a href="#">Contatos</a></li>
+                <li><a href="#">Política de privacidade</a></li>
+            </ul>
+    </div>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="ckeditor/skins/moono/editor.css">
@@ -233,7 +246,7 @@
             console.log(comment_visible);
             if(!comment_visible) {
                 comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='padding-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
+                $( "<div id=\"input2\" class=\"container col-md-12\" style='margin: 0px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
                 CKEDITOR.replace( 'inputText' );
             } else {
                 comment_visible = false;

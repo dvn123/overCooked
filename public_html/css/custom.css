@@ -15,6 +15,10 @@
     border-bottom-color: #e2e4c0;
 }
 
+.navbar{
+    min-height:10px;
+}
+
 /*paginations */
 
 .pagination > li > a,
