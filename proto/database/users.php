@@ -1,10 +1,34 @@
 <?php
 
+/*
 function createUser($realname, $username, $password)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO users VALUES (?, ?, ?)");
     $stmt->execute(array($username, $realname, sha1($password)));
+}
+*/
+
+function createUser($username, $password, $birthDate, $city, $email, $gender, $name, $idCountry, $userGroup)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "INSERT INTO webUser (username,password, registrationDate, birthDate, city, email, gender, name, idCountry, userGroup)
+        VALUES (:username,:password,:registrationDate,:birthDate,:city,:email,:gender,:name,:idCountry,'user');"
+    );
+
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":password", sha1($password));
+    $stmt->bindParam(":registrationDate",date('d-m-Y h:i:s', time()) );
+    $stmt->bindParam(":birthDate", $birthDate);
+    $stmt->bindParam(":city", $city);
+    $stmt->bindParam(":email", $email);
+    $stmt->bindParam(":gender", $gender);
+    $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":idCountry", $idCountry);
+    $stmt->bindParam(":userGroup", $userGroup);
+
+    $stmt->execute();
 }
 
 function isLoginCorrect($username, $password)
