@@ -110,7 +110,7 @@ function getUsersByName() {
         ORDER BY username");
     
     $stmt->execute();
-    $stmt->fetch();
+    $stmt->fetchAll();
 
     $data = array();
 
