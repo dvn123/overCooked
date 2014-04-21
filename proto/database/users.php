@@ -133,7 +133,7 @@ function getUsersByScore() {
         ORDER BY score");
     
     $stmt->execute();
-    $stmt->fetch();
+    $stmt->fetchAll();
 
     $data = array();
 
