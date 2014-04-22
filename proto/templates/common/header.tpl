@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Fritter</title>
-    <meta charset='utf-8'>
-    <link rel="stylesheet" href="{$BASE_URL}css/style.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="{$BASE_URL}javascript/main.js"></script>
-  </head>
-  <body>
-    <header>
-      <h1><a href="{$BASE_URL}">Fritter</a></h1>
-      {if $USERNAME}
-        {include file='common/menu_logged_in.tpl'}
-      {else}
-        {include file='common/menu_logged_out.tpl'}
-      {/if}
-    </header>
-    {if $USERNAME}
-    <div id="tweet_form">
-      <form action="{$BASE_URL}actions/tweets/tweet.php" method="post">
-        <textarea name="tweet" placeholder="Say something"></textarea>
-        <input type="submit">
-      </form>
+<head>
+	<title>OverCooked</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{$BASE_URL}css/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
+	<link href="{$BASE_URL}css/styles.css" rel="stylesheet">
+	<link href = "{$BASE_URL}css/custom.css" rel = "stylesheet">
+</head>
+<body>
+
+
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+        <a href="{$BASE_URL}" class="navbar-brand"><img src="images/food-logo1.png"></a>
+
+
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navHeaderCollapse">
+
+            <ul class="nav navbar-nav navbar-right pull-left">
+
+                <li class = "active"> <a href = "#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a></li>
+                <li ><a href = "#">Fazer Pergunta</a></li>
+                <li><a href = "#">Perguntas</a></li>
+                <li><a href = "#">Tags</a></li>
+
+            </ul>
+
+		{if $USERNAME}
+		{include file='common/menu_logged_in.tpl'}
+		{else}
+		{include file='common/menu_logged_out.tpl'}
+		{/if}
+
+        </div>
+
     </div>
-    {/if}
-    <div id="error_messages">
-    {foreach $ERROR_MESSAGES as $error}
-      <div class="error">{$error}<a class="close" href="#">X</a></div>
-    {/foreach}
-    </div>
-    <div id="success_messages">
-    {foreach $SUCCESS_MESSAGES as $success}
-      <div class="success">{$success}<a class="close" href="#">X</a></div>
-    {/foreach}
-    </div>
+</div>
