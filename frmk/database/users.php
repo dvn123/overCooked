@@ -11,7 +11,7 @@
     $stmt = $conn->prepare("SELECT * 
                             FROM users 
                             WHERE username = ? AND password = ?");
-    $stmt->execute(array($username, sha1($password)));
+    $stmt->execute(array($username, md5($password)));
     return $stmt->fetch() == true;
   }
 ?>

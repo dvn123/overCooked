@@ -3,24 +3,20 @@
 function getQuestionsByDate($numQuestions) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT *
-        FROM question_list_vw
-        LIMIT :num
-        ORDER BY idQuestion
-        DESC;");
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion DESC LIMIT :num;");
     
-    $stmt->bindParam(":num", $numQuestions);
+    $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
-    $stmt->fetchAll();
+    return $stmt->fetchAll();
 
-    $data = array();
+  /*  $data = array();
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
             $data[$row->id] = $row->name;
         }
     }
 
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function getQuestionsHot() {
@@ -122,18 +118,18 @@ function getQuestionTags($idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT Tag.name FROM Tag,QuestionTag
         WHERE QuestionTag.idQuestion = :id AND Tag.idTag = QuestionTag.idTag;");
-    
+
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
-    $stmt->fetchAll();
-
+    return $stmt->fetchAll();
+/*
     $data = array();
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
             $data[$row->id] = $row->name;
         }
     }
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function getQuestionAnswers($idQuestion) {
@@ -281,6 +277,8 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
 //TODO: SQL026 - Adicionar voto a pergunta
 //TODO: SQL027 - Adicionar voto a resposta
 
+
+/* repeated??
 function addCommentToAnswer($idAnswer, $idUser, $content)
 {
     global $conn;
@@ -292,7 +290,7 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
     $stmt->bindParam(":content", $content);
 
     $stmt->execute();
-}
+}*/
 
 function changeQuestionContent($idUser, $idQuestion, $html, $date)
 {

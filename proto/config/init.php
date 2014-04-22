@@ -2,8 +2,8 @@
   session_set_cookie_params(3600, '/~lbaw1315');
   session_start();
 
-  $BASE_DIR = 'C:/Development/xampp/htdocs/overCooked/proto';
-  $BASE_URL = 'localhost/proto/';
+  $BASE_DIR = '../../';
+  $BASE_URL = '../../';
 
   $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1315', 'lbaw1315','oA667ld4');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -11,7 +11,10 @@
 
   $conn->exec('SET SCHEMA \'public\'');
 
-  include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
+if (!file_exists($BASE_URL . 'lib/smarty/Smarty.class.php'))
+    echo BENFICA;
+
+  include_once($BASE_URL . 'lib/smarty/Smarty.class.php');
 
   $smarty = new Smarty;
   $smarty->template_dir = $BASE_DIR . 'templates/';
