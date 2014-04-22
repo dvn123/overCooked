@@ -86,5 +86,18 @@ function updateUserProfile($idUser, $imageLink, $about, $birthDate, $city, $emai
     $stmt->execute();
 }
 
+//alterar password
+function changePassword($idUser, $password)
+{
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE webUser
+        SET password = :password WHERE idUser = :idUser;");
+
+    $stmt->bindParam(":password", sha1($password));
+    $stmt->bindParam(":idUser", $idUser);
+
+    $stmt->execute();
+}
 
 ?>
