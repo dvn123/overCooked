@@ -1,15 +1,17 @@
 <?php
   session_set_cookie_params(3600, '/~lbaw1315');
+
   session_start();
 
-  $BASE_DIR = 'C:/Development/xampp/htdocs/overCooked/proto';
-  $BASE_URL = 'localhost/proto/';
+  $BASE_DIR = '/opt/lbaw/lbaw1315/public_html/frmk/';
+  $BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1315/frmk/';
 
-  $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1315', 'lbaw1315','oA667ld4');
+  $conn = new PDO('pgsql:host=vdbm;dbname=lbaw1315', 'lbaw1315',
+'oA667ld4');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'public\'');
+  $conn->exec('SET SCHEMA \'frmk\'');
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
 
