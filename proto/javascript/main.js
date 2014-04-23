@@ -1,7 +1,12 @@
 BASE_URL = '...';
 
 $(document).ready(function() {
-  initMessageClosers();
+  //initMessageClosers();
+    $('#registrationModal .btn').click(function() {
+        $('#my-modal').modal('hide');
+        $('reg-form').submit();
+    });
+
 });
 
 function initMessageClosers() {

@@ -12,7 +12,7 @@
   $conn->exec('SET SCHEMA \'public\'');
 
 if (!file_exists($BASE_URL . 'lib/smarty/Smarty.class.php'))
-    echo BENFICA;
+    echo 'BENFICA';
 
   include_once($BASE_URL . 'lib/smarty/Smarty.class.php');
 

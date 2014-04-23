@@ -35,9 +35,9 @@ function isLoginCorrect($username, $password)
 {
     global $conn;
     $stmt = $conn->prepare("SELECT * 
-                            FROM users 
+                            FROM webUser
                             WHERE username = ? AND password = ?");
-    $stmt->execute(array($username, sha1($password)));
+    $stmt->execute(array($username, $password));
     return $stmt->fetch() == true;
 }
 

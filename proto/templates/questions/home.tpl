@@ -138,7 +138,7 @@
     <h4 class="modal-title" id="myModalLabel">Registar</h4>
 </div>
 <div class="modal-body">
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" id="reg-form" role="form">
 <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Nome</label>
 
@@ -161,6 +161,10 @@
         <input type="password" class="form-control" id="inputPassword" placeholder="Password">
     </div>
 </div>
+
+
+
+
 <div class="form-group">
 <label for="inputCountry" class="col-sm-2 control-label">País</label>
 
