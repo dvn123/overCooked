@@ -113,6 +113,7 @@
                 </div>
                 <div class="tab-pane" id="asked">
                     <table class="table table-hover table-responsive ">
+                      hhjj  {var_dump($questions_asked)}hhhh
                         {foreach $questions_asked as $question_asked}
                             <tr>
                                 <td class="col-md-1 text-center">

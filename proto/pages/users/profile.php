@@ -13,23 +13,23 @@ if (!$_GET['username']) {
 $idUser=getIdUser(amet);//$_GET['username']);
 $profile_data=getUserProfile($idUser);
 $questions_asked=getQuestionsAsked($idUser);
-var_dump($questions_asked);
+var_dump(1,$questions_asked);
 $questions_answered=getQuestionsAnswered($idUser);
-var_dump($questions_answered);
+var_dump(2,$questions_answered);
 $questions_subscribed=getQuestionsSubscribed($idUser);
-var_dump($questions_subscribed);
+var_dump(3,$questions_subscribed);
 
-foreach($questions_asked as $key => $question1) {
-    $tags = getQuestionTags($question1['idquestion']);
-    $questions_asked[$key]['tags'] = $tags;
+foreach($questions_asked as $key1 => $question1) {
+    $tags1 = getQuestionTags($question1['idquestion']);
+    $questions_asked[$key1]['tags'] = $tags1;
 }
-foreach($questions_answered as $key => $question2) {
-    $tags = getQuestionTags($question2['idquestion']);
-    $questions_answered[$key]['tags'] = $tags;
+foreach($questions_answered as $key2 => $question2) {
+    $tags2 = getQuestionTags($question2['idquestion']);
+    $questions_answered[$key2]['tags'] = $tags2;
 }
-foreach($questions_subscribed as $key => $question3) {
-    $tags = getQuestionTags($question3['idquestion']);
-    $questions_subscribed[$key]['tags'] = $tags;
+foreach($questions_subscribed as $key3 => $question3) {
+    $tags3 = getQuestionTags($question3['idquestion']);
+    $questions_subscribed[$key3]['tags'] = $tags3;
 }
 
 $smarty->assign('profile_data', $profile_data);
