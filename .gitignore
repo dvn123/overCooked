@@ -6,3 +6,5 @@
 *.iml
 /frmk/templates_c/*
 /proto/templates_c/*
+/frmk/config/init.php
+/proto/config/init.php

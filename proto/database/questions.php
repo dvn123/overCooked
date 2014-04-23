@@ -1,10 +1,12 @@
 <?php
 
-function getQuestionsByDate($numQuestions) {
+function getQuestionsByDate($numQuestions, $page) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion DESC LIMIT :num;");
+    $offset = $numQuestions * ($page - 1);
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion ASC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
     
+    $stmt->bindParam("offset", $offset);
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -19,21 +21,25 @@ function getQuestionsByDate($numQuestions) {
     return json_encode($data);*/
 }
 
-function getQuestionsHot() {
+function getQuestionsHot($numQuestions, $page) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM Question WHERE hot;");
-    
-    $stmt->execute();
-    $stmt->fetchAll();
+    $offset = $numQuestions * ($page - 1);
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE hot ORDER BY idQuestion ASC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
 
-    $data = array();
+
+    $stmt->bindParam("offset", $offset);
+    $stmt->bindParam("num", $numQuestions);
+    $stmt->execute();
+    return $stmt->fetchAll();
+
+    /*$data = array();
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
             $data[$row->id] = $row->name;
         }
     }
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function getQuestionsSubscribed($idUser) {
