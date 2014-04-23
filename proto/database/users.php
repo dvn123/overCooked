@@ -12,7 +12,7 @@ function getIdUser($username) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT idUser FROM webUser
-          WHERE webUser.username LIKE name;");
+          WHERE webUser.username LIKE :name;");
 
     $stmt->bindParam(":name", $username);
     $stmt->execute();
