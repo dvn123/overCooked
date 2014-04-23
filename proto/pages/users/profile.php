@@ -10,7 +10,8 @@ if (!$_GET['username']) {
     exit;
 }
 
-$idUser= getIdUser($_GET['username']);
+$idUser=getIdUser($_GET['username']);
+echo idUser;
 $profile_data=getUserProfile($idUser);
 $questions_asked=getQuestionsAsked($idUser);
 $questions_answered=getQuestionsAnswered($idUser);
@@ -20,6 +21,6 @@ $smarty->assign('profile_data', $profile_data);
 $smarty->assign('questions_asked', $questions_asked);
 $smarty->assign('questions_answered', $questions_answered);
 $smarty->assign('questions_subscribed', $questions_subscribed);
-$smarty->display('users/profile.tpl');
+//$smarty->display('users/profile.tpl');
 
 ?>
