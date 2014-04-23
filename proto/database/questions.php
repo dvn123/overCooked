@@ -59,8 +59,7 @@ function getQuestionsAsked($idUser) {
 function getQuestionsAnswered($idUser) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM answer_vw
-        WHERE answer.idUser = :id;");
+    $stmt = $conn->prepare("SELECT * FROM answer_vw WHERE answer_vw.idUser = :id;");
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
@@ -71,7 +70,7 @@ function getQuestion($idQuestion) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM answer_vw
-        WHERE answer.idUser = :id;");
+        WHERE answer_vw.idUser = :id;");
     
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();

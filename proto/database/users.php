@@ -17,7 +17,7 @@ function getIdUser($username) {
     $stmt->bindParam(":name", $username);
     $stmt->execute();
 
-    return  $stmt->fetch();
+    return   $stmt->fetch()['iduser'];
 }
 
 function createUser($username, $password, $birthDate, $city, $email, $gender, $name, $idCountry, $userGroup)
@@ -59,6 +59,7 @@ function getUserProfile($idUser)
       city,  email,  gender,  webUser.name,  numAnswers,  numComments,  numQuestions,
 	  score,  country.name AS country,  userGroup
       FROM webUser, country WHERE idUser = :id AND webUser.idCountry = country.idCountry;");
+
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
 
