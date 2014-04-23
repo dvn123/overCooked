@@ -51,9 +51,9 @@ function getUserProfile($idUser)
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
 
-    $stmt->fetch();
+   return  $stmt->fetch();
 
-    $data = array();
+   /* $data = array();
 
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
@@ -61,7 +61,7 @@ function getUserProfile($idUser)
         }
     }
 
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function updateUserProfile($idUser, $imageLink, $about, $birthDate, $city, $email, $gender, $name, $idCountry)

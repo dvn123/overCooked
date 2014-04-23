@@ -17,7 +17,6 @@ function getQuestionsByDate($numQuestions, $page) {
             $data[$row->id] = $row->name;
         }
     }
-
     return json_encode($data);*/
 }
 
@@ -32,14 +31,6 @@ function getQuestionsHot($numQuestions, $page) {
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
-
-    /*$data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);*/
 }
 
 function getQuestionsSubscribed($idUser) {
@@ -51,15 +42,7 @@ function getQuestionsSubscribed($idUser) {
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function getQuestionsAsked($idUser) {
@@ -70,15 +53,7 @@ function getQuestionsAsked($idUser) {
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function getQuestionsAnswered($idUser) {
@@ -89,15 +64,7 @@ function getQuestionsAnswered($idUser) {
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function getQuestion($idQuestion) {
@@ -108,15 +75,7 @@ function getQuestion($idQuestion) {
     
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
-    $stmt->fetch();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetch();
 }
 
 function getQuestionTags($idQuestion) {
@@ -128,14 +87,6 @@ function getQuestionTags($idQuestion) {
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
-/*
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);*/
 }
 
 function getQuestionAnswers($idQuestion) {
@@ -146,15 +97,7 @@ function getQuestionAnswers($idQuestion) {
     
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function getQuestionComments($idQuestion) {
@@ -164,15 +107,7 @@ function getQuestionComments($idQuestion) {
     
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function getAnswerComments($idAnswer) {
@@ -183,15 +118,7 @@ function getAnswerComments($idAnswer) {
     
     $stmt->bindParam(":id", $idAnswer);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function searchQuestions($text) {
@@ -214,15 +141,7 @@ function searchQuestions($text) {
     
     $stmt->bindParam(":text", $text);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 function addQuestion($title, $idUser, $content)

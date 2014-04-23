@@ -6,15 +6,15 @@ function getTags() {
     $stmt = $conn->prepare("SELECT name FROM tag ORDER BY name ASC;");
 
     $stmt->execute();
-    $stmt->fetchAll();
+    return $stmt->fetchAll();
 
-    $data = array();
+    /*$data = array();
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
             $data[$row->id] = $row->name;
         }
     }
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function getQuestionByTag($tag) {
@@ -25,15 +25,7 @@ function getQuestionByTag($tag) {
 
     $stmt->bindParam(":name", $tag);
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 ?>

@@ -10,9 +10,9 @@ function getUsersByName() {
         ORDER BY username");
     
     $stmt->execute();
-    $stmt->fetchAll();
+    return $stmt->fetchAll();
 
-    $data = array();
+/*    $data = array();
 
     if ($stmt->num_rows() > 0) {
         foreach ($stmt->result() as $row) {
@@ -20,7 +20,7 @@ function getUsersByName() {
         }
     }
 
-    return json_encode($data);
+    return json_encode($data);*/
 }
 
 function getUsersByScore() {
@@ -33,17 +33,7 @@ function getUsersByScore() {
         ORDER BY score");
     
     $stmt->execute();
-    $stmt->fetchAll();
-
-    $data = array();
-
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-
-    return json_encode($data);
+    return $stmt->fetchAll();
 }
 
 //TODO: SQL008 - Obter valores de estatísticas
