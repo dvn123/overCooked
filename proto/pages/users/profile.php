@@ -10,8 +10,16 @@ if (!$_GET['username']) {
     exit;
 }
 
-$idUser= getIdUser($_GET['username']); //TODO: assim ou adicionar as variaveis de sessao?
-
+$idUser= getIdUser($_GET['username']);
 $profile_data=getUserProfile($idUser);
+$questions_asked=getQuestionsAsked($idUser);
+$questions_answered=getQuestionsAnswered($idUser);
+$questions_subscribed=getQuestionsSubscribed($idUser);
+
+$smarty->assign('profile_data', $profile_data);
+$smarty->assign('questions_asked', $questions_asked);
+$smarty->assign('questions_answered', $questions_answered);
+$smarty->assign('questions_subscribed', $questions_subscribed);
+$smarty->display('users/profile.tpl');
 
 ?>
