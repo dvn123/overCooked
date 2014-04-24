@@ -23,18 +23,23 @@ function getIdUser($username) {
 function createUser($username, $password, $email, $name, $idCountry)
 {
     global $conn;
+
     $stmt = $conn->prepare(
-        "INSERT INTO webUser (username,password, registrationDate, birthDate, city, email, gender, name, idCountry, userGroup)
-        VALUES (:username,:password,:registrationDate,NULL,NULL,:email,NULL,:name,:idCountry,'user');"
+        "INSERT INTO webUser (username, password, salt, registrationDate, birthDate, city, email, gender, name, idCountry, userGroup)
+        VALUES (:username,:password, :salt, :registrationDate,NULL,NULL,:email,NULL,:name,:idCountry,'user');"
     );
 
+    $salt = base64_encode(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+    $hashed_password = hash(sha256, $salt . $password);
     $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":password", sha1($password));
+    $stmt->bindParam(":password", $hashed_password);
+    $stmt->bindParam(":salt", $salt);
     $stmt->bindParam(":registrationDate",date('Y-m-d', time()) );
     $stmt->bindParam(":email", $email);
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":idCountry", $idCountry);
     return $stmt->execute();
+
 }
 
 // Compares two strings $a and $b in length-constant time.
@@ -73,17 +78,17 @@ function getUserProfile($idUser)
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
 
-   return  $stmt->fetch();
+    return  $stmt->fetch();
 
-   /* $data = array();
+    /* $data = array();
 
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
+     if ($stmt->num_rows() > 0) {
+         foreach ($stmt->result() as $row) {
+             $data[$row->id] = $row->name;
+         }
+     }
 
-    return json_encode($data);*/
+     return json_encode($data);*/
 }
 
 function updateUserProfile($idUser, $imageLink, $about, $birthDate, $city, $email, $gender, $name, $idCountry)

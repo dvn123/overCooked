@@ -18,7 +18,7 @@ $idCountry = $_POST['idCountry'];
 
 if(!createUser($username, $password, $email, $realname, $idCountry)) {
     $_SESSION['error_messages'][] = 'Error creating user';
-   header("Location: $BASE_URL");
+    header("Location: $BASE_URL");
     exit;
 }
 /*
