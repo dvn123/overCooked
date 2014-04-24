@@ -17,7 +17,10 @@ function getIdUser($username) {
     $stmt->bindParam(":name", $username);
     $stmt->execute();
 
-    return   $stmt->fetch()['iduser'];
+    //return   $stmt->fetch()['iduser'];
+    $tmp = $stmt->fetch();
+    $tmp2 = $tmp['iduser'];
+    return $tmp2;
 }
 
 function createUser($username, $password, $email, $name, $idCountry)
@@ -69,6 +72,7 @@ function isLoginCorrect($username, $password)
 
 function getUserProfile($idUser)
 {
+
     global $conn;
     $stmt = $conn->prepare("SELECT username, imageLink,  registrationDate,  about,  birthDate,
       city,  email,  gender,  webUser.name,  numAnswers,  numComments,  numQuestions,
