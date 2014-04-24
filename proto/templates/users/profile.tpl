@@ -35,7 +35,7 @@
             {/if}
 
             <div class="col-lg-4">
-                <div id="about" class="voffset4">
+                <div id="public"> <!--class="voffset4"-->
                     <p><b>Data de registo: </b>{$profile_data.registrationdate} </p>
                     <p><b>País: </b>{$profile_data.country}</p>
                     <p><b>Sobre: </b></p>
