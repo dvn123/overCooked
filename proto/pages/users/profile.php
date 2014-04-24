@@ -11,6 +11,13 @@ if (!$_GET['username']) {
 }
 
 $idUser=getIdUser($_GET['username']);
+
+if($idUser==null) {
+    $_SESSION['error_messages'][] = 'Invalid username';
+    header("Location: $BASE_URL");
+    exit;
+}
+
 $profile_data=getUserProfile($idUser);
 $questions_asked=getQuestionsAsked($idUser);
 //var_dump(1,$questions_asked);
