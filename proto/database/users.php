@@ -37,14 +37,29 @@ function createUser($username, $password, $email, $name, $idCountry)
     return $stmt->execute();
 }
 
+// Compares two strings $a and $b in length-constant time.
+function slow_equals($a, $b)
+{
+    $diff = strlen($a) ^ strlen($b);
+    for($i = 0; $i < strlen($a) && $i < strlen($b); $i++)
+    {
+        $diff |= ord($a[$i]) ^ ord($b[$i]);
+    }
+    return $diff === 0;
+}
+
 function isLoginCorrect($username, $password)
 {
     global $conn;
     $stmt = $conn->prepare("SELECT * 
                             FROM webUser
-                            WHERE username = ? AND password = ?");
-    $stmt->execute(array($username, $password));
-    return $stmt->fetch() == true;
+                            WHERE username = :user");
+    $stmt->bindParam(":user", $username);
+    $stmt->execute();
+    $data = $stmt->fetch();
+
+    $hashed_password = hash(sha256,$data['salt'] . $password);
+    return slow_equals($data['password'], $hashed_password);
 }
 
 function getUserProfile($idUser)

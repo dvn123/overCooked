@@ -18,7 +18,7 @@ $idCountry = $_POST['idCountry'];
 
 if(!createUser($username, $password, $email, $realname, $idCountry)) {
     $_SESSION['error_messages'][] = 'Error creating user';
-   header("Location: $BASE_URL" . 'pages/users/register.php');
+   header("Location: $BASE_URL");
     exit;
 }
 /*
@@ -40,5 +40,5 @@ header("Location: $BASE_URL" . 'pages/users/register.php');
 exit;
 }*/
 $_SESSION['success_messages'][] = 'User registered successfully';
-//header("Location: $BASE_URL");
+header("Location: $BASE_URL");
 ?>
