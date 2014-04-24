@@ -9,7 +9,7 @@
             <h2 class="col-lg-12">{$profile_data.username}</h2>
             <div class="col-lg-4 ">
                 <div class="text-center" >
-                    <img src="images/default.png" style="width:100px;height:100px; margin: auto auto;">
+                    <img src="{$BASE_URL}images/default.png" style="width:100px;height:100px; margin: auto auto;">
                 </div>
 
                 <div class="text-center">
@@ -31,17 +31,9 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
-                <h4 class="text-center text-pink">Privado</h4>
-                <div class="voffset4">
-                    <p><b>Nome:</b>{$profile_data.name}</p>
-                    <p><b>Data de nascimento:</b> {$profile_data.birthdate}</p>
-
-                    <p><b>Cidade:</b> {$profile_data.city}</p>
-                    <p><b>Email:</b> {$profile_data.email}</p>
-                </div>
-                <br>
-            </div>
+            {if $USERNAME==$profile_data.username}
+                {include file='users/private_profile.tpl'}
+            {/if}
 
             <div class="col-lg-4">
                 <h4 class="text-center text-pink">Público</h4>
@@ -71,7 +63,7 @@
             <ul class="nav nav-tabs ">
                 <li><a href="#subscribed" data-toggle="tab"><b>Subscritas</b></a></li>
                 <li><a href="#asked" data-toggle="tab"><b>Colocadas</b></a></li>
-                <li><a href="#answered" data-toggle="tab"><b>Participei</b></a></li>
+                <li><a href="#answered" data-toggle="tab"><b>Participadas</b></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -111,10 +103,9 @@
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane" id="asked">
+                <div class="tab-pane active" id="asked">
                     <table class="table table-hover table-responsive ">
-                      hhjj  {var_dump($questions_asked)}hhhh
-                        {foreach $questions_asked as $question_asked}
+                     {foreach $questions_asked as $question_asked}
                             <tr>
                                 <td class="col-md-1 text-center">
                                     <div class="row text-danger">{$question_asked.score}</div>
@@ -147,7 +138,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane" id="answered">
+                <div class="tab-pane active" id="answered">
                     <table class="table table-hover table-responsive ">
                         {foreach $questions_answered as $question_answered}
                             <tr>
