@@ -60,13 +60,13 @@
         <div class="panel-body">
             <ul class="nav nav-tabs ">
                 <li><a href="#subscribed" data-toggle="tab"><b>Subscritas</b></a></li>
-                <li><a href="#asked" data-toggle="tab"><b>Colocadas</b></a></li>
+                <li class="active"><a href="#asked" data-toggle="tab"><b>Colocadas</b></a></li>
                 <li><a href="#answered" data-toggle="tab"><b>Participadas</b></a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane active" id="subscribed">
+                <div class="tab-pane " id="subscribed">
                     <table class="table table-hover table-responsive ">
                         {foreach $questions_subscribed as $question_subscribed}
                         <tr>
@@ -86,8 +86,8 @@
                                     {/foreach}
                                 </div>
                             </td>
+                        </tr>
                         {/foreach}
-
                     </table>
                     <div class="text-center">
                         <ul class="pagination">
@@ -136,7 +136,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="tab-pane active" id="answered">
+                <div class="tab-pane " id="answered">
                     <table class="table table-hover table-responsive ">
                         {foreach $questions_answered as $question_answered}
                             <tr>
