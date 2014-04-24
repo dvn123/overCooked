@@ -3,7 +3,7 @@
 <div class="container">
     <div class="panel panel-green">
         <div class="panel-heading">
-            <h3 class="panel-title">Área pessoal</h3>
+            <h3 class="panel-title">Informação pessoal</h3>
         </div>
         <div class="panel-body">
             <h2 class="col-lg-12">{$profile_data.username}</h2>
@@ -175,5 +175,8 @@
         </div>
     </div>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 
 {include file='common/footer.tpl'}
