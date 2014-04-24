@@ -36,9 +36,9 @@ function getQuestionsHot($numQuestions, $page) {
 function getQuestionsSubscribed($idUser) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM Question, QuestionSubscription 
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw, QuestionSubscription
         WHERE QuestionSubscription.idUser = :id
-        AND QuestionSubscription.idQuestion = Question.idQuestion;");
+        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion;");
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
@@ -48,19 +48,20 @@ function getQuestionsSubscribed($idUser) {
 function getQuestionsAsked($idUser) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM Question
-        WHERE Question.idUser = :id;");
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw
+        WHERE question_list_vw.idUser = :id;");
     
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function getQuestionsAnswered($idUser) {
+function getQuestionsAnswered($idUser) { //todo: fix do select
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM answer_vw WHERE answer_vw.idUser = :id;");
-    
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE idQuestion=
+    (SELECT idQuestion FROM answer_vw WHERE idUser=:id)");
+
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -71,7 +72,7 @@ function getQuestion($idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM answer_vw
         WHERE answer_vw.idUser = :id;");
-    
+
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
     return $stmt->fetch();
@@ -93,7 +94,7 @@ function getQuestionAnswers($idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM answer_vw
         WHERE idQuestion = :id;");
-    
+
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -103,7 +104,7 @@ function getQuestionComments($idQuestion) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM questionComment_vw WHERE idQuestion = :id;");
-    
+
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -114,7 +115,7 @@ function getAnswerComments($idAnswer) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM answerComment_vw
         WHERE idAnswer = :id;");
-    
+
     $stmt->bindParam(":id", $idAnswer);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -126,18 +127,18 @@ function searchQuestions($text) {
     $stmt = $conn->prepare("SELECT question.idQuestion, question.title, question.DATE, question.score,
         (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
         FROM questionContent, question, answer, answerContent, webUser
-        WHERE questionContent.idQuestion = question.idQuestion 
+        WHERE questionContent.idQuestion = question.idQuestion
         AND questionContent.DATE =
             (SELECT MAX(questionContent.DATE) FROM questionContent WHERE questionContent.idQuestion = question.idQuestion)
         AND answerContent.DATE = (SELECT MAX(answerContent.DATE) FROM answerContent WHERE answerContent.idAnswer = answer.idAnswer)
         AND question.idQuestion = answer.idQuestion
         AND answer.idAnswer = answerContent.idAnswer
-        AND (to_tsvector('portuguese', question.title) @@ to_tsquery('portuguese', :text) 
+        AND (to_tsvector('portuguese', question.title) @@ to_tsquery('portuguese', :text)
         OR to_tsvector('portuguese', questionContent.html) @@ to_tsquery('portuguese', :text)
         OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('poruguese', :text))
         AND question.idUser = webUser.idUser
         GROUP BY question.idQuestion;");
-    
+
     $stmt->bindParam(":text", $text);
     $stmt->execute();
     return $stmt->fetchAll();
