@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/users.php');
 if (!(isset($_POST['username']) && isset($_POST['realname']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['idCountry']))) {
     $_SESSION['error_messages'][] = 'All fields are mandatory';
     $_SESSION['form_values'] = $_POST;
-    //header("Location: $BASE_URL" . 'pages/users/register.php');
+    header("Location: $BASE_URL" . 'pages/users/register.php');
     echo 'exit';
     exit;
 }
@@ -18,7 +18,7 @@ $idCountry = $_POST['idCountry'];
 
 if(!createUser($username, $password, $email, $realname, $idCountry)) {
     $_SESSION['error_messages'][] = 'Error creating user';
-   //header("Location: $BASE_URL" . 'pages/users/register.php');
+   header("Location: $BASE_URL" . 'pages/users/register.php');
     exit;
 }
 /*
