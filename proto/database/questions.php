@@ -56,11 +56,11 @@ function getQuestionsAsked($idUser) {
     return $stmt->fetchAll();
 }
 
-function getQuestionsAnswered($idUser) { //todo: fix do select
+function getQuestionsAnswered($idUser) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE idQuestion=
-    (SELECT idQuestion FROM answer_vw WHERE idUser=:id)");
+    (SELECT idQuestion FROM answer_vw WHERE idUser=:id);");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
@@ -70,8 +70,7 @@ function getQuestionsAnswered($idUser) { //todo: fix do select
 function getQuestion($idQuestion) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM answer_vw
-        WHERE answer_vw.idUser = :id;");
+    $stmt = $conn->prepare("SELECT * FROM question_vw WHERE idQuestion = :id;");
 
     $stmt->bindParam(":id", $idQuestion);
     $stmt->execute();
