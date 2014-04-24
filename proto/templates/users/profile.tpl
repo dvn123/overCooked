@@ -13,8 +13,7 @@
                 </div>
 
                 <div class="text-center">
-                    <p><b>Data de registo</b>: {$profile_data.registrationdate} </p>
-                    <p class="text-danger"><b>Pontuação:</b> {$profile_data.score} </p>
+                     <p class="text-danger"><b>Pontuação:</b> {$profile_data.score} </p>
                     <table class="table-responsive table text-center">
                         <tr>
                             <td><b>Perguntas</b></td>
@@ -36,21 +35,20 @@
             {/if}
 
             <div class="col-lg-4">
-                <h4 class="text-center text-pink">Público</h4>
                 <div id="about" class="voffset4">
-
-                    <p><b>País:</b> {$profile_data.country}</p>
-                    <p><b>Sobre:</b></p>
+                    <p><b>Data de registo: </b>{$profile_data.registrationdate} </p>
+                    <p><b>País: </b>{$profile_data.country}</p>
+                    <p><b>Sobre: </b></p>
                     <p class="text-justify">{$profile_data.about}</p>
                 </div>
-
-            </div>
-            <div class="text-center row col-lg-12">
-                <a href="#" class="btn btn-default">Editar</a>
             </div>
 
+            {if $USERNAME==$profile_data.username}
+                {include file='users/edit_button.tpl'}
+            {/if}
+
+            </div>
         </div>
-
     </div>
 </div>
 
