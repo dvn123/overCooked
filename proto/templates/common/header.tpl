@@ -7,6 +7,7 @@
     <link href="{$BASE_URL}css/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
     <link href="{$BASE_URL}css/styles.css" rel="stylesheet">
     <link href = "{$BASE_URL}css/custom.css" rel = "stylesheet">
+    <link rel="shortcut icon" href="../../images/logo.ico">
 </head>
 <body>
 
