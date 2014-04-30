@@ -10,19 +10,19 @@
      <div class="form-group">
          <label for="inputName" class="col-sm-2 control-label">Nome</label>
          <div class="col-sm-10">
-             <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de Utilizador">
+             <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de Utilizador" value="{$FORM_VALUES.username}">
          </div>
      </div>
      <div class="form-group">
          <label for="inputRealName" class="col-sm-2 control-label">Nome Real</label>
          <div class="col-sm-10">
-             <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome Completo">
+             <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome Completo" value="{$FORM_VALUES.realname}">
          </div>
      </div>
      <div class="form-group">
          <label for="inputEmail" class="col-sm-2 control-label">Email</label>
          <div class="col-sm-10">
-             <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+             <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$FORM_VALUES.email}">
          </div>
      </div>
      <div class="form-group">
@@ -35,7 +35,7 @@
          <label for="inputCountry" class="col-sm-2 control-label">País</label>
          <div class="col-sm-10">
              <select id="inputCountry" name="idCountry" class="form-control">
-                 <option value="1">Afghanistan</option>
+            <option value="1">Afghanistan</option>
 			<option value="2">Albania</option>
 			<option value="3">Algeria</option>
 			<option value="4">American Samoa</option>
@@ -43,7 +43,7 @@
 			<option value="6">Angola</option>
 			<option value="7">Anguilla</option>
 			<option value="8">Antarctica</option>
-			<option value="">Antiqua and Barbuda</option>
+			<option value="9">Antiqua and Barbuda</option>
 			<option value="10">	Argentina</option>
 			<option value="11">	Armenia</option>
 			<option value="12">	Aruba</option>
@@ -202,7 +202,7 @@
 			<option value="165">Philippines</option>
 			<option value="166">Pitcairn Islands</option>
 			<option value="167">Poland</option>
-			<option value="168">Portugal</option>
+			<option value="168" selected>Portugal</option>
 			<option value="169">Puerto Rico</option>
 			<option value="170">Qatar</option>
 			<option value="171">Republic of the Congo</option>

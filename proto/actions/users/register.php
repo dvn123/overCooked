@@ -7,7 +7,7 @@ if (!$_POST['username'] || !$_POST['realname'] || !$_POST['password']
 {
     $_SESSION['error_messages'][] = 'Todos os campos são obrigatórios';
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL");
+    header("Location: $BASE_URL" . 'pages/users/register.php');
     echo 'exit';
     exit;
 }
@@ -22,14 +22,18 @@ try {
     createUser($username, $password, $email, $realname, $idCountry);
 } catch (PDOException $e) {
 
-if (strpos($e->getMessage(), 'users_pkey') !== false) {
+if (strpos($e->getMessage(), 'webuser_username_key') !== false) {
     $_SESSION['error_messages'][] = 'Nome de utilizador duplicado';
     $_SESSION['field_errors']['username'] = 'O nome de utilizador já existe';
+}
+else if (strpos($e->getMessage(), 'webuser_email_key') !== false) {
+    $_SESSION['error_messages'][] = 'Esse email já está registado!';
+    $_SESSION['field_errors']['mail'] = 'Esse email já está registado!';
 }
 else $_SESSION['error_messages'][] = 'Erro ao criar utilizador';
 
 $_SESSION['form_values'] = $_POST;
-header("Location: $BASE_URL");
+    header("Location: $BASE_URL" . 'pages/users/register.php');
 exit;
 }
 $_SESSION['success_messages'][] = 'Utilizador registado com sucesso';
