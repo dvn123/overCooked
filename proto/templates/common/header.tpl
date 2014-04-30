@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>OverCooked</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="{$BASE_URL}css/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
-	<link href="{$BASE_URL}css/styles.css" rel="stylesheet">
-	<link href = "{$BASE_URL}css/custom.css" rel = "stylesheet">
+    <title>OverCooked</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{$BASE_URL}css/bootstrap-3.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href="{$BASE_URL}css/styles.css" rel="stylesheet">
+    <link href = "{$BASE_URL}css/custom.css" rel = "stylesheet">
 </head>
 <body>
 
@@ -34,13 +34,34 @@
 
             </ul>
 
-		{if $USERNAME}
-		{include file='common/menu_logged_in.tpl'}
-		{else}
-		{include file='common/menu_logged_out.tpl'}
-		{/if}
+            {if $USERNAME}
+                {include file='common/menu_logged_in.tpl'}
+            {else}
+                {include file='common/menu_logged_out.tpl'}
+            {/if}
 
         </div>
 
     </div>
+</div>
+
+<div id="error_messages">
+    {foreach $ERROR_MESSAGES as $error}
+        <div class="container">
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {$error}
+            </div>
+        </div>
+    {/foreach}
+</div>
+<div id="success_messages">
+    {foreach $SUCCESS_MESSAGES as $success}
+        <div class="container">
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {$success}
+            </div>
+        </div>
+    {/foreach}
 </div>
