@@ -6,7 +6,7 @@
         
         <div class="panel-body">
  
- <form class="form-horizontal" action="{$BASE_URL}actions/users/register.php" method="post" accept-charset="UTF-8" role="form">
+ <form class="form-horizontal" action="{$BASE_DIR}actions/users/register.php" method="post" accept-charset="UTF-8" role="form">
      <div class="form-group">
          <label for="inputName" class="col-sm-2 control-label">Nome</label>
          <div class="col-sm-10">
