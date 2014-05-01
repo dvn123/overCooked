@@ -3,7 +3,7 @@ include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
 if (!$_POST['username'] || !$_POST['password']) {
-    $_SESSION['error_messages'][] = 'Invalid login';
+    $_SESSION['error_messages'][] = 'Login inválido!';
     $_SESSION['form_values'] = $_POST;
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;

@@ -134,7 +134,7 @@ function searchQuestions($text) {
         AND answer.idAnswer = answerContent.idAnswer
         AND (to_tsvector('portuguese', question.title) @@ to_tsquery('portuguese', :text)
         OR to_tsvector('portuguese', questionContent.html) @@ to_tsquery('portuguese', :text)
-        OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('poruguese', :text))
+        OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('portuguese', :text))
         AND question.idUser = webUser.idUser
         GROUP BY question.idQuestion;");
 

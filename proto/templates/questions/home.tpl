@@ -2,14 +2,21 @@
 
 <div class="container">
     <div  class="pull-right">
-        <form class="navbar-form navbar-right" role="search">
-            <button type="submit" class="btn btn-default">
+        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
+            <div class="right-inner-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input name="content" type="search"
+                       class="form-control"
+                       placeholder="Pesquisar" />
+            </div>
+
+            <!-- <button type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
                 Pesquisa
                 <div class="form-group">
-                    <input type="text" class="form-control">
+                    <input name="content" type="text" class="form-control">
                 </div>
-            </button>
+            </button> -->
         </form>
     </div>
 </div>
