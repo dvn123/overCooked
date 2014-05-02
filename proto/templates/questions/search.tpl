@@ -50,7 +50,7 @@
                         <div class="row text-danger">votos</div>
                     </td>
                     <td class="col-md-2 text-center text-muted">
-                        <div class="row">{$question.numanswers}</div>
+                        <div class="row">{$question.numanswers1}</div>
                         <div class="row">respostas</div>
                     </td>
                     <td>
