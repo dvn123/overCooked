@@ -123,7 +123,8 @@ function getAnswerComments($idAnswer) {
 function searchQuestions($text) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT question.idQuestion, question.title, question.DATE, question.score,
+    $stmt = $conn->prepare("
+       SELECT question.idQuestion, question.title, question.DATE, question.score, webUser.username, webUser.imagelink,
         (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
         FROM questionContent, question, answer, answerContent, webUser
         WHERE questionContent.idQuestion = question.idQuestion
@@ -136,7 +137,8 @@ function searchQuestions($text) {
         OR to_tsvector('portuguese', questionContent.html) @@ to_tsquery('portuguese', :text)
         OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('portuguese', :text))
         AND question.idUser = webUser.idUser
-        GROUP BY question.idQuestion;");
+        GROUP BY question.idQuestion, webuser.username,webuser.imagelink
+        ORDER BY question.idquestion;");
 
     $stmt->bindParam(":text", $text);
     $stmt->execute();
