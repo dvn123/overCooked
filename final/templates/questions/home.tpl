@@ -80,65 +80,69 @@
             <div class="table-responsive">
                 <table class="table table-hover table-responsive ">
                     {foreach $questions as $question}
+                        <tr>
+                            <td class="col-md-1 text-center">
+                                <div class="row text-danger">{$question.score}</div>
+                                <div class="row text-danger">votos</div>
+                            </td>
+                            <td class="col-md-2 text-center text-muted">
+                                <div class="row">{$question.numanswers}</div>
+                                <div class="row">respostas</div>
+                            </td>
+                            <td class="col-md-8">
+                                <div class="row"><b>{$question.title}</b></div>
+                                <div class="row">
+                                    {foreach $question.tags as $tag}
+                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                    {/foreach}
+                                </div>
+                            </td>
+                            <td class="col-md-1">
+                                <div class="row">
+                                    <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question.username}">
+                                        <b>{$question.username}</b>
+                                    </a>
+                                </div>
+                                <div class="row">{$question.date2}</div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </table>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            </div>
+        </div>
+        <div class="tab-pane" id="hot">
+            <table class="table table-hover table-responsive ">
+                {foreach $questions_hot as $question_hot}
                     <tr>
                         <td class="col-md-1 text-center">
-                            <div class="row text-danger">{$question.score}</div>
+                            <div class="row text-danger">{$question_hot.score}</div>
                             <div class="row text-danger">votos</div>
                         </td>
                         <td class="col-md-2 text-center text-muted">
-                            <div class="row">{$question.numanswers}</div>
+                            <div class="row">{$question_hot.numanswers}</div>
                             <div class="row">respostas</div>
                         </td>
-                        <td class="col-md-8">
-                            <div class="row"><b>{$question.title}</b></div>
+                        <td>
+                            <div class="row"><b>{$question_hot.title}</b></div>
                             <div class="row">
-                                {foreach $question.tags as $tag}
+                                {foreach $question_hot.tags as $tag}
                                     <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                 {/foreach}
                             </div>
                         </td>
-                        <td class="col-md-1>
-                            <div class="row"><a class="" href="{$BASE_URL}pages/users/profile.php?username={$question.username}"><b>{$question.username}</b></a></div>
-            <div class="row">{$question.date}</div>
-            </td>
-            </tr>
-            {/foreach}
+                    </tr>
+                {/foreach}
             </table>
-        </div>
 
-        <div class="text-center">
-            <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            <div class="text-center">
+                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            </div>
         </div>
     </div>
-    <div class="tab-pane" id="hot">
-        <table class="table table-hover table-responsive ">
-            {foreach $questions_hot as $question_hot}
-                <tr>
-                    <td class="col-md-1 text-center">
-                        <div class="row text-danger">{$question_hot.score}</div>
-                        <div class="row text-danger">votos</div>
-                    </td>
-                    <td class="col-md-2 text-center text-muted">
-                        <div class="row">{$question_hot.numanswers}</div>
-                        <div class="row">respostas</div>
-                    </td>
-                    <td>
-                        <div class="row"><b>{$question_hot.title}</b></div>
-                        <div class="row">
-                            {foreach $question_hot.tags as $tag}
-                                <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
-                            {/foreach}
-                        </div>
-                    </td>
-                </tr>
-            {/foreach}
-        </table>
-
-        <div class="text-center">
-            <a href="#" class="btn btn-info" alt="">Ver mais</a>
-        </div>
-    </div>
-</div>
 </div>
 
 <!-- registo -->

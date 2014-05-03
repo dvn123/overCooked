@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.15, created on 2014-05-03 16:52:43
+<?php /* Smarty version Smarty-3.1.15, created on 2014-05-03 17:40:44
          compiled from "..\..\templates\questions\home.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:95075356e138c0c086-92716459%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '1ebc7e2b6c97fb57bb4bf5f75208d7d501301eb0' => 
     array (
       0 => '..\\..\\templates\\questions\\home.tpl',
-      1 => 1399128756,
+      1 => 1399131641,
       2 => 'file',
     ),
   ),
@@ -119,23 +119,76 @@ images/3.png" alt="3" class="img-responsive" style="width:100%">
 foreach ($_from as $_smarty_tpl->tpl_vars['question']->key => $_smarty_tpl->tpl_vars['question']->value) {
 $_smarty_tpl->tpl_vars['question']->_loop = true;
 ?>
+                        <tr>
+                            <td class="col-md-1 text-center">
+                                <div class="row text-danger"><?php echo $_smarty_tpl->tpl_vars['question']->value['score'];?>
+</div>
+                                <div class="row text-danger">votos</div>
+                            </td>
+                            <td class="col-md-2 text-center text-muted">
+                                <div class="row"><?php echo $_smarty_tpl->tpl_vars['question']->value['numanswers'];?>
+</div>
+                                <div class="row">respostas</div>
+                            </td>
+                            <td class="col-md-8">
+                                <div class="row"><b><?php echo $_smarty_tpl->tpl_vars['question']->value['title'];?>
+</b></div>
+                                <div class="row">
+                                    <?php  $_smarty_tpl->tpl_vars['tag'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tag']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['question']->value['tags']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['tag']->key => $_smarty_tpl->tpl_vars['tag']->value) {
+$_smarty_tpl->tpl_vars['tag']->_loop = true;
+?>
+                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink"><?php echo $_smarty_tpl->tpl_vars['tag']->value['name'];?>
+</span></a>
+                                    <?php } ?>
+                                </div>
+                            </td>
+                            <td class="col-md-1">
+                                <div class="row">
+                                    <a class="" href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
+pages/users/profile.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
+">
+                                        <b><?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
+</b>
+                                    </a>
+                                </div>
+                                <div class="row"><?php echo $_smarty_tpl->tpl_vars['question']->value['date2'];?>
+</div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            </div>
+        </div>
+        <div class="tab-pane" id="hot">
+            <table class="table table-hover table-responsive ">
+                <?php  $_smarty_tpl->tpl_vars['question_hot'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['question_hot']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['questions_hot']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+foreach ($_from as $_smarty_tpl->tpl_vars['question_hot']->key => $_smarty_tpl->tpl_vars['question_hot']->value) {
+$_smarty_tpl->tpl_vars['question_hot']->_loop = true;
+?>
                     <tr>
                         <td class="col-md-1 text-center">
-                            <div class="row text-danger"><?php echo $_smarty_tpl->tpl_vars['question']->value['score'];?>
+                            <div class="row text-danger"><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['score'];?>
 </div>
                             <div class="row text-danger">votos</div>
                         </td>
                         <td class="col-md-2 text-center text-muted">
-                            <div class="row"><?php echo $_smarty_tpl->tpl_vars['question']->value['numanswers'];?>
+                            <div class="row"><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['numanswers'];?>
 </div>
                             <div class="row">respostas</div>
                         </td>
-                        <td class="col-md-8">
-                            <div class="row"><b><?php echo $_smarty_tpl->tpl_vars['question']->value['title'];?>
+                        <td>
+                            <div class="row"><b><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['title'];?>
 </b></div>
                             <div class="row">
                                 <?php  $_smarty_tpl->tpl_vars['tag'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tag']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['question']->value['tags']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+ $_from = $_smarty_tpl->tpl_vars['question_hot']->value['tags']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['tag']->key => $_smarty_tpl->tpl_vars['tag']->value) {
 $_smarty_tpl->tpl_vars['tag']->_loop = true;
 ?>
@@ -144,64 +197,15 @@ $_smarty_tpl->tpl_vars['tag']->_loop = true;
                                 <?php } ?>
                             </div>
                         </td>
-                        <td class="col-md-1>
-                            <div class="row"><a class="" href="<?php echo $_smarty_tpl->tpl_vars['BASE_URL']->value;?>
-pages/users/profile.php?username=<?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
-"><b><?php echo $_smarty_tpl->tpl_vars['question']->value['username'];?>
-</b></a></div>
-            <div class="row"><?php echo $_smarty_tpl->tpl_vars['question']->value['date'];?>
-</div>
-            </td>
-            </tr>
-            <?php } ?>
+                    </tr>
+                <?php } ?>
             </table>
-        </div>
 
-        <div class="text-center">
-            <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            <div class="text-center">
+                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+            </div>
         </div>
     </div>
-    <div class="tab-pane" id="hot">
-        <table class="table table-hover table-responsive ">
-            <?php  $_smarty_tpl->tpl_vars['question_hot'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['question_hot']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['questions_hot']->value; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['question_hot']->key => $_smarty_tpl->tpl_vars['question_hot']->value) {
-$_smarty_tpl->tpl_vars['question_hot']->_loop = true;
-?>
-                <tr>
-                    <td class="col-md-1 text-center">
-                        <div class="row text-danger"><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['score'];?>
-</div>
-                        <div class="row text-danger">votos</div>
-                    </td>
-                    <td class="col-md-2 text-center text-muted">
-                        <div class="row"><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['numanswers'];?>
-</div>
-                        <div class="row">respostas</div>
-                    </td>
-                    <td>
-                        <div class="row"><b><?php echo $_smarty_tpl->tpl_vars['question_hot']->value['title'];?>
-</b></div>
-                        <div class="row">
-                            <?php  $_smarty_tpl->tpl_vars['tag'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['tag']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['question_hot']->value['tags']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['tag']->key => $_smarty_tpl->tpl_vars['tag']->value) {
-$_smarty_tpl->tpl_vars['tag']->_loop = true;
-?>
-                                <a href="#" style="text-decoration: none"><span class="tag label label-pink"><?php echo $_smarty_tpl->tpl_vars['tag']->value['name'];?>
-</span></a>
-                            <?php } ?>
-                        </div>
-                    </td>
-                </tr>
-            <?php } ?>
-        </table>
-
-        <div class="text-center">
-            <a href="#" class="btn btn-info" alt="">Ver mais</a>
-        </div>
-    </div>
-</div>
 </div>
 
 <!-- registo -->
