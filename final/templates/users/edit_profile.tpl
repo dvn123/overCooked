@@ -11,25 +11,25 @@
 <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de utilizador" value="{$profile_data.username}" disabled>
+        <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de utilizador" value="{$profile_data.username}" disabled required>
     </div>
 </div>
 <div class="form-group">
     <label for="inputRealName" class="col-sm-2 control-label">Nome Real</label>
     <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome completo" value="{$profile_data.name}">
+        <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome completo" value="{$profile_data.name}" required>
     </div>
 </div>
 <div class="form-group">
     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
     <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$profile_data.email}" disabled>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$profile_data.email}" required>
     </div>
 </div>
 <div class="form-group">
     <label for="inputBirthDate" class="col-sm-2 control-label">Data de nascimento</label>
     <div class="col-sm-10">
-        <input type="date" class="form-control" id="inputBirthDate" name="birthdate" placeholder="Data de nascimento" value="{$profile_data.birthdate}">
+            <input type="date" class="form-control" id="inputBirthDate" name="birthdate" placeholder="Data de nascimento" value="{$profile_data.birthdate}">
     </div>
 </div>
 <div class="form-group form-inline">
@@ -37,13 +37,13 @@
     <div class="col-sm-10">
         <div class="radio">
             <label class="radio-inline">
-                <input type="radio" name="optionsRadios" id="genderF" value="option1">
+                <input type="radio" name="gender" id="genderF" value="F">
                 Feminino
             </label>
         </div>
         <div class="radio">
             <label class="radio-inline">
-                <input type="radio" name="optionsRadios" id="genderM" value="option2">
+                <input type="radio" name="gender" id="genderM" value="M">
                 Masculino
             </label>
         </div>
@@ -58,7 +58,7 @@
 <div class="form-group">
 <label for="inputCountry" class="col-sm-2 control-label">País</label>
 <div class="col-sm-10">
-<select id="inputCountry" name="idCountry" class="form-control">
+<select id="inputCountry" name="idCountry" class="form-control" required>
 <option value="1">Afghanistan</option>
 <option value="2">Albania</option>
 <option value="3">Algeria</option>
@@ -302,17 +302,16 @@
 <div class="form-group">
     <label for="inputAbout" class="col-sm-2 control-label">Sobre mim</label>
     <div class="col-sm-10">
-        <textarea type="text" class="form-control" id="inputAbout" name="about" placeholder="Sobre mim" value="{$profile_data.about}">
-            </textarea>
+        <textarea type="text" class="form-control" id="inputAbout" name="about" placeholder="Sobre mim">{$profile_data.about}</textarea>
     </div>
 </div>
 <div class="form-group">
     <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
     <div class="col-sm-10">
-        <input type="file" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$profile_data.email}">
+        <input type="file" class="form-control" id="inputImage" name="image" placeholder="foto" value="{$profile_data.imagelink}">
     </div>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
     <div class="col-sm-10">
         <div class="fileupload fileupload-new" data-provides="fileupload">
     <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
@@ -321,11 +320,11 @@
             <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
         </div>
     </div>
-    </div>
+    </div>-->
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Guardar alterações</button>
+    <div class="col-sm-offset-2 col-sm-2">
+        <button type="submit" class="btn btn-primary text-center">Guardar alterações</button>
     </div>
 </div>
 </form>

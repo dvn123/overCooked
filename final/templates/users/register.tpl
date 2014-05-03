@@ -10,31 +10,31 @@
      <div class="form-group">
          <label for="inputName" class="col-sm-2 control-label">Nome</label>
          <div class="col-sm-10">
-             <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de Utilizador" value="{$FORM_VALUES.username}">
+             <input type="text" class="form-control" id="inputName" name="username" placeholder="Nome de Utilizador" value="{$FORM_VALUES.username}" required>
          </div>
      </div>
      <div class="form-group">
          <label for="inputRealName" class="col-sm-2 control-label">Nome Real</label>
          <div class="col-sm-10">
-             <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome Completo" value="{$FORM_VALUES.realname}">
+             <input type="text" class="form-control" id="inputRealName" name="realname" placeholder="Nome Completo" value="{$FORM_VALUES.realname}" required>
          </div>
      </div>
      <div class="form-group">
          <label for="inputEmail" class="col-sm-2 control-label">Email</label>
          <div class="col-sm-10">
-             <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$FORM_VALUES.email}">
+             <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$FORM_VALUES.email}" required>
          </div>
      </div>
      <div class="form-group">
          <label for="inputPassword" class="col-sm-2 control-label">Password</label>
          <div class="col-sm-10">
-             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
          </div>
      </div>
      <div class="form-group">
          <label for="inputCountry" class="col-sm-2 control-label">País</label>
          <div class="col-sm-10">
-             <select id="inputCountry" name="idCountry" class="form-control">
+             <select id="inputCountry" name="idCountry" class="form-control" required>
             <option value="1">Afghanistan</option>
 			<option value="2">Albania</option>
 			<option value="3">Algeria</option>
