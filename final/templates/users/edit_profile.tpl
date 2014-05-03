@@ -7,7 +7,7 @@
 </div>
 <div class="panel-body">
 
-<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php" method="post" accept-charset="UTF-8" role="form">
+<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form">
 <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
@@ -323,10 +323,14 @@
     </div>-->
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-2">
-        <button type="submit" class="btn btn-primary text-center">Guardar alterações</button>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-1 col-sm-offset-1">
+        <button type="submit" class="btn btn-success text-center"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar</button>
     </div>
-</div>
+    <div class="col-sm-1">
+        <a href="{$BASE_URL}pages/users/profile.php?username={$USERNAME}" class="col-sm-offset-3 btn btn-danger text-center"><span class="glyphicon glyphicon-floppy-remove"></span> Cancelar</a>
+
+    </div>
 </form>
 </div>
 </div>
