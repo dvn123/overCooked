@@ -99,12 +99,12 @@ function updateUserProfile($idUser, $imageLink, $about, $birthDate, $city, $emai
 {
     global $conn;
 
-    $stmt = $conn->prepare("UPDATE webUser SET username = :username,imageLink = :imageLink,
+    $stmt = $conn->prepare("UPDATE webUser SET imageLink = :imageLink,
                         about = :about,birthDate = :birthDate,city = :city,email = :email,
                         gender = :gender,name = :name,idCountry = :idCountry
                         WHERE idUser = :idUser;");
 
-    $stmt->bindParam(":id", $idUser);
+    $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":imageLink", $imageLink);
     $stmt->bindParam(":about", $about);
     $stmt->bindParam(":birthDate", $birthDate);

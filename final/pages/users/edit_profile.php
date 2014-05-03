@@ -25,6 +25,7 @@ if($idUser==null) {
 
 $profile_data=getUserProfile($idUser);
 
+$smarty->assign('username_edit', $_GET['username']);
 $smarty->assign('profile_data', $profile_data);
 $smarty->display('users/edit_profile.tpl');
 

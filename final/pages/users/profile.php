@@ -41,6 +41,7 @@ foreach($questions_subscribed as $key => $question) {
     $questions_subscribed[$key]['tags'] = $tags;
 }
 
+$smarty->assign('username_edit', $_GET['username']);
 $smarty->assign('profile_data', $profile_data);
 $smarty->assign('questions_asked', $questions_asked);
 $smarty->assign('questions_answered', $questions_answered);

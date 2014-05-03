@@ -7,7 +7,7 @@
 </div>
 <div class="panel-body">
 
-<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php" method="post" accept-charset="UTF-8" role="form">
+<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form">
 <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
@@ -37,13 +37,13 @@
     <div class="col-sm-10">
         <div class="radio">
             <label class="radio-inline">
-                <input type="radio" name="gender" id="genderF" value="F">
+                <input type="radio" name="gender" id="genderF" value="F" {if $profile_data.gender=='F'} checked="checked"{/if}>
                 Feminino
             </label>
         </div>
         <div class="radio">
             <label class="radio-inline">
-                <input type="radio" name="gender" id="genderM" value="M">
+                <input type="radio" name="gender" id="genderM" value="M" {if $profile_data.gender=='M'} checked="checked"{/if}>
                 Masculino
             </label>
         </div>
@@ -58,7 +58,7 @@
 <div class="form-group">
 <label for="inputCountry" class="col-sm-2 control-label">País</label>
 <div class="col-sm-10">
-<select id="inputCountry" name="idCountry" class="form-control" required>
+<select  id="{$profile_data.idcountry}" name="idCountry" class="form-control" required>
 <option value="1">Afghanistan</option>
 <option value="2">Albania</option>
 <option value="3">Algeria</option>
@@ -226,7 +226,7 @@
 <option value="165">Philippines</option>
 <option value="166">Pitcairn Islands</option>
 <option value="167">Poland</option>
-<option value="168" selected>Portugal</option>
+<option value="168">Portugal</option>
 <option value="169">Puerto Rico</option>
 <option value="170">Qatar</option>
 <option value="171">Republic of the Congo</option>
@@ -323,17 +323,31 @@
     </div>-->
 
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-2">
-        <button type="submit" class="btn btn-primary text-center">Guardar alterações</button>
+    <div class="col-sm-8"></div>
+    <div class="col-sm-1 col-sm-offset-1">
+        <button type="submit" class="btn btn-success text-center"><span class="glyphicon glyphicon-floppy-saved"></span> Guardar</button>
     </div>
-</div>
+    <div class="col-sm-1">
+        <a href="{$BASE_URL}pages/users/profile.php?username={$USERNAME}" class="col-sm-offset-3 btn btn-danger text-center"><span class="glyphicon glyphicon-floppy-remove"></span> Cancelar</a>
+
+    </div>
 </form>
 </div>
 </div>
 </div>
 
-<script src="{$BASE_URL}javascript/main.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
+<script>
+    $(document).ready(function() {
+        var value = $("select").attr("selected");
+        var id = $("select").attr("id");
+        console.log(value);
+        console.log(id);
+        $("option[value='"+ value +"'").select();
+
+    });
+</script>
+
 
 {include file='common/footer.tpl'}

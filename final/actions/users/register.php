@@ -23,7 +23,7 @@ try {
 } catch (PDOException $e) {
 
 if (strpos($e->getMessage(), 'webuser_username_key') !== false) {
-    $_SESSION['error_messages'][] = 'Nome de utilizador duplicado';
+    $_SESSION['error_messages'][] = 'O nome de utilizador já existe';
     $_SESSION['field_errors']['username'] = 'O nome de utilizador já existe';
 }
 else if (strpos($e->getMessage(), 'webuser_email_key') !== false) {
