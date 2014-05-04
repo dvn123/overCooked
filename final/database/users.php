@@ -76,7 +76,7 @@ function getUserProfile($idUser)
     global $conn;
     $stmt = $conn->prepare("SELECT username, imageLink,  registrationDate,  about,  birthDate,
       city,  email,  gender,  webUser.name,  numAnswers,  numComments,  numQuestions,
-	  score,  country.name AS country,  userGroup
+	  score,  country.name AS country,  userGroup, webUser.idCountry
       FROM webUser, country WHERE idUser = :id AND webUser.idCountry = country.idCountry;");
 
     $stmt->bindParam(":id", $idUser);

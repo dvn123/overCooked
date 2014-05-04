@@ -340,12 +340,8 @@
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script>
     $(document).ready(function() {
-        var value = $("select").attr("selected");
-        var id = $("select").attr("id");
-        console.log(value);
-        console.log(id);
-        $("option[value='"+ value +"'").select();
-
+        var id = '"' + $("select").attr("id") + '"';
+        $('select option[value=' + id +']').prop('selected', true);
     });
 </script>
 
