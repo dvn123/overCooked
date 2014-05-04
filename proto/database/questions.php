@@ -155,7 +155,7 @@ function addQuestion($title, $idUser, $content)
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function addAnswerToQuestion($idQuestion, $idUser, $content)
