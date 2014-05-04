@@ -9,11 +9,15 @@
             <h2 class="col-lg-12">{$profile_data.username}</h2>
             <div class="col-lg-4 ">
                 <div class="text-center" >
-                    <img src="{$BASE_URL}images/default.png" style="width:100px;height:100px; margin: auto auto;">
+                    {if $profile_data.imagelink == null}
+                        <img src="{$BASE_URL}images/default.png" style="width:100px;height:100px; margin: auto auto;">
+                    {else}
+                        <img src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:100px;height:100px; margin: auto auto;">
+                    {/if}
                 </div>
 
                 <div class="text-center">
-                     <p class="text-danger"><b>Pontuação:</b> {$profile_data.score} </p>
+                    <p class="text-danger"><b>Pontuação:</b> {$profile_data.score} </p>
                     <table class="table-responsive table text-center">
                         <tr>
                             <td><b>Perguntas</b></td>
@@ -47,9 +51,9 @@
                 {include file='users/edit_button.tpl'}
             {/if}
 
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="container" >
@@ -69,24 +73,24 @@
                 <div class="tab-pane " id="subscribed">
                     <table class="table table-hover table-responsive ">
                         {foreach $questions_subscribed as $question_subscribed}
-                        <tr>
-                            <td class="col-md-1 text-center">
-                                <div class="row text-danger">{$question_subscribed.score}</div>
-                                <div class="row text-danger">votos</div>
-                            </td>
-                            <td class="col-md-2 text-center text-muted">
-                                <div class="row">{$question_subscribed.numanswers}</div>
-                                <div class="row">respostas</div>
-                            </td>
-                            <td>
-                                <div class="row"><b>{$question_subscribed.title}</b></div>
-                                <div class="row">
-                                    {foreach $question_subscribed.tags as $tag}
-                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
-                                    {/foreach}
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="col-md-1 text-center">
+                                    <div class="row text-danger">{$question_subscribed.score}</div>
+                                    <div class="row text-danger">votos</div>
+                                </td>
+                                <td class="col-md-2 text-center text-muted">
+                                    <div class="row">{$question_subscribed.numanswers}</div>
+                                    <div class="row">respostas</div>
+                                </td>
+                                <td>
+                                    <div class="row"><b>{$question_subscribed.title}</b></div>
+                                    <div class="row">
+                                        {foreach $question_subscribed.tags as $tag}
+                                            <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                        {/foreach}
+                                    </div>
+                                </td>
+                            </tr>
                         {/foreach}
                     </table>
                     <!--<div class="text-center">
@@ -103,7 +107,7 @@
                 </div>
                 <div class="tab-pane active" id="asked">
                     <table class="table table-hover table-responsive ">
-                     {foreach $questions_asked as $question_asked}
+                        {foreach $questions_asked as $question_asked}
                             <tr>
                                 <td class="col-md-1 text-center">
                                     <div class="row text-danger">{$question_asked.score}</div>
