@@ -305,21 +305,31 @@
         <textarea type="text" class="form-control" id="inputAbout" name="about" placeholder="Sobre mim">{$profile_data.about}</textarea>
     </div>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
     <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
     <div class="col-sm-10">
-        <input type="image" class="form-control" id="inputImage" name="image">
-    </div>
-</div>
-<!--<div class="form-group">
-    <div class="col-sm-10">
-        <div class="fileupload fileupload-new" data-provides="fileupload">
-    <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
-    <span class="fileupload-exists">Change</span>         <input type="file" /></span>
-            <span class="fileupload-preview"></span>
-            <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+    <!--<div class="media">-->
+        <!--<a href="#" class="pull-left">
+            <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" alt="..." class="img-thumbnail">
+            <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" class="media-object" alt="Sample Image">
+        </a>
+        <!--<div class="media-body">
+
+
+
+            <!--<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" style="width: 198px; height: 148px;">
+            </div>
+            <div>
+            <span class="btn btn-default btn-file"><!--<span class="fileinput-new">Selecionar imagem</span>
+                <input type="file" name="..." value="{$profile_data.imagelink}"></span>
+                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover imagem</a>
+            </div>
         </div>
     </div>
+</div>-->
+      <!--  </div>
     </div>-->
 
 <div class="form-group">

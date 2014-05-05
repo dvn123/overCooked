@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/users.php');
 
 if (!$_POST['email'] ||  !$_POST['idCountry']) {
     $_SESSION['error_messages'][] = 'Campos obrigatórios não preenchidos!';
-    header("Location: $BASE_URL" . 'pages/users/profile.php?username='.$_SESSION['username']);
+    header("Location: $BASE_URL" . 'pages/users/edit_profile.php?username='.$_SESSION['username']);
     exit;
 }
 
