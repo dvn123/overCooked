@@ -320,7 +320,7 @@
     </div>
     <div class="col-sm-1 voffset2">
         {if is_null($profile_data.imagelink)}
-            <img id="preview" src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:50px;height:50px;">
+            <img id="preview" src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;">
         {else}
             <img id="preview"  src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:50px;height:50px;">
         {/if}
