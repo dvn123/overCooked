@@ -38,7 +38,7 @@ try {
         $_SESSION['form_values'] = $_POST;
         $_SESSION['form_values']['pass_old'] = "";
         header("Location: $BASE_URL" .'pages/users/edit_password.php?username='.$_SESSION['username']);
-        
+
         exit;
     }
 
