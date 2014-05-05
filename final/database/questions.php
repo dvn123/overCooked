@@ -149,10 +149,11 @@ function addQuestion($title, $idUser, $content)
 {
     global $conn;
     $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO question_vw (title, idUser, html) VALUES(:title, :user, :content);");
+        INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
 
     $stmt->bindParam(":title", $title);
     $stmt->bindParam(":user", $idUser);
+    $stmt->bindParam(":date",date('Y-m-d H:i:s', time()));
     $stmt->bindParam(":content", $content);
 
     $stmt->execute();

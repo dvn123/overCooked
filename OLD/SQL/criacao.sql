@@ -51,7 +51,7 @@ CREATE TABLE question (
   title TEXT NOT NULL,
   date DATE NOT NULL,
   score INTEGER NOT NULL DEFAULT 0,
-  hot BOOLEAN NOT NULL,
+  hot BOOLEAN NOT NULL DEFAULT FALSE,
   idUser INTEGER REFERENCES webUser (idUser)
 );
 
