@@ -25,6 +25,8 @@ $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
 $imagelink=$_POST['image'];
 
+//TODO: store profile pic
+
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
 
