@@ -4,7 +4,7 @@ function getUsersByName() {
 
     global $conn;
     $stmt = $conn->prepare("SELECT  username, imageLink,  registrationDate,
-        about,  birthDate,  city,  email,  gender,  name,  numAnswers,  
+        about,  birthDate,  city,  email,  gender,  name,  numAnswers,
         numComments,  numQuestions,  score,  idCountry,  userGroup
         FROM webUser
         ORDER BY username");

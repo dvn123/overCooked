@@ -133,14 +133,26 @@ function updateUserProfile($idUser, $imageLink, $about, $birthDate, $city, $emai
 function changePassword($idUser, $password)
 {
     global $conn;
-
     $stmt = $conn->prepare("UPDATE webUser
-        SET password = :password WHERE idUser = :idUser;");
+        SET password = :password, salt=:salt WHERE idUser = :idUser;");
 
-    $stmt->bindParam(":password", sha1($password));
+    $salt = base64_encode(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+    $hashed_password = hash(sha256, $salt . $password);
+    $stmt->bindParam(":password", $hashed_password);
+    $stmt->bindParam(":salt", $salt);
     $stmt->bindParam(":idUser", $idUser);
+    $stmt->execute();
+}
+
+function getUsers() {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
+        FROM webUser, country WHERE webUser.idCountry = country.idCountry
+        ORDER BY username;");
 
     $stmt->execute();
+    return $stmt->fetchAll();
 }
 
 ?>
