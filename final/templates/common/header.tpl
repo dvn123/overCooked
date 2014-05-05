@@ -32,7 +32,7 @@
                 <li ><a href = "#">Fazer Pergunta</a></li>
                 <li><a href = "#">Perguntas</a></li>
                 <li><a href = "#">Tags</a></li>
-
+                <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
             </ul>
 
             {if $USERNAME}

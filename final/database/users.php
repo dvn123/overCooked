@@ -144,4 +144,15 @@ function changePassword($idUser, $password)
     $stmt->execute();
 }
 
+function getUsers() {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
+        FROM webUser, country WHERE webUser.idCountry = country.idCountry
+        ORDER BY username;");
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 ?>
