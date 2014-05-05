@@ -148,8 +148,8 @@ function searchQuestions($text) {
 function addQuestion($title, $idUser, $content)
 {
     global $conn;
-    $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt = $conn->prepare("INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
 
     $stmt->bindParam(":title", $title);
     $stmt->bindParam(":user", $idUser);
@@ -162,8 +162,8 @@ function addQuestion($title, $idUser, $content)
 function addAnswerToQuestion($idQuestion, $idUser, $content)
 {
     global $conn;
-    $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO answer_vw (answer.idQuestion, answer.idUser, answerContent.html)
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt = $conn->prepare("INSERT INTO answer_vw (answer.idQuestion, answer.idUser, answerContent.html)
         VALUES (:question, :idUser, :content);");
 
     $stmt->bindParam(":question", $idQuestion);
