@@ -2,7 +2,7 @@
 session_set_cookie_params(3600, '/~lbaw1315');
 session_start();
 
-$BASE_DIR = '../../';
+$BASE_DIR = 'C:/Development/xampp/htdocs/overCooked/final/';
 $BASE_URL = '../../';
 
 $conn = new PDO('pgsql:host=vdbm.fe.up.pt;dbname=lbaw1315', 'lbaw1315','oA667ld4');

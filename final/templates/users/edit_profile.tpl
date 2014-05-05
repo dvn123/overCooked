@@ -7,7 +7,7 @@
 </div>
 <div class="panel-body">
 
-<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form">
+<form class="form-horizontal " action="{$BASE_URL}actions/users/edit_profile.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form" enctype="multipart/form-data">
 <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Nome</label>
     <div class="col-sm-10">
@@ -29,7 +29,7 @@
 <div class="form-group">
     <label for="inputBirthDate" class="col-sm-2 control-label">Data de nascimento</label>
     <div class="col-sm-10">
-            <input type="date" class="form-control" id="inputBirthDate" name="birthdate" placeholder="Data de nascimento" value="{$profile_data.birthdate}">
+        <input type="date" class="form-control" id="inputBirthDate" name="birthdate" placeholder="Data de nascimento" value="{$profile_data.birthdate}">
     </div>
 </div>
 <div class="form-group form-inline">
@@ -305,32 +305,54 @@
         <textarea type="text" class="form-control" id="inputAbout" name="about" placeholder="Sobre mim">{$profile_data.about}</textarea>
     </div>
 </div>
+<!--
+<div class="form-group">
+    <label for="inputPic">File input</label>
+    <div class="col-sm-10">
+        <input type="file" name="picture" value="{$profile_data.imagelink}"></span>
+
+    </div>
+</div> -->
+<div class="form-group">
+    <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
+    <div class="col-sm-9">
+        <input type="file" class="form-control" id="inputImage" name="photo">
+    </div>
+    <div class="col-sm-1 voffset2">
+        {if is_null($profile_data.imagelink)}
+            <img id="preview" src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:50px;height:50px;">
+        {else}
+            <img id="preview"  src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:50px;height:50px;">
+        {/if}
+
+    </div>
+
+</div>
+
 <!--<div class="form-group">
     <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
     <div class="col-sm-10">
         <div class="fileinput fileinput-new" data-provides="fileinput">
-    <!--<div class="media">-->
-        <!--<a href="#" class="pull-left">
-            <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" alt="..." class="img-thumbnail">
-            <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" class="media-object" alt="Sample Image">
-        </a>
-        <!--<div class="media-body">
+            <div class="media">
+                <a href="#" class="pull-left">
+                    <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" alt="..." class="img-thumbnail">
+                    <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" class="media-object" alt="Sample Image">
+                </a>
+                <div class="media-body">
 
-
-
-            <!--<div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-                <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" style="width: 198px; height: 148px;">
-            </div>
-            <div>
-            <span class="btn btn-default btn-file"><!--<span class="fileinput-new">Selecionar imagem</span>
+                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                        <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" style="width: 198px; height: 148px;">
+                    </div>
+                    <div>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar imagem</span>
                 <input type="file" name="..." value="{$profile_data.imagelink}"></span>
-                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover imagem</a>
+                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover imagem</a>
+                   </div>
+                </div>
             </div>
         </div>
     </div>
-</div>-->
-      <!--  </div>
-    </div>-->
+</div> -->
 
 <div class="form-group">
     <div class="col-sm-8"></div>
@@ -341,6 +363,7 @@
         <a href="{$BASE_URL}pages/users/profile.php?username={$USERNAME}" class="col-sm-offset-3 btn btn-danger text-center"><span class="glyphicon glyphicon-floppy-remove"></span> Cancelar</a>
 
     </div>
+</div>
 </form>
 </div>
 </div>
@@ -352,6 +375,18 @@
     $(document).ready(function() {
         var id = '"' + $("select").attr("id") + '"';
         $('select option[value=' + id +']').prop('selected', true);
+
+        $("input:file").change(function (){
+            var pic = document.getElementById("inputImage").files[0];
+            var imgUrl;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var imgURL = reader.result;
+                $('#preview').attr("src",imgURL);
+            }
+            reader.readAsDataURL(pic);
+        });
+
     });
 </script>
 

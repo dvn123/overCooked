@@ -16,6 +16,9 @@ if($idUser==null) {
     exit;
 }
 
+$photo = $_FILES['photo'];
+$extension = end(explode(".", $photo["name"]));
+
 $realname = strip_tags($_POST['realname']);
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];
@@ -23,12 +26,16 @@ $gender = $_POST['gender'];
 $city = strip_tags($_POST['city']);
 $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
-$imagelink=$_POST['image'];
+$imagelink=$_GET['username'] .".". $extension;
 
-//TODO: store profile pic
+$username = $_GET['username'];
+
+
 
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
+    move_uploaded_file($photo["tmp_name"],$BASE_DIR .  "images/users/" . $username . '.' . $extension); // this is dangerous
+    chmod($BASE_DIR . "images/users/" . $username . '.' . $extension, 0644);
 
 } catch (PDOException $e) {
 
@@ -44,6 +51,7 @@ try {
 }
 
 $_SESSION['success_messages'][] = 'Alterações registadas com sucesso!';
+$_SESSION['profile_pic'] = $imagelink;
 header("Location: $BASE_URL" . 'pages/users/profile.php?username='.$_SESSION['username']);
 
 ?>

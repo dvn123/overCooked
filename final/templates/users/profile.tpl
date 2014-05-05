@@ -10,7 +10,7 @@
             <div class="col-lg-4 ">
                 <div class="text-center" >
                     {if $profile_data.imagelink == null}
-                        <img src="{$BASE_URL}images/default.png" style="width:100px;height:100px; margin: auto auto;">
+                        <img src="{$BASE_URL}images/users/default.png" style="width:100px;height:100px; margin: auto auto;">
                     {else}
                         <img src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:100px;height:100px; margin: auto auto;">
                     {/if}
