@@ -308,7 +308,7 @@
 <div class="form-group">
     <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
     <div class="col-sm-10">
-        <input type="file" class="form-control" id="inputImage" name="image" placeholder="foto" value="{$profile_data.imagelink}">
+        <input type="image" class="form-control" id="inputImage" name="image">
     </div>
 </div>
 <!--<div class="form-group">
@@ -344,6 +344,5 @@
         $('select option[value=' + id +']').prop('selected', true);
     });
 </script>
-
 
 {include file='common/footer.tpl'}
