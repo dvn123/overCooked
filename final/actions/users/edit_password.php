@@ -17,7 +17,7 @@ if($idUser==null) {
     exit;
 }
 
-$username = $_POST['username'];
+$username = $_GET['username'];
 $passwordOld = $_POST['pass_old'];
 $passwordNew = $_POST['pass_new'];
 $passwordNewConf = $_POST['pass_new_conf'];
