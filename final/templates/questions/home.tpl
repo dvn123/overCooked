@@ -126,13 +126,21 @@
                             <div class="row">{$question_hot.numanswers}</div>
                             <div class="row">respostas</div>
                         </td>
-                        <td>
+                        <td class="col-md-8">
                             <div class="row"><b>{$question_hot.title}</b></div>
                             <div class="row">
                                 {foreach $question_hot.tags as $tag}
                                     <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                 {/foreach}
                             </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="row">
+                                <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question_hot.username}">
+                                    <b>{$question_hot.username}</b>
+                                </a>
+                            </div>
+                            <div class="row">{$question_hot.date2}</div>
                         </td>
                     </tr>
                 {/foreach}

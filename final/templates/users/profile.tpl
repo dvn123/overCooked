@@ -82,13 +82,21 @@
                                     <div class="row">{$question_subscribed.numanswers}</div>
                                     <div class="row">respostas</div>
                                 </td>
-                                <td>
+                                <td class="col-md-8">
                                     <div class="row"><b>{$question_subscribed.title}</b></div>
                                     <div class="row">
                                         {foreach $question_subscribed.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                         {/foreach}
                                     </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="row">
+                                        <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question_subscribed.username}">
+                                            <b>{$question_subscribed.username}</b>
+                                        </a>
+                                    </div>
+                                    <div class="row">{$question_subscribed.date2}</div>
                                 </td>
                             </tr>
                         {/foreach}
@@ -117,13 +125,21 @@
                                     <div class="row">{$question_asked.numanswers}</div>
                                     <div class="row">respostas</div>
                                 </td>
-                                <td>
+                                <td class="col-md-8">
                                     <div class="row"><b>{$question_asked.title}</b></div>
                                     <div class="row">
                                         {foreach $question_asked.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                         {/foreach}
                                     </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="row">
+                                        <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question_asked.username}">
+                                            <b>{$question_asked.username}</b>
+                                        </a>
+                                    </div>
+                                    <div class="row">{$question_asked.date2}</div>
                                 </td>
                             </tr>
                         {/foreach}
@@ -152,13 +168,21 @@
                                     <div class="row">{$question_answered.numanswers}</div>
                                     <div class="row">respostas</div>
                                 </td>
-                                <td>
+                                <td class="col-md-8">
                                     <div class="row"><b>{$question_answered.title}</b></div>
                                     <div class="row">
                                         {foreach $question_answered.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                         {/foreach}
                                     </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="row">
+                                        <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question_answered.username}">
+                                            <b>{$question_answered.username}</b>
+                                        </a>
+                                    </div>
+                                    <div class="row">{$question_answered.date2}</div>
                                 </td>
                             </tr>
                         {/foreach}

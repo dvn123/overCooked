@@ -18,48 +18,78 @@ foreach ($tweets as $key => $tweet) {
     $tweets[$key]['photo'] = $photo;
 }*/
 
-foreach($questions as $key => $question) {
-    $tags = getQuestionTags($question['idquestion']);
-    $questions[$key]['tags'] = $tags;
-
-    $timeFirst  = strtotime($question['date']);
+/**
+ * @param $question
+ * @param $questions
+ * @param $key
+ * @return mixed
+ */
+function getDate2($question, $questions, $key)
+{
+    $timeFirst = strtotime($question['date']);
     $timeSecond = time();
     $difference = $timeSecond - $timeFirst;
 
     if ($difference < 60) {
         $seconds = ' segundos';
-        if($difference == 1)
+        if ($difference == 1)
             $seconds = ' segundo';
-        $questions[$key]['date2'] = 'há ' . $difference . $seconds;
-    }
-    elseif($difference < 3600) {
+        $questions[$key]['date2'] = 'há ' . $difference % 60 . $seconds;
+        return $questions;
+    } elseif ($difference < 3600) {
         $minutes = ' minutos';
-        if($difference >= 60 && $difference <= 120)
+        if ($difference >= 60 && $difference <= 120)
             $minutes = ' minuto';
-        $questions[$key]['date2'] = 'há ' . $difference / 60 . $minutes;
-    }
-    else if ($difference < 86400) {
+        $questions[$key]['date2'] = 'há ' . $difference / 60 % 60 . $minutes;
+        return $questions;
+    } else if ($difference < 86400) {
         $hours = ' horas';
-        if($difference >= 60 && $difference <= 120)
+        if ($difference >= 60 && $difference <= 120)
             $hours = ' hora';
-        $questions[$key]['date2'] = 'há ' . $difference / 3600 . $hours;
-    }
-    else if ($difference < 86400 * 7) {
+        $questions[$key]['date2'] = 'há ' . $difference / 3600 % 24 . $hours;
+        return $questions;
+    } else if ($difference < 86400 * 7) {
         $hours = ' dias';
-        if($difference >= 60 && $difference <= 120)
+        $data = $difference / 86400 % 7;
+        if ($data == 1)
             $hours = ' dia';
-        $questions[$key]['date2'] = 'há ' . $difference / 86400 . $hours;
+        $questions[$key]['date2'] = 'há ' . $data . $hours;
+        return $questions;
+    }
+    else if ($difference < 604800  * 52) {
+        $text = ' semanas';
+        $data = $difference / 604800 % 52;
+        if ($data == 1)
+            $text = ' semana';
+        $questions[$key]['date2'] = 'há ' . $data . $text;
+        return $questions;
     }
     else {
-        $date = new DateTime($question['date']);
-        $questions[$key]['date2'] = $date->format('d-m-Y');
+        $text = ' anos';
+        $data = $difference / 31556926 % 12;
+        if ($data == 1)
+            $text = ' ano';
+        $questions[$key]['date2'] = 'há ' . $data . $text;
+        return $questions;
     }
+    /*else {
+          $date = new DateTime($question['date']);
+          $questions[$key]['date2'] = $date->format('d-m-Y');
+     }*/
+}
+
+foreach($questions as $key => $question) {
+    $tags = getQuestionTags($question['idquestion']);
+    $questions[$key]['tags'] = $tags;
+
+    $questions = getDate2($question, $questions, $key);
 
 }
 
 foreach($questions_hot as $key => $question) {
     $tags = getQuestionTags($question['idquestion']);
     $questions_hot[$key]['tags'] = $tags;
+    $questions_hot = getDate2($question, $questions_hot, $key);
 }
 
 $smarty->assign('questions', $questions);

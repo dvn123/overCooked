@@ -26,19 +26,82 @@ $questions_answered=getQuestionsAnswered($idUser);
 $questions_subscribed=getQuestionsSubscribed($idUser);
 //var_dump(3,$questions_subscribed);
 
+/**
+ * @param $question
+ * @param $questions
+ * @param $key
+ * @return mixed
+ */
+function getDate2($question, $questions, $key)
+{
+    $timeFirst = strtotime($question['date']);
+    $timeSecond = time();
+    $difference = $timeSecond - $timeFirst;
+
+    if ($difference < 60) {
+        $seconds = ' segundos';
+        if ($difference == 1)
+            $seconds = ' segundo';
+        $questions[$key]['date2'] = 'há ' . $difference % 60 . $seconds;
+        return $questions;
+    } elseif ($difference < 3600) {
+        $minutes = ' minutos';
+        if ($difference >= 60 && $difference <= 120)
+            $minutes = ' minuto';
+        $questions[$key]['date2'] = 'há ' . $difference / 60 % 60 . $minutes;
+        return $questions;
+    } else if ($difference < 86400) {
+        $hours = ' horas';
+        if ($difference >= 60 && $difference <= 120)
+            $hours = ' hora';
+        $questions[$key]['date2'] = 'há ' . $difference / 3600 % 24 . $hours;
+        return $questions;
+    } else if ($difference < 86400 * 7) {
+        $hours = ' dias';
+        $data = $difference / 86400 % 7;
+        if ($data == 1)
+            $hours = ' dia';
+        $questions[$key]['date2'] = 'há ' . $data . $hours;
+        return $questions;
+    }
+    else if ($difference < 604800  * 52) {
+        $text = ' semanas';
+        $data = $difference / 604800 % 52;
+        if ($data == 1)
+            $text = ' semana';
+        $questions[$key]['date2'] = 'há ' . $data . $text;
+        return $questions;
+    }
+    else {
+        $text = ' anos';
+        $data = $difference / 31556926 % 12;
+        if ($data == 1)
+            $text = ' ano';
+        $questions[$key]['date2'] = 'há ' . $data . $text;
+        return $questions;
+    }
+    /*else {
+          $date = new DateTime($question['date']);
+          $questions[$key]['date2'] = $date->format('d-m-Y');
+     }*/
+}
+
 foreach($questions_asked as $key => $question) {
     $tags = getQuestionTags($question['idquestion']);
     $questions_asked[$key]['tags'] = $tags;
+    $questions_asked = getDate2($question, $questions_asked, $key);
 }
 
 foreach($questions_answered as $key => $question) {
     $tags = getQuestionTags($question['idquestion']);
     $questions_answered[$key]['tags'] = $tags;
+    $questions_answered = getDate2($question, $questions_answered, $key);
 }
 
 foreach($questions_subscribed as $key => $question) {
     $tags3= getQuestionTags($question['idquestion']);
     $questions_subscribed[$key]['tags'] = $tags;
+    $questions_subscribed = getDate2($question, $questions_subscribed, $key);
 }
 
 $smarty->assign('username_edit', $_GET['username']);
