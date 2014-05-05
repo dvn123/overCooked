@@ -138,7 +138,7 @@ function searchQuestions($text) {
         OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('portuguese', :text))
         AND question.idUser = webUser.idUser
         GROUP BY question.idQuestion, webuser.username,webuser.imagelink
-        ORDER BY question.idquestion;");
+        ORDER BY question.idquestion DESC;");
 
     $stmt->bindParam(":text", $text);
     $stmt->execute();
