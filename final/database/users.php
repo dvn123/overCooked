@@ -70,6 +70,18 @@ function isLoginCorrect($username, $password)
     return slow_equals($data['password'], $hashed_password);
 }
 
+function getProfilePic($username)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT imageLink
+                            FROM webUser
+                            WHERE username = :user");
+    $stmt->bindParam(":user", $username);
+    $stmt->execute();
+
+    return $stmt->fetch();
+}
+
 function getUserProfile($idUser)
 {
 

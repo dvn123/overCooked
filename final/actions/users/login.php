@@ -13,13 +13,16 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 if (isLoginCorrect($username, $password)) {
+
     $_SESSION['username'] = $username;
     $_SESSION['success_messages'][] = 'Login bem sucedido!';
+
+    $picture=getProfilePic($username);
+    $_SESSION['profile_pic'] = $picture['imagelink'];
 
 } else {
     $_SESSION['error_messages'][] = 'O login falhou!';
 }
-
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 
