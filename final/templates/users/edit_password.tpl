@@ -6,7 +6,7 @@
             <h3 class="panel-title">Alterar password</h3>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal " action="{$BASE_URL}actions/users/change_password.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form">
+            <form class="form-horizontal " action="{$BASE_URL}actions/users/edit_password.php?username={$username_edit}" method="post" accept-charset="UTF-8" role="form">
                 <div class="form-group">
                     <label for="inputName" class="col-sm-2 control-label">Nome utilizador</label>
                     <div class="col-sm-10">
@@ -16,19 +16,19 @@
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Atual</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword1" name="password1" placeholder="Password atual" value="{$FORM_VALUES.pass_old}" required>
+                        <input type="password" class="form-control" id="inputPassword1" name="pass_old" placeholder="Password atual" value="{$FORM_VALUES.pass_old}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Nova</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword2" name="password2" placeholder="Password nova" value="{$FORM_VALUES.pass_new}" required>
+                        <input type="password" class="form-control" id="inputPassword2" name="pass_new" placeholder="Password nova" value="{$FORM_VALUES.pass_new}" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Reescrever nova</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword3" name="password3" placeholder="Password nova" value="{$FORM_VALUES.pass_new_conf}" required>
+                        <input type="password" class="form-control" id="inputPassword3" name="pass_new_conf" placeholder="Password nova" value="{$FORM_VALUES.pass_new_conf}" required>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
-if (!$_POST['password1'] ||  !$_POST['password2'] ||  !$_POST['password3']) {
+if (!$_POST['pass_old'] ||  !$_POST['pass_new'] ||  !$_POST['pass_new_conf']) {
     $_SESSION['error_messages'][] = 'Campos obrigatórios não preenchidos!';
     $_SESSION['form_values'] = $_POST;
     header("Location: $BASE_URL" . 'pages/users/edit_password.php?username='.$_SESSION['username']);
@@ -17,23 +17,40 @@ if($idUser==null) {
     exit;
 }
 
-$username = strip_tags($_POST['username']);
-$passwordOld = strip_tags($_POST['password']);
-$passwordNew = strip_tags($_POST['password2']);
-$passwordNewConf = strip_tags($_POST['password3']);
+$username = $_POST['username'];
+$passwordOld = $_POST['pass_old'];
+$passwordNew = $_POST['pass_new'];
+$passwordNewConf = $_POST['pass_new_conf'];
 
 try {
-    changePassword($idUser, $passwordNew);
-    //TODO: mudar funçao, verificar se old é igual, new e newconf
+    if(isLoginCorrect($username, $passwordOld)) {
+        if($passwordNew==$passwordNewConf) {
+            changePassword($idUser, $passwordNew);
+        } else {
+            $_SESSION['error_messages'][] = 'Confirmação password incorreta';
+            $_SESSION['form_values'] = $_POST;
+            $_SESSION['form_values']['pass_new_conf'] = "";
+            header("Location: $BASE_URL" .'pages/users/edit_password.php?username='.$_SESSION['username']);
+            exit;
+        }
+    } else {
+        $_SESSION['error_messages'][] = 'Password atual incorreta';
+        $_SESSION['form_values'] = $_POST;
+        $_SESSION['form_values']['pass_old'] = "";
+        header("Location: $BASE_URL" .'pages/users/edit_password.php?username='.$_SESSION['username']);
+        
+        exit;
+    }
+
 } catch (PDOException $e) {
 
     $_SESSION['error_messages'][] = 'Erro ao guardar alterações. Tente outra vez';
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . . 'pages/users/edit_password.php?username='.$_SESSION['username']);
+    header("Location: $BASE_URL" . 'pages/users/edit_password.php?username='.$_SESSION['username']);
     exit;
 }
 
-$_SESSION['success_messages'][] = 'Alterações registadas com sucesso!';
+$_SESSION['success_messages'][] = 'Password alterada com sucesso!!';
 header("Location: $BASE_URL" . 'pages/users/profile.php?username='.$_SESSION['username']);
 
 ?>
