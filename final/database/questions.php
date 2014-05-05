@@ -72,7 +72,7 @@ function getQuestion($idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM question_vw WHERE idQuestion = :id;");
 
-    $stmt->bindParam(":id", $idQuestion);
+    $stmt->bindParam("id", $idQuestion);
     $stmt->execute();
     return $stmt->fetch();
 }
@@ -83,7 +83,7 @@ function getQuestionTags($idQuestion) {
     $stmt = $conn->prepare("SELECT Tag.name FROM Tag,QuestionTag
         WHERE QuestionTag.idQuestion = :id AND Tag.idTag = QuestionTag.idTag;");
 
-    $stmt->bindParam(":id", $idQuestion);
+    $stmt->bindParam("id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -94,7 +94,7 @@ function getQuestionAnswers($idQuestion) {
     $stmt = $conn->prepare("SELECT * FROM answer_vw
         WHERE idQuestion = :id;");
 
-    $stmt->bindParam(":id", $idQuestion);
+    $stmt->bindParam("id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -104,7 +104,7 @@ function getQuestionComments($idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM questionComment_vw WHERE idQuestion = :id;");
 
-    $stmt->bindParam(":id", $idQuestion);
+    $stmt->bindParam("id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -115,7 +115,7 @@ function getAnswerComments($idAnswer) {
     $stmt = $conn->prepare("SELECT * FROM answerComment_vw
         WHERE idAnswer = :id;");
 
-    $stmt->bindParam(":id", $idAnswer);
+    $stmt->bindParam("id", $idAnswer);
     $stmt->execute();
     return $stmt->fetchAll();
 }
