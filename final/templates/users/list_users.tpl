@@ -21,7 +21,7 @@
                     <div class="panel panel-green">
                         <div class="panel-body">
                             {if $user.imagelink == null}
-                                <img src="{$BASE_URL}images/default.png" style="width:50px;height:50px;margin-top:0px;">
+                                <img src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;margin-top:0px;">
                             {else}
                                 <img src="{$BASE_URL}images/users/{$user.imagelink}" style="width:50px;height:50px;margin-top:0px;">
                             {/if}
