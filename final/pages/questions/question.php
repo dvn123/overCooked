@@ -14,7 +14,7 @@ include_once($BASE_DIR .'database/users.php');
 		$question['username'] = $user['username'];
 		$question['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user['username'];
 		if($user['imagelink'] == NULL)	
-			$question['userphoto'] =$BASE_URL . "images/default.png";
+			$question['userphoto'] =$BASE_URL . "images/users/default.png";
 		else $question['userphoto'] =$BASE_URL . "images/users/" . $user['imagelink'];
 		$question['userpoints'] = $user['score'];
 		$question['tags'] = getQuestionTags($idQuestion);
@@ -31,7 +31,7 @@ include_once($BASE_DIR .'database/users.php');
 			$answer['username'] = $user_answer['username'];
 			$answer['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user_answer['username'];
 			if($user_answer['imagelink'] == NULL)	
-				$answer['userphoto'] =$BASE_URL . "images/default.png";
+				$answer['userphoto'] =$BASE_URL . "images/users/default.png";
 			else $answer['userphoto'] =$BASE_URL . "images/users/" . $user_answer['imagelink'];
 			$answer['userpoints'] = $user_answer['score'];
 			$answer['comments'] = getAnswerComments($answer['idanswer']);

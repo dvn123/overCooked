@@ -23,6 +23,20 @@ function getIdUser($username) {
     return $tmp2;
 }
 
+function getUserName($idUser) {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT username FROM webUser
+          WHERE webUser.iduser = :id;");
+
+    $stmt->bindParam(":id", $idUser);
+    $stmt->execute();
+
+    $tmp = $stmt->fetch();
+    $tmp2 = $tmp['username'];
+    return $tmp2;
+}
+
 function createUser($username, $password, $email, $name, $idCountry)
 {
     global $conn;
