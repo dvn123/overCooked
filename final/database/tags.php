@@ -28,4 +28,40 @@ function getQuestionByTag($tag) {
     return $stmt->fetchAll();
 }
 
+function getTag($tag) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM tag WHERE tag.name = :name;");
+
+    $stmt->bindParam(":name", $tag);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function createTag($tag) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO tag (name)
+                            SELECT (:name)
+                            WHERE NOT EXISTS (SELECT * FROM Tag
+                            WHERE name = :name);");
+    /*$stmt = $conn->prepare("INSERT INTO tag (name)
+                            VALUES (:name);");*/
+    $stmt->bindParam(":name", $tag);
+    return $stmt->execute();
+}
+
+function createQuestionTag($tag, $questionid) {
+    global $conn;
+    createTag($tag);
+    //echo print_r(getTag($tag));
+    //echo getTag($tag)[0]['idtag'];
+    $tagid = getTag($tag)[0]['idtag'];
+    $stmt = $conn->prepare("INSERT INTO questiontag (idQuestion, idTag)
+        VALUES (:questionid, :tagid);");
+
+    $stmt->bindParam(":tagid", $tagid);
+    $stmt->bindParam(":questionid", $questionid);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 ?>

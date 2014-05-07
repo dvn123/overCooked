@@ -2,7 +2,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/questions.php');
-
+include_once($BASE_DIR .'database/tags.php');
 
 /*
 if(!isset($_SESSION['username'])) {
@@ -13,6 +13,8 @@ if(!isset($_SESSION['username'])) {
 
 //$idUser = getIdUser($_SESSION['username']);
 $idUser = 1;
+echo $_GET['title'];
+
 if (!isset($_GET['title']) || !isset($_GET['content'])) {
     $_SESSION['error_messages'][] = 'Campos Invalidos!';
     //$_SESSION['form_values'] = $_GET;
@@ -22,17 +24,17 @@ if (!isset($_GET['title']) || !isset($_GET['content'])) {
     if($_GET['title'] == "" || $_GET['content'] == "") {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         //$_SESSION['form_values'] = $_GET;
-        echo '400';
+        echo '200';
         exit;
     }
 }
 
-
 if (addQuestion($_GET['title'], $idUser, $_GET['content'])) {
     $_SESSION['success_messages'][] = 'Login bem sucedido!';
-    $idQuestion = getQuestionByTitle($_GET['title']);
+    $idQuestion = getQuestionByTitle($_GET['title'])['idquestion'];
     $i = 0;
     while(isset($_GET['tag'.$i])) {
+        echo $_POST['tag'.$i];
         createQuestionTag($_GET['tag'.$i],$idQuestion);
         $i = $i + 1;
     }

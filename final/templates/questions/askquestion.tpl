@@ -22,7 +22,12 @@
         });
         request.done(function(data) {
             console.log(data);
-            //window.location.href = email;
+            if(data != 400 && data !=401 && data != 300) {
+                var url = "question.php?idQuestion=" + data;
+                window.location.href = url;
+            } else {
+                location.reload();
+            }
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );

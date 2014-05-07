@@ -159,18 +159,32 @@ function searchQuestions($text) {
     return $stmt->fetchAll();
 }
 
+function getQuestionByTitle($title) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM question_vw WHERE title = :title;");
+
+    $stmt->bindParam(":title", $title);
+    $stmt->execute();
+    return $stmt->fetch();
+}
+
+
 function addQuestion($title, $idUser, $content)
 {
     global $conn;
-    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    //$conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
 
     $stmt->bindParam(":title", $title);
+    //echo $title;
+    //echo $idUser;
+    //echo date('Y-m-d', time());
+    //echo $content;
     $stmt->bindParam(":user", $idUser);
-    $stmt->bindParam(":date",date('Y-m-d H:i:s', time()));
+    $stmt->bindParam(":date",date('Y-m-d', time()) );
     $stmt->bindParam(":content", $content);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function addAnswerToQuestion($idQuestion, $idUser, $content)
@@ -212,7 +226,7 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function getQuestionVote($idQuestion, $idUser)
