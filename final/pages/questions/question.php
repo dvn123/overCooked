@@ -40,11 +40,24 @@ include_once($BASE_DIR .'database/users.php');
 				$acomment['username'] = getUserName($acomment['iduser']);
 				$acomment['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $acomment['username'];
 			}
+		}//------------
+		if(isset($_SESSION['username']))
+		{
+			$idMyUser = getIdUser($_SESSION['username']);
+			if($question['iduser']==$idMyUser)
+				$question['owner']=true;
+			$question['subscribed'] = isQuestionSubscribed($idMyUser,$idQuestion);
+			$question['vote'] = getQuestionVote($idQuestion, $idMyUser);
+			foreach($question['answers'] as &$answer)
+			{
+				$answer['vote'] = getAnswerVote($answer['idanswer'], $idMyUser);
+			}
 		}
+		//------------
 		$smarty->assign('question', $question);
 		$smarty->display('questions/question.tpl');	
 	} catch(Exception $e)
 	{
-		header('Location: home.php');
+		header("Location: $BASE_URL");
 	}
 ?>

@@ -45,6 +45,20 @@ function getQuestionsSubscribed($idUser) {
     return $stmt->fetchAll();
 }
 
+function isQuestionSubscribed($idUser,$idQuestion) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) AS subscribed FROM QuestionSubscription
+        WHERE QuestionSubscription.idUser = :idUser
+        AND QuestionSubscription.idQuestion = :idQuestion");
+    
+    $stmt->bindParam("idUser", $idUser);
+    $stmt->bindParam("idQuestion", $idQuestion);
+    $stmt->execute();
+    $tmp = $stmt->fetch();
+    $tmp2 = $tmp['subscribed'];
+    return $tmp2;
+}
+
 function getQuestionsAsked($idUser) {
 
     global $conn;
@@ -199,6 +213,34 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
     $stmt->bindParam(":content", $content);
 
     $stmt->execute();
+}
+
+function getQuestionVote($idQuestion, $idUser)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT updown FROM QuestionVote Where idQuestion = :idQuestion AND idUser = :idUser");
+
+    $stmt->bindParam("idQuestion", $idQuestion);
+    $stmt->bindParam("idUser", $idUser);
+    $stmt->execute();
+    $tmp = $stmt->fetch();
+    if($tmp)
+        return $tmp['updown'];
+    else return 0;
+}
+
+function getAnswerVote($idAnswer, $idUser)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT updown FROM AnswerVote Where idAnswer = :idAnswer AND idUser = :idUser");
+
+    $stmt->bindParam("idAnswer", $idAnswer);
+    $stmt->bindParam("idUser", $idUser);
+    $stmt->execute();
+    $tmp = $stmt->fetch();
+    if($tmp)
+        return $tmp['updown'];
+    else return 0;
 }
 
 //TODO: SQL026 - Adicionar voto a pergunta
