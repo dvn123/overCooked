@@ -52,8 +52,7 @@ function createTag($tag) {
 function createQuestionTag($tag, $questionid) {
     global $conn;
     createTag($tag);
-    //echo print_r(getTag($tag));
-    //echo getTag($tag)[0]['idtag'];
+
     $tagid = getTag($tag)[0]['idtag'];
     $stmt = $conn->prepare("INSERT INTO questiontag (idQuestion, idTag)
         VALUES (:questionid, :tagid);");

@@ -14,14 +14,14 @@
         <div class="panel-body">
 
             <div class="col-xs-1">
-                <button type="button" class="btn btn-default btn-md {if $question.vote eq '1'} active{/if}" style="min-width:50px;">
+                <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </button>
                 <div class="text-center btn btn-default disabled" style="min-width:50px;">{$question.score}</div>
-                <button type="button" class="btn btn-default btn-md {if $question.vote eq '-1'} active{/if}" style="min-width:50px;">
+                <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
-                <button type="button" class="btn btn-default btn-md{if $question.subscribed eq '1'} active{/if}" style="min-width:50px;">
+                <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
                     <span class="glyphicon glyphicon-pushpin"></span>
                 </button>
             </div>
@@ -67,16 +67,16 @@
 
                         <div class="col-xs-1">
                             {if $answer.bestanswer eq 'true'}
-                            <button type="button" class="btn btn-success btn-md{if $question.owner eq true} active{else} disabled{/if}"
+                            <button type="button" class="btn btn-success btn-md disabled"
                             style="min-width:50px; margin-bottom:10px;">
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                         {/if}
-                        <button type="button" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
+                        <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </button>
                         <div class="text-center btn btn-default disabled" style="min-width:50px;">{$answer.score}</div>
-                        <button type="button" class="btn btn-default btn-md{if $answer.vote eq '-1'} active{/if}" style="min-width:50px;">
+                        <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </button>
 
@@ -161,8 +161,10 @@
     </div>
 </div>-->
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="ckeditor/skins/moono/editor.css">
+<script src="js/libs/bootstrap/bootstrap.js"></script>
 <script>
     var answer_visible = false, comment_visible = false;
 

@@ -2,6 +2,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR .'database/tags.php');
 
 if(!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = 'Não tem permissões para criar uma pergunta';
@@ -26,14 +27,13 @@ if (!isset($_POST['title']) || !isset($_POST['content'])) {
 }
 
 if (addQuestion($_POST['title'], $idUser, $_POST['content'])) {
-    $_SESSION['success_messages'][] = 'Login bem sucedido!';
+    $_SESSION['success_messages'][] = 'Criação de Pergunta bem sucedida!';
     $idQuestion = getQuestionByTitle($_POST['title'])['idquestion'];
-    //$i = 0;
-    /*while(isset($_POST['tag'.$i])) {
-        echo $_POST['tag'.$i];
+    $i = 0;
+    while(isset($_POST['tag'.$i])) {
         createQuestionTag($_POST['tag'.$i],$idQuestion);
         $i = $i + 1;
-    }*/
+    }
     echo $idQuestion;
     exit;
 } else {

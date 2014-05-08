@@ -14,7 +14,7 @@ include_once($BASE_DIR .'database/users.php');
 		$question['username'] = $user['username'];
 		$question['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user['username'];
 		if($user['imagelink'] == NULL)	
-			$question['userphoto'] =$BASE_URL . "images/users/default.png";
+			$question['userphoto'] =$BASE_URL . "images/default.png";
 		else $question['userphoto'] =$BASE_URL . "images/users/" . $user['imagelink'];
 		$question['userpoints'] = $user['score'];
 		$question['tags'] = getQuestionTags($idQuestion);
@@ -31,7 +31,7 @@ include_once($BASE_DIR .'database/users.php');
 			$answer['username'] = $user_answer['username'];
 			$answer['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user_answer['username'];
 			if($user_answer['imagelink'] == NULL)	
-				$answer['userphoto'] =$BASE_URL . "images/users/default.png";
+				$answer['userphoto'] =$BASE_URL . "images/default.png";
 			else $answer['userphoto'] =$BASE_URL . "images/users/" . $user_answer['imagelink'];
 			$answer['userpoints'] = $user_answer['score'];
 			$answer['comments'] = getAnswerComments($answer['idanswer']);
@@ -40,24 +40,11 @@ include_once($BASE_DIR .'database/users.php');
 				$acomment['username'] = getUserName($acomment['iduser']);
 				$acomment['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $acomment['username'];
 			}
-		}//------------
-		if(isset($_SESSION['username']))
-		{
-			$idMyUser = getIdUser($_SESSION['username']);
-			if($question['iduser']==$idMyUser)
-				$question['owner']=true;
-			$question['subscribed'] = isQuestionSubscribed($idMyUser,$idQuestion);
-			$question['vote'] = getQuestionVote($idQuestion, $idMyUser);
-			foreach($question['answers'] as &$answer)
-			{
-				$answer['vote'] = getAnswerVote($answer['idanswer'], $idMyUser);
-			}
 		}
-		//------------
 		$smarty->assign('question', $question);
 		$smarty->display('questions/question.tpl');	
 	} catch(Exception $e)
 	{
-		header("Location: $BASE_URL");
+		header('Location: home.php');
 	}
 ?>
