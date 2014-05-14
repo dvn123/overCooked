@@ -8,6 +8,21 @@ function createUser($realname, $username, $password)
     $stmt->execute(array($username, $realname, sha1($password)));
 }
 */
+function getUserName($idUser) {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT username FROM webUser
+          WHERE webUser.iduser = :id;");
+
+    $stmt->bindParam(":id", $idUser);
+    $stmt->execute();
+
+    $tmp = $stmt->fetch();
+    $tmp2 = $tmp['username'];
+    return $tmp2;
+}
+
+
 function getIdUser($username) {
 
     global $conn;
