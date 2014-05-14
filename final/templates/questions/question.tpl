@@ -1,5 +1,7 @@
 {include file='common/header.tpl'}
 
+
+
 <div class="question container center col-md-8 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -160,6 +162,10 @@
             </ul>
     </div>
 </div>-->
+
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 
 <script src="ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="ckeditor/skins/moono/editor.css">
