@@ -1,6 +1,8 @@
 {include file='common/header.tpl'}
 
-
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="{$BASE_URL}javascript/question.js"></script>
 
 <div class="question container center col-md-8 col-md-offset-1">
     <div class="panel panel-default">
@@ -16,14 +18,14 @@
         <div class="panel-body">
 
             <div class="col-xs-1">
-                <button type="button" class="btn btn-default btn-md {if $question.vote eq '1'} active{/if}" style="min-width:50px;">
+                <button type="button" id="questionUP" onclick="voteQuestion({$question.idquestion},1)" class="btn btn-default btn-md {if $question.vote eq '1'} active{/if}" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-up"></span>
                 </button>
-                <div class="text-center btn btn-default disabled" style="min-width:50px;">{$question.score}</div>
-                <button type="button" class="btn btn-default btn-md {if $question.vote eq '-1'} active{/if}" style="min-width:50px;">
+                <div id="questionScore" class="text-center btn btn-default disabled" style="min-width:50px;">{$question.score}</div>
+                <button type="button" id="questionDOWN" onclick="voteQuestion({$question.idquestion},-1)" class="btn btn-default btn-md {if $question.vote eq '-1'} active{/if}" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
-                <button type="button" class="btn btn-default btn-md{if $question.subscribed eq '1'} active{/if}" style="min-width:50px;">
+                <button type="button" id="questionpin" onclick="pinquestion({$question.idquestion})" class="btn btn-default btn-md{if $question.subscribed eq '1'} active{/if}" style="min-width:50px;">
                     <span class="glyphicon glyphicon-pushpin"></span>
                 </button>
             </div>
@@ -68,17 +70,15 @@
                         </button>-->
 
                         <div class="col-xs-1">
-                            {if $answer.bestanswer eq 'true'}
-                            <button type="button" class="btn btn-success btn-md{if $question.owner eq true} active{else} disabled{/if}"
-                            style="min-width:50px; margin-bottom:10px;">
+                            <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn btn-success btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} disabled{/if}"
+                            style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
-                        {/if}
-                        <button type="button" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
+                        <button type="button" id="answerUP{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},1)" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </button>
-                        <div class="text-center btn btn-default disabled" style="min-width:50px;">{$answer.score}</div>
-                        <button type="button" class="btn btn-default btn-md{if $answer.vote eq '-1'} active{/if}" style="min-width:50px;">
+                        <div id="answerscore{$answer.idanswer}" class="text-center btn btn-default disabled" style="min-width:50px;">{$answer.score}</div>
+                        <button type="button" id="answerDOWN{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},-1)" class="btn btn-default btn-md{if $answer.vote eq '-1'} active{/if}" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </button>
 
@@ -163,8 +163,6 @@
     </div>
 </div>-->
 
-<script src="{$BASE_URL}javascript/main.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 
 <script src="ckeditor/ckeditor.js"></script>
