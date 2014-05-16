@@ -9,7 +9,7 @@
             <h3 class="panel-title">
                 {$question.title}
                 <div class="pull-right panel panel-default">
-                <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
+                    <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
                     </div>
                 </div>
             </h3>
@@ -27,21 +27,23 @@
                     <span class="glyphicon glyphicon-pushpin"></span>
                 </button>
             </div>
-            <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
+            <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
                 {$question.html}<br/><br/><small>{$question.date}</small>
+            </div>
+            <div class="col-xs-2">
+                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
+                    Responder
+                </button>
+                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                    Comentar
+                </button>
             </div>
             <div class="col-xs-11 col-xs-offset-1">
             	{foreach $question.tags as $tag}
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
-                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
-                    Responder
-                </button>
-                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
-                    Comentar
-                </button>
-
             </div>
+            
             {foreach $question.comments as $comment}
             <div class="highlight col-xs-11 col-xs-offset-1"
             style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
@@ -99,28 +101,30 @@
 
                     </div>
                     <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
-                        <div class="panel panel-default" style="float:right;">
-                            <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
-                                <span class="badge">{$answer.userpoints} pts</span>
+                        <div style="float:right;">
+                            <div class="panel panel-default">
+                                <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
+                                    <span class="badge">{$answer.userpoints} pts</span>
+                                </div>
                             </div>
-                        </div>
-
-                        <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
-                            <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md pull-right" style="position: relative;bottom: 0px; right:-140px;min-width:50px;">
+                            <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                                 Comentar
                             </button>
+                            </div>
+                            <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
+                        </div>
+                    <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
+                        {foreach $answer.comments as $acomment}
+                        <div class="highlight col-xs-11 col-xs-offset-1"
+                        style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
+                        <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
                     </div>
-                    {foreach $answer.comments as $acomment}
-                    <div class="highlight col-xs-11 col-xs-offset-1"
-                    style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                    <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
-                </div>
-                {/foreach}
+                    {/foreach}
 
+                </div>
             </div>
         </div>
-    </div>
-    {/foreach}
+        {/foreach}
 <!----
             <div class="container col-md-12">
                 <div class="panel panel-default">
