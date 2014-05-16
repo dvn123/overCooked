@@ -58,7 +58,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText" cols="80"  rows="10">
+            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10">
             </textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
@@ -185,32 +185,35 @@
     }
     function commentShow(element) {
         if(!comment_visible) {
+            var jquery = $('#input2');
+            jquery.empty();
+            jquery.remove();
             comment_visible = true;
-            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
-            $('#input2').show("slow");
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
             CKEDITOR.replace( 'inputText' );
+            $('#input2').show("slow");
         } else {
             comment_visible = false;
             var jquery = $('#input2');
             jquery.hide("slow");
-            //jquery.empty();
-            //jquery.remove();
         }
     }
     function commentShowQuestion(element) {
         console.log(comment_visible);
         if(!comment_visible) {
+            var jquery = $('#input2');
+            jquery.empty();
+            jquery.remove();
             console.log($(element));
             comment_visible = true;
-            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
+            CKEDITOR.replace( 'inputText2' );
             $('#input2').show("slow");
-            CKEDITOR.replace( 'inputText' );
+
         } else {
             comment_visible = false;
             var jquery = $('#input2');
             jquery.hide("slow");
-            //jquery.empty();
-            //jquery.remove();
         }
     }
     function submitAnswer() {
