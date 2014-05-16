@@ -45,13 +45,13 @@
             </div>
             
             {foreach $question.comments as $comment}
-            <div class="highlight col-xs-11 col-xs-offset-1"
-            style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-            <p>{$comment.content}<small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small></p> 
-        </div>
-        {/foreach}
+            <div class="highlight col-xs-9 col-xs-offset-1"
+                style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
+                <p>{$comment.content}<small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small></p> 
+            </div>
+            {/foreach}
+        </div> 
     </div>
-</div>
 </div>
 
 <div id="answer" class="container col-md-10 col-md-offset-1" style="display:none">
@@ -89,7 +89,7 @@
                             <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn btn-success btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} disabled{/if}"
                             style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
                             <span class="glyphicon glyphicon-ok"></span>
-                        </button>
+                            </button>
                         <button type="button" id="answerUP{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},1)" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
 
                             <span class="glyphicon glyphicon-chevron-up"></span>
@@ -99,75 +99,36 @@
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </button>
 
-                    </div>
-                    <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
-                        <div style="float:right;">
-                            <div class="panel panel-default">
-                                <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
-                                    <span class="badge">{$answer.userpoints} pts</span>
+                        </div>
+                        <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
+                            <div style="float:right; margin-left:10px;">
+                                <div class="panel panel-default">
+                                    <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
+                                        <span class="badge">{$answer.userpoints} pts</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
-                                Comentar
-                            </button>
+
+                                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                    Comentar
+                                </button>
                             </div>
                             <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
                         </div>
-                    <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
-                        {foreach $answer.comments as $acomment}
-                        <div class="highlight col-xs-11 col-xs-offset-1"
-                        style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                        <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
-                    </div>
-                    {/foreach}
-
-                </div>
-            </div>
-        </div>
-        {/foreach}
-<!----
-            <div class="container col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <button type="button" class="comment-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:45px;min-width:50px;">
-                            Comment
-                        </button>
-
-                        <div class="col-xs-1">
-                            <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
-                                <span class="glyphicon glyphicon-chevron-up"></span>
-                            </button>
-                            <div class="text-center btn btn-default disabled" style="min-width:50px;">0</div>
-                            <button type="button" class="btn btn-default btn-md" style="min-width:50px;">
-                                <span class="glyphicon glyphicon-chevron-down"></span>
-                            </button>
-                        </div>
-                        <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
-                            <div class="panel panel-default" style="float:right;">
-                                <div class="panel-body"><img src="images/default.png" style="width:30px;height:30px;margin-top:0px;">mariajose
-                                    <span class="badge">5 pts</span>
-                                </div>
+                        <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
+                            {foreach $answer.comments as $acomment}
+                            <div class="highlight col-xs-10"
+                            style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
+                                <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
                             </div>
-                            É dificl ajudar com poucos detalhes.... :(
-                            <br/><br/><br/><small>14/03/2014 01:23</small>
-                        </div>
+                            {/foreach}
 
+                        </div>
                     </div>
                 </div>
             </div>
---><!--
-            <div class="text-center">
-                <ul class="pagination">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                </ul>
-            </div>-->
+            {/foreach}
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
