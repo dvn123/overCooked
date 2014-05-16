@@ -48,7 +48,11 @@
             </div>
 
             {if $USERNAME==$profile_data.username}
-                {include file='users/edit_button.tpl'}
+                <div class="text-center row col-lg-12">
+                    <a href="{$BASE_URL}pages/users/edit_profile.php?username={$username_edit}" class="btn btn-default">Editar perfil</a>
+                    <a href="{$BASE_URL}pages/users/edit_password.php?username={$username_edit}" class="btn btn-default">Alterar password</a>
+                    <a href="#" class="btn btn-default">Desativar conta</a>
+                </div>
             {/if}
 
         </div>
@@ -83,7 +87,7 @@
                                     <div class="row">respostas</div>
                                 </td>
                                 <td class="col-md-8">
-                                    <div class="row"><b>{$question_subscribed.title}</b></div>
+                                    <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subscribed.idquestion}"><b>{$question_subscribed.title}</b></a></div>
                                     <div class="row">
                                         {foreach $question_subscribed.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -126,7 +130,7 @@
                                     <div class="row">respostas</div>
                                 </td>
                                 <td class="col-md-8">
-                                    <div class="row"><b>{$question_asked.title}</b></div>
+                                    <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_asked.idquestion}"><b>{$question_asked.title}</b></a></div>
                                     <div class="row">
                                         {foreach $question_asked.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -169,7 +173,7 @@
                                     <div class="row">respostas</div>
                                 </td>
                                 <td class="col-md-8">
-                                    <div class="row"><b>{$question_answered.title}</b></div>
+                                    <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_answered.idquestion}"><b>{$question_answered.title}</b></a></div>
                                     <div class="row">
                                         {foreach $question_answered.tags as $tag}
                                             <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>

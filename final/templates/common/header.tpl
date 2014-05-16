@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav navbar-right pull-left">
 
                 <li class = "active"> <a href = "#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a></li>
-                <li ><a href = "#">Fazer Pergunta</a></li>
+                <li ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
                 <li><a href = "#">Perguntas</a></li>
                 <li><a href = "#">Tags</a></li>
                 <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
@@ -49,11 +49,11 @@
 <div id="error_messages">
     {foreach $ERROR_MESSAGES as $error}
         <div class="container">
-            <div class="alert alert-danger fade in">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                {$error}
-            </div>
+        <div class="alert alert-danger fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {$error}
         </div>
+    </div>
     {/foreach}
 </div>
 <div id="success_messages">
