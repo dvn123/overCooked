@@ -1,8 +1,6 @@
 {include file='common/header.tpl'}
 
-
-
-<div class="question container center col-md-8 col-md-offset-1">
+<div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -34,13 +32,12 @@
             	{foreach $question.tags as $tag}
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
-                <!--<button type="button" class="comment-button-question btn btn-default btn-md col-xs-offset-7" style="position: absolute;bottom: 30px; right:45px;min-width:50px;min-width:50px;">
-                    Comment
+                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="position: absolute;bottom: 0px; right:0px;min-width:50px;min-width:50px;">
+                    Comentar
                 </button>
-                <button type="button" class="answer-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:135px;min-width:50px;min-width:50px;">
-                    Answer
-                </button>-->
-
+                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position: absolute;bottom: 0px; right:90px;min-width:50px;min-width:50px;">
+                    Responder
+                </button>
             </div>
             {foreach $question.comments as $comment}
             <div class="highlight col-xs-11 col-xs-offset-1"
@@ -52,7 +49,28 @@
 </div>
 </div>
 
-<div class="container col-md-8 col-md-offset-1">
+<div id="answer" class="container col-md-10 col-md-offset-1" style="display:none">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span>Escreva a sua resposta</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText" cols="80"  rows="10">
+            </textarea>
+            <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
+                Submeter
+            </button>
+            <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position-relative:margin-top: 5px;">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{$question.numanswers} resposta{if $question.numanswers != '1'}s{/if}</h3>
@@ -63,9 +81,9 @@
                 <div class="panel panel-default">
 
                     <div class="panel-body">
-                       <!-- <button type="button" class="comment-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:45px;min-width:50px;">
-                            Comment
-                        </button>-->
+                        <button type="button" onclick="commentShow(this);" class="comment-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:45px;min-width:50px;">
+                            Comentar
+                        </button>
 
                         <div class="col-xs-1">
                             {if $answer.bestanswer eq 'true'}
@@ -83,8 +101,6 @@
                         </button>
 
                     </div>
-
-
                     <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                         <div class="panel panel-default" style="float:right;">
                             <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
@@ -150,66 +166,56 @@
 </div>
 </div>
 
-<!--<div class="navbar navbar-default navbar-fixed-bottom" style="border-bottom:0px;border-top:10px;border-color: #606E14;height: 35px;">
-    <div class="container">
-        <ul class="nav navbar-nav pull-left" style="position:relative;top: -8px;">
-            <li ><a href="#">@2014 overCooked Foundation</a></li>
-        </ul>
-            <ul class="nav navbar-nav pull-right" style="position:relative;top: -8px;">
-                <li ><a href="#">Quem Somos</a></li>
-                <li><a href="#">Contatos</a></li>
-                <li><a href="#">Política de privacidade</a></li>
-            </ul>
-    </div>
-</div>-->
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
-
-<script src="ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="ckeditor/skins/moono/editor.css">
+<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
 <script>
     var answer_visible = false, comment_visible = false;
 
-    $(document).ready(function() {
-        $('.comment-button').on('click', function() {
-            console.log(comment_visible);
-            if(!comment_visible) {
-                comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\" style='margin: 0px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                comment_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-        $('.comment-button-question').on('click', function() {
-            console.log(comment_visible);
-            if(!comment_visible) {
-                comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                comment_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-        $('.answer-button').on('click', function() {
-            if(!answer_visible) {
-                answer_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"answer-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                answer_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-    })
+    function answerShow() {
+        if(!answer_visible) {
+            answer_visible = true;
+            $('#answer').show("slow");
+        } else {
+            answer_visible = false;
+            $('#answer').hide("slow");
+        }
+    }
+    function commentShow(element) {
+        if(!comment_visible) {
+            comment_visible = true;
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
+            $('#input2').show("slow");
+            CKEDITOR.replace( 'inputText' );
+        } else {
+            comment_visible = false;
+            var jquery = $('#input2');
+            jquery.hide("slow");
+            jquery.empty();
+            jquery.remove();
+        }
+    }
+    function commentShowQuestion(element) {
+        console.log(comment_visible);
+        if(!comment_visible) {
+            console.log($(element));
+            comment_visible = true;
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(element).parent());
+            $('#input2').show("slow");
+            CKEDITOR.replace( 'inputText' );
+        } else {
+            comment_visible = false;
+            var jquery = $('#input2');
+            jquery.hide("slow");
+            //jquery.empty();
+            //jquery.remove();
+        }
+    }
+    function submitAnswer() {
 
+    }
 </script>
 
 {include file='common/footer.tpl'}
