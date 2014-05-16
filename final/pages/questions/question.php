@@ -58,6 +58,7 @@ try{
     $smarty->display('questions/question.tpl');
 } catch(Exception $e)
 {
-    header("Location: $BASE_URL");
+    echo $e;
+    //header("Location: $BASE_URL");
 }
 ?>

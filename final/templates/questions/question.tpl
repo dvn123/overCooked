@@ -218,7 +218,7 @@
     function submitAnswer(element) {
         console.log(element);
         var request = $.ajax({
-            url: "{BASE_URL}api/questions/addAnswer.php",
+            url: "{$BASE_URL}api/questions/addAnswer.php",
             type: "POST",
             data: { id : menuId },
             dataType: "html"
