@@ -32,12 +32,13 @@
             	{foreach $question.tags as $tag}
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
-                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="position: absolute;bottom: 0px; right:0px;min-width:50px;min-width:50px;">
-                    Comentar
-                </button>
-                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position: absolute;bottom: 0px; right:90px;min-width:50px;min-width:50px;">
+                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
                     Responder
                 </button>
+                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
+                    Comentar
+                </button>
+
             </div>
             {foreach $question.comments as $comment}
             <div class="highlight col-xs-11 col-xs-offset-1"
@@ -79,18 +80,14 @@
             {foreach $question.answers as $answer}
             <div class="container col-md-12">
                 <div class="panel panel-default">
-
                     <div class="panel-body">
-                        <button type="button" onclick="commentShow(this);" class="comment-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:45px;min-width:50px;">
-                            Comentar
-                        </button>
-
                         <div class="col-xs-1">
                             {if $answer.bestanswer eq 'true'}
                             <button type="button" class="btn btn-success btn-md{if $question.owner eq true} active{else} disabled{/if}"
                             style="min-width:50px; margin-bottom:10px;">
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
+
                         {/if}
                         <button type="button" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-up"></span>
@@ -107,8 +104,11 @@
                                 <span class="badge">{$answer.userpoints} pts</span>
                             </div>
                         </div>
-                        <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
 
+                        <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
+                            <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md pull-right" style="position: relative;bottom: 0px; right:-140px;min-width:50px;">
+                                Comentar
+                            </button>
                     </div>
                     {foreach $answer.comments as $acomment}
                     <div class="highlight col-xs-11 col-xs-offset-1"
@@ -186,15 +186,15 @@
     function commentShow(element) {
         if(!comment_visible) {
             comment_visible = true;
-            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
             $('#input2').show("slow");
             CKEDITOR.replace( 'inputText' );
         } else {
             comment_visible = false;
             var jquery = $('#input2');
             jquery.hide("slow");
-            jquery.empty();
-            jquery.remove();
+            //jquery.empty();
+            //jquery.remove();
         }
     }
     function commentShowQuestion(element) {
@@ -202,7 +202,7 @@
         if(!comment_visible) {
             console.log($(element));
             comment_visible = true;
-            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(element).parent());
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
             $('#input2').show("slow");
             CKEDITOR.replace( 'inputText' );
         } else {
