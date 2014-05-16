@@ -58,6 +58,7 @@ include_once($BASE_DIR .'database/users.php');
 		$smarty->display('questions/question.tpl');	
 	} catch(Exception $e)
 	{
-		header("Location: $BASE_URL");
+        var_dump($e);
+	//	header("Location: $BASE_URL");
 	}
 ?>

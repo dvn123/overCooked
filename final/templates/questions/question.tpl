@@ -12,7 +12,6 @@
             </h3>
         </div>
         <div class="panel-body">
-
             <div class="col-xs-1">
                 <button type="button" class="btn btn-default btn-md {if $question.vote eq '1'} active{/if}" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-up"></span>
@@ -63,7 +62,7 @@
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
-            <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position-relative:margin-top: 5px;">
+            <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;">
                 Cancelar
             </button>
         </div>
@@ -189,7 +188,7 @@
             jquery.empty();
             jquery.remove();
             comment_visible = true;
-            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitAnswerComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
             CKEDITOR.replace( 'inputText' );
             $('#input2').show("slow");
         } else {
@@ -206,7 +205,7 @@
             jquery.remove();
             console.log($(element));
             comment_visible = true;
-            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitQuestionComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
             CKEDITOR.replace( 'inputText2' );
             $('#input2').show("slow");
 
@@ -216,7 +215,27 @@
             jquery.hide("slow");
         }
     }
-    function submitAnswer() {
+    function submitAnswer(element) {
+        console.log(element);
+        var request = $.ajax({
+            url: "{BASE_URL}api/questions/addAnswer.php",
+            type: "POST",
+            data: { id : menuId },
+            dataType: "html"
+        });
+
+        request.done(function( msg ) {
+            $( "#log" ).html( msg );
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+
+    }
+    function submitAnswerComment(element) {
+
+    }
+    function submitQuestionComment(element) {
 
     }
 </script>
