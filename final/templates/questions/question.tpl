@@ -1,10 +1,9 @@
 {include file='common/header.tpl'}
-
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/question.js"></script>
 
-<div class="question container center col-md-8 col-md-offset-1">
+<div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -16,7 +15,6 @@
             </h3>
         </div>
         <div class="panel-body">
-
             <div class="col-xs-1">
                 <button type="button" id="questionUP" onclick="voteQuestion({$question.idquestion},1)" class="btn btn-default btn-md {if $question.vote eq '1'} active{/if}" style="min-width:50px;">
                     <span class="glyphicon glyphicon-chevron-up"></span>
@@ -36,12 +34,12 @@
             	{foreach $question.tags as $tag}
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
-                <!--<button type="button" class="comment-button-question btn btn-default btn-md col-xs-offset-7" style="position: absolute;bottom: 30px; right:45px;min-width:50px;min-width:50px;">
-                    Comment
+                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
+                    Responder
                 </button>
-                <button type="button" class="answer-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:135px;min-width:50px;min-width:50px;">
-                    Answer
-                </button>-->
+                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="position: relative;bottom: 0px; right:-175px;min-width:50px;min-width:50px;">
+                    Comentar
+                </button>
 
             </div>
             {foreach $question.comments as $comment}
@@ -54,7 +52,28 @@
 </div>
 </div>
 
-<div class="container col-md-8 col-md-offset-1">
+<div id="answer" class="container col-md-10 col-md-offset-1" style="display:none">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span>Escreva a sua resposta</span>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10">
+            </textarea>
+            <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
+                Submeter
+            </button>
+            <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">{$question.numanswers} resposta{if $question.numanswers != '1'}s{/if}</h3>
@@ -63,18 +82,14 @@
             {foreach $question.answers as $answer}
             <div class="container col-md-12">
                 <div class="panel panel-default">
-
                     <div class="panel-body">
-                       <!-- <button type="button" class="comment-button btn btn-default btn-md" style="position: absolute;bottom: 30px; right:45px;min-width:50px;">
-                            Comment
-                        </button>-->
-
                         <div class="col-xs-1">
                             <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn btn-success btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} disabled{/if}"
                             style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                         <button type="button" id="answerUP{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},1)" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
+
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </button>
                         <div id="answerscore{$answer.idanswer}" class="text-center btn btn-default disabled" style="min-width:50px;">{$answer.score}</div>
@@ -83,16 +98,17 @@
                         </button>
 
                     </div>
-
-
                     <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                         <div class="panel panel-default" style="float:right;">
                             <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
                                 <span class="badge">{$answer.userpoints} pts</span>
                             </div>
                         </div>
-                        <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
 
+                        <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
+                            <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md pull-right" style="position: relative;bottom: 0px; right:-140px;min-width:50px;">
+                                Comentar
+                            </button>
                     </div>
                     {foreach $answer.comments as $acomment}
                     <div class="highlight col-xs-11 col-xs-offset-1"
@@ -150,64 +166,77 @@
 </div>
 </div>
 
-<!--<div class="navbar navbar-default navbar-fixed-bottom" style="border-bottom:0px;border-top:10px;border-color: #606E14;height: 35px;">
-    <div class="container">
-        <ul class="nav navbar-nav pull-left" style="position:relative;top: -8px;">
-            <li ><a href="#">@2014 overCooked Foundation</a></li>
-        </ul>
-            <ul class="nav navbar-nav pull-right" style="position:relative;top: -8px;">
-                <li ><a href="#">Quem Somos</a></li>
-                <li><a href="#">Contatos</a></li>
-                <li><a href="#">Política de privacidade</a></li>
-            </ul>
-    </div>
-</div>-->
-
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
-
-<script src="ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="ckeditor/skins/moono/editor.css">
+<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
 <script>
     var answer_visible = false, comment_visible = false;
 
-    $(document).ready(function() {
-        $('.comment-button').on('click', function() {
-            console.log(comment_visible);
-            if(!comment_visible) {
-                comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\" style='margin: 0px;padding:0px;'><textarea class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).appendTo( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                comment_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-        $('.comment-button-question').on('click', function() {
-            console.log(comment_visible);
-            if(!comment_visible) {
-                comment_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                comment_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-        $('.answer-button').on('click', function() {
-            if(!answer_visible) {
-                answer_visible = true;
-                $( "<div id=\"input2\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"answer-editor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button></div>" ).insertAfter( $(this).parent());
-                CKEDITOR.replace( 'inputText' );
-            } else {
-                answer_visible = false;
-                $('#input2').empty();
-                $('#input2').remove();
-            }
-        })
-    })
+    function answerShow() {
+        if(!answer_visible) {
+            answer_visible = true;
+            $('#answer').show("slow");
+        } else {
+            answer_visible = false;
+            $('#answer').hide("slow");
+        }
+    }
+    function commentShow(element) {
+        if(!comment_visible) {
+            var jquery = $('#input2');
+            jquery.empty();
+            jquery.remove();
+            comment_visible = true;
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitAnswerComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
+            CKEDITOR.replace( 'inputText' );
+            $('#input2').show("slow");
+        } else {
+            comment_visible = false;
+            var jquery = $('#input2');
+            jquery.hide("slow");
+        }
+    }
+    function commentShowQuestion(element) {
+        console.log(comment_visible);
+        if(!comment_visible) {
+            var jquery = $('#input2');
+            jquery.empty();
+            jquery.remove();
+            console.log($(element));
+            comment_visible = true;
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitQuestionComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
+            CKEDITOR.replace( 'inputText2' );
+            $('#input2').show("slow");
 
+        } else {
+            comment_visible = false;
+            var jquery = $('#input2');
+            jquery.hide("slow");
+        }
+    }
+    function submitAnswer(element) {
+        console.log(element);
+        var request = $.ajax({
+            url: "{$BASE_URL}api/questions/addAnswer.php",
+            type: "POST",
+            data: { id : menuId },
+            dataType: "html"
+        });
+
+        request.done(function( msg ) {
+            $( "#log" ).html( msg );
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+        });
+
+    }
+    function submitAnswerComment(element) {
+
+    }
+    function submitQuestionComment(element) {
+
+    }
 </script>
 
 {include file='common/footer.tpl'}

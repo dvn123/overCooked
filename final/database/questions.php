@@ -5,7 +5,7 @@ function isQuestionSubscribed($idUser,$idQuestion) {
     $stmt = $conn->prepare("SELECT COUNT(*) AS subscribed FROM QuestionSubscription
         WHERE QuestionSubscription.idUser = :idUser
         AND QuestionSubscription.idQuestion = :idQuestion");
-    
+
     $stmt->bindParam("idUser", $idUser);
     $stmt->bindParam("idQuestion", $idQuestion);
     $stmt->execute();
@@ -83,19 +83,19 @@ function getQuestionsByDate($numQuestions, $page) {
     global $conn;
     $offset = $numQuestions * ($page - 1);
     $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion ASC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
-    
+
     $stmt->bindParam("offset", $offset);
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
 
-  /*  $data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);*/
+    /*  $data = array();
+      if ($stmt->num_rows() > 0) {
+          foreach ($stmt->result() as $row) {
+              $data[$row->id] = $row->name;
+          }
+      }
+      return json_encode($data);*/
 }
 
 function getQuestionsHot($numQuestions, $page) {
@@ -117,7 +117,7 @@ function getQuestionsSubscribed($idUser) {
     $stmt = $conn->prepare("SELECT * FROM question_list_vw, QuestionSubscription
         WHERE QuestionSubscription.idUser = :id
         AND QuestionSubscription.idQuestion = question_list_vw.idQuestion;");
-    
+
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -128,7 +128,7 @@ function getQuestionsAsked($idUser) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM question_list_vw
         WHERE question_list_vw.idUser = :id;");
-    
+
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
     return $stmt->fetchAll();
@@ -212,7 +212,7 @@ function getAnswerComments($idAnswer) {
 function searchQuestions($text) {
 
     global $conn;
-    $stmt = $conn->prepare("
+    /*$stmt = $conn->prepare("
        SELECT question.idQuestion, question.title, question.DATE, question.score, webUser.username, webUser.imagelink,
         (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
         FROM questionContent, question, answer, answerContent, webUser
@@ -227,7 +227,24 @@ function searchQuestions($text) {
         OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('portuguese', :text))
         AND question.idUser = webUser.idUser
         GROUP BY question.idQuestion, webuser.username,webuser.imagelink
-        ORDER BY question.idquestion DESC;");
+        ORDER BY question.idquestion DESC;");*/
+
+    $stmt = $conn->prepare("SELECT question.idQuestion, question.title, question.DATE, question.score,
+(SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
+FROM question left join questionContent using(idQuestion) left join webUser on question.idUser = webUser.idUser left join answer using(idquestion) left join answerContent using(idAnswer)
+WHERE (questionContent.DATE = (SELECT MAX(questionContent.DATE)
+FROM questionContent WHERE questionContent.idQuestion = question.idQuestion) OR questionContent is null)
+	AND (answerContent.DATE = (SELECT MAX(answerContent.DATE) FROM answerContent
+WHERE answerContent.idAnswer = answer.idAnswer) OR answerContent is null)
+	AND (to_tsvector('portuguese', question.title) @@
+	to_tsquery('portuguese', :text)
+		OR to_tsvector('portuguese', questionContent.html) @@
+		to_tsquery('portuguese', :text)
+		OR to_tsvector('portuguese', answerContent.html) @@
+		to_tsquery('portuguese', :text))
+	GROUP BY question.idQuestion
+	ORDER BY question.idquestion DESC;");
+
 
     $stmt->bindParam(":text", $text);
     $stmt->execute();
@@ -390,7 +407,7 @@ function changeAnswerContent($idUser, $idAnswer, $html, $date)
     global $conn;
     $stmt = $conn->prepare("INSERT INTO answerContent (idAnswer, idUser, date, html)
         VALUES (:idAnswer, :idUser, :date, :html);");
-    
+
     $stmt->bindParam(":idAnswer", $idAnswer);
     $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":date", $date);

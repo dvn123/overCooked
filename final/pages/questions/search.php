@@ -7,7 +7,8 @@ if (!$_GET['content']) {
     header("Location: $BASE_URL");
     exit;
 }
-$content = str_replace(' ', '&', $_GET['content']);
+$tmp = trim($_GET['content']);
+$content = str_replace(' ', '&', $tmp);
 
 $questions = searchQuestions($content);
 

@@ -159,11 +159,33 @@ function changePassword($idUser, $password)
     $stmt->execute();
 }
 
-function getUsers() {
+function getUsersByName() {
 
     global $conn;
     $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
         FROM webUser, country WHERE webUser.idCountry = country.idCountry
+        ORDER BY username;");
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getUsersByScore() {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
+        FROM webUser, country WHERE webUser.idCountry = country.idCountry
+        ORDER BY score;");
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getUsersModerator() {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
+        FROM webUser, country WHERE webUser.idCountry = country.idCountry AND userGroup='moderator'
         ORDER BY username;");
 
     $stmt->execute();
