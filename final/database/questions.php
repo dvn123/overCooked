@@ -14,6 +14,41 @@ function isQuestionSubscribed($idUser,$idQuestion) {
     return $tmp2;
 }
 
+function setBestAnswer($idAnswer,$value){
+    global $conn;
+    $stmt = $conn->prepare("UPDATE answer SET bestanswer = false 
+        WHERE idanswer = (SELECT idAnswer FROM Answer Where bestanswer=true
+            AND idQuestion=(SELECT idQuestion FROM Answer Where idAnswer=:idAnswer))");
+    $stmt->bindParam("idAnswer", $idAnswer);
+    $res1 = $stmt->execute();
+
+    if(!($value == '0' || $value == 0))
+    {
+        $stmt2 = $conn->prepare("UPDATE answer SET bestanswer=true WHERE idanswer=:idAnswer");
+        $stmt2->bindParam("idAnswer", $idAnswer);
+        $res2 = $stmt2->execute();
+    } else return $res1;
+
+    return ($res1 && $res2);
+}
+
+function setQuestionSubscribed($idUser,$idQuestion,$value) {
+    global $conn;
+    if($value == '0' || $value == 0)
+    {
+    $stmt = $conn->prepare("DELETE FROM questionsubscription
+    WHERE iduser = :idUser
+    AND idquestion = :idQuestion");
+    $stmt->bindParam("idUser", $idUser);
+    $stmt->bindParam("idQuestion", $idQuestion);
+    return $stmt->execute();
+    }
+    $stmt = $conn->prepare("INSERT INTO questionsubscription (iduser,idquestion) VALUES (:idUser,:idQuestion)");
+    $stmt->bindParam("idUser", $idUser);
+    $stmt->bindParam("idQuestion", $idQuestion);
+    return $stmt->execute();
+}
+
 function getQuestionVote($idQuestion, $idUser)
 {
     global $conn;
@@ -140,6 +175,17 @@ function getQuestionAnswers($idQuestion) {
     $stmt->bindParam("id", $idQuestion);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getAnswer($idAnswer) {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM answer_vw
+        WHERE idAnswer = :id;");
+
+    $stmt->bindParam("id", $idAnswer);
+    $stmt->execute();
+    return $stmt->fetch();
 }
 
 function getQuestionComments($idQuestion) {
@@ -276,8 +322,57 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
 }
 
 //TODO: SQL026 - Adicionar voto a pergunta
-//TODO: SQL027 - Adicionar voto a resposta
+function addVoteToQuestion($idUser,$idQuestion,$value)
+{
+    global $conn;
+    if($value == '0' || $value == 0)
+    {
+        $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+        $stmt = $conn->prepare("DELETE FROM QuestionVote WHERE idUser = :user AND idQuestion = :question");
+        $stmt->bindParam("question", $idQuestion);
+        $stmt->bindParam("user", $idUser);
+        $res = $stmt->execute();
+       // throw new Exception($stmt->queryString, 1);
+        return $res;
+    }
+        //   throw new Exception("Error vote $value", 1);
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt = $conn->prepare("UPDATE QuestionVote SET updown = :value WHERE idUser = :user AND idQuestion = :question");
+    $stmt->bindParam("question", $idQuestion);
+    $stmt->bindParam("user", $idUser);
+    $stmt->bindParam("value", $value);
+    $res1 = $stmt->execute();
 
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt2 = $conn->prepare("INSERT INTO QuestionVote (idUser,idQuestion,upDown) SELECT :user,:question,:value WHERE NOT EXISTS (SELECT * FROM QuestionVote WHERE idUser = :user AND idQuestion = :question);");
+    $stmt2->bindParam("question", $idQuestion);
+    $stmt2->bindParam("user", $idUser);
+    $stmt2->bindParam("value", $value);
+    $res2 = $stmt2->execute();
+
+    return ($res1 && $res2);
+}
+//TODO: SQL027 - Adicionar voto a resposta
+function addVoteToAnswer($idUser,$idAnswer,$value)
+{
+    global $conn;
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt = $conn->prepare("UPDATE AnswerVote SET updown = :value WHERE idUser = :user AND idAnswer = :answer");
+    $stmt->bindParam("answer", $idAnswer);
+    $stmt->bindParam("user", $idUser);
+    $stmt->bindParam("value", $value);
+    $res1 = $stmt->execute();
+
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt2 = $conn->prepare("INSERT INTO AnswerVote (idUser,idAnswer,upDown) SELECT :user,:answer,:value WHERE NOT EXISTS (SELECT * FROM AnswerVote WHERE idUser = :user AND idAnswer = :answer);");
+    $stmt2->bindParam("answer", $idAnswer);
+    $stmt2->bindParam("user", $idUser);
+    $stmt2->bindParam("value", $value);
+    $res2 = $stmt2->execute();
+
+    return ($res1 && $res2);
+
+}
 
 /* repeated??
 function addCommentToAnswer($idAnswer, $idUser, $content)
