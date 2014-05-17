@@ -9,8 +9,76 @@ if (!$_GET['content']) {
 }
 $tmp = trim($_GET['content']);
 $content = str_replace(' ', '&', $tmp);
+$get = str_replace(' ', '+', $tmp);
 
-$questions = searchQuestions($content);
+$type2 = "date";
+$order = "desc";
+
+
+if($_GET['type'] && $_GET['order']) {
+    $type2 = $_GET['type'];
+    $order = $_GET['order'];
+
+    $selection_date = '';
+    $selection_answers = '';
+    $selection_score = '';
+
+    switch ($type2) {
+        case "date":
+            $type = "question.idQuestion";
+            $selection_date = 'active';
+            break;
+        case "score":
+            $type = "question.score";
+            $selection_score = 'active';
+            break;
+        case "answers":
+            $type = "numAnswers1";
+            $selection_answers = 'active';
+            break;
+        default:
+            $type = "question.idQuestion";
+            $selection_date = 'active';
+            $type2 ="date";
+            break;
+    }
+
+    if($order === 'asc' || $order === "desc")
+        if($type)
+            $questions = searchQuestions($content,$type, $order);
+        else
+            $questions = searchQuestions($content,$type,$order);
+    else {
+        $order = "desc";
+        if($type)
+            $questions = searchQuestions($content,$type, $order);
+        else
+            $questions = searchQuestions($content,$type,$order);
+    }
+
+    $selection_down = '';
+    $selection_up = '';
+
+    if($order === "desc")
+        $selection_down = 'active';
+    else
+        $selection_up = 'active';
+
+
+
+
+}
+else {
+    $questions = searchQuestions($content,"question.idQuestion", "DESC");
+    $selection_date = 'active';
+    $selection_answers = '';
+    $selection_score = '';
+
+    $selection_down = 'active';
+    $selection_up = '';
+}
+
+
 
 /**
  * @param $question
@@ -79,6 +147,20 @@ foreach($questions as $key => $question) {
 }
 
 $smarty->assign("questions", $questions);
+$smarty->assign("get", $get);
+
+$smarty->assign("selection_date", $selection_date);
+$smarty->assign("selection_answers", $selection_answers);
+$smarty->assign("selection_score", $selection_score);
+
+$smarty->assign("selection_down", $selection_down);
+$smarty->assign("selection_up", $selection_up);
+
+$smarty->assign("type",$type2);
+$smarty->assign("order",$order);
+
+
+
 
 $smarty->display('questions/search.tpl');
 ?>

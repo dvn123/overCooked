@@ -55,14 +55,14 @@
             <button type="button" class="btn btn-default">Nº Respostas</button>
         </div> -->
         <div id="param" class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default active">
-                <input type="radio" name="param" id="option1">Data
+            <label class="btn btn-default {$selection_date}">
+               <input type="radio" name="param" id="date">Data
             </label>
-            <label class="btn btn-default">
-                <input type="radio" name="param" id="option2">Pontuação
+            <label class="btn btn-default {$selection_score}">
+                <input type="radio" name="param" id="score">Pontuação
             </label>
-            <label class="btn btn-default">
-                <input type="radio" name="param" id="option3">Nº Respostas
+            <label class="btn btn-default {$selection_answers}">
+                <input type="radio" name="param" id="answers">Nº Respostas
             </label>
         </div>
         <!--
@@ -71,11 +71,11 @@
             <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
         </div>-->
         <div id="order" class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default active">
-                <input type="radio" name="order" id="period1"><span class="glyphicon glyphicon-chevron-down"></span>
+            <label class="btn btn-default {$selection_down}" id="desc1">
+                <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
             </label>
-            <label class="btn btn-default">
-                <input type="radio" name="order" id="period2"><span class="glyphicon glyphicon-chevron-up"></span>
+            <label class="btn btn-default {$selection_up}" id="asc1">
+                <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
             </label>
         </div>
 
@@ -122,8 +122,31 @@
 
 
 
-<script src="{$BASE_URL}javascript/main.js"></script>
+
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
+<script>
+
+    $( document ).ready(function() {
+        var location = "{$BASE_URL}pages/questions/search.php";
+        var getvars = "{$get}";
+        var type = "{$type}";
+        var order = "{$order}";
+
+
+        $('#asc, #desc').change(function(){
+            order = $(this).attr("id");
+            console.log(order + "  " + type);
+            window.location = location + "?content=" + getvars + "&type=" + type + "&order=" + order;
+        });
+
+        $('#date, #answers, #score').change(function(){
+            type = $(this).attr("id");
+            console.log(order + "  " + type);
+            window.location = location + "?content=" + getvars + "&type=" + type + "&order=" + order;
+        });
+    });
+</script>
 
 {include file='common/footer.tpl'}

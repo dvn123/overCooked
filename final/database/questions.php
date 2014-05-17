@@ -163,7 +163,7 @@ function getAnswerComments($idAnswer) {
     return $stmt->fetchAll();
 }
 
-function searchQuestions($text) {
+function searchQuestions($text, $type, $order) {
 
     global $conn;
     /*$stmt = $conn->prepare("
@@ -183,7 +183,7 @@ function searchQuestions($text) {
         GROUP BY question.idQuestion, webuser.username,webuser.imagelink
         ORDER BY question.idquestion DESC;");*/
 
-    $stmt = $conn->prepare("SELECT question.idQuestion, question.title, question.DATE, question.score,
+    $query1 = "SELECT question.idQuestion, question.title, question.DATE, question.score,
 (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
 FROM question left join questionContent using(idQuestion) left join webUser on question.idUser = webUser.idUser left join answer using(idquestion) left join answerContent using(idAnswer)
 WHERE (questionContent.DATE = (SELECT MAX(questionContent.DATE)
@@ -191,16 +191,16 @@ FROM questionContent WHERE questionContent.idQuestion = question.idQuestion) OR 
 	AND (answerContent.DATE = (SELECT MAX(answerContent.DATE) FROM answerContent
 WHERE answerContent.idAnswer = answer.idAnswer) OR answerContent is null)
 	AND (to_tsvector('portuguese', question.title) @@
-	to_tsquery('portuguese', :text)
+    to_tsquery('portuguese', :text)
 		OR to_tsvector('portuguese', questionContent.html) @@
-		to_tsquery('portuguese', :text)
+    to_tsquery('portuguese', :text)
 		OR to_tsvector('portuguese', answerContent.html) @@
-		to_tsquery('portuguese', :text))
-	GROUP BY question.idQuestion
-	ORDER BY question.idquestion DESC;");
+    to_tsquery('portuguese', :text))
+     GROUP BY question.idQuestion" . " ORDER BY " . $type . " " . $order;
 
-
+    $stmt = $conn->prepare($query1);
     $stmt->bindParam(":text", $text);
+
     $stmt->execute();
     return $stmt->fetchAll();
 }
