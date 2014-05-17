@@ -1,7 +1,5 @@
 {include file='common/header.tpl'}
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="{$BASE_URL}javascript/main.js"></script>
-<script src="{$BASE_URL}javascript/question.js"></script>
+
 
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
@@ -131,6 +129,12 @@
     </div>
 </div>
 
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var BASE_URL = "{$BASE_URL}";
+</script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="{$BASE_URL}javascript/question.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">

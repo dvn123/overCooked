@@ -1,4 +1,4 @@
-BASE_URL = 'http://localhost/~augusto/overcooked/final/';
+//BASE_URL = 'http://localhost/~augusto/overcooked/final/';
 
 $(document).ready(function() {
   //initMessageClosers();
