@@ -290,7 +290,7 @@ function addAnswerToQuestion($idQuestion, $idUser, $content)
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function addCommentToQuestion($idQuestion, $idUser, $content)
@@ -304,7 +304,7 @@ function addCommentToQuestion($idQuestion, $idUser, $content)
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function addCommentToAnswer($idAnswer, $idUser, $content)

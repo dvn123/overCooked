@@ -80,7 +80,7 @@
         </div>
         <div class="panel-body">
             {foreach $question.answers as $answer}
-            <div class="container col-md-12">
+            <div id="{$answer.idanswer}" class="container col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-xs-1">
@@ -105,8 +105,7 @@
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
-
-                                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                                     Comentar
                                 </button>
                             </div>
@@ -156,7 +155,7 @@
             jquery.empty();
             jquery.remove();
             comment_visible = true;
-            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitAnswerComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent());
+            $( "<div id=\"input2\" class=\"container col-md-12\" style='display:none;margin-top: 10px;padding:0px;'><textarea class=\"comm-editor ckeditor form-control\" id=\"inputText\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitAnswerComment(this);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).appendTo( $(element).parent().parent());
             CKEDITOR.replace( 'inputText' );
             $('#input2').show("slow");
         } else {
@@ -166,7 +165,7 @@
         }
     }
     function commentShowQuestion(element) {
-        console.log(comment_visible);
+        //console.log(comment_visible);
         if(!comment_visible) {
             var jquery = $('#input2');
             jquery.empty();
@@ -183,28 +182,44 @@
             jquery.hide("slow");
         }
     }
-    function submitAnswer(element) {
-        console.log(element);
+    function submitAnswer() {
+        var content = CKEDITOR.instances.inputText3.getData();
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addAnswer.php",
             type: "POST",
-            data: { id : menuId },
-            dataType: "html"
+            data: { idQuestion: {$question.idquestion}, content:content}
         });
 
-        request.done(function( msg ) {
-            $( "#log" ).html( msg );
+        request.always(function( msg ) {
+            location.reload();
         });
-        request.fail(function( jqXHR, textStatus ) {
-            alert( "Request failed: " + textStatus );
-        });
-
     }
     function submitAnswerComment(element) {
-
+        //var content = CKEDITOR.instances.inputText.document.getBody().getText();
+        var content = CKEDITOR.instances.inputText.getData();
+        var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id'); //:)
+        //console.log(idAnswer);
+        //console.log("ANSWER");
+        var request = $.ajax({
+            url: "{$BASE_URL}api/questions/addCommentAnswer.php",
+            type: "POST",
+            data: { idAnswer: idAnswer, content:content}
+        });
+        request.always(function( ) {
+            location.reload();
+        });
     }
     function submitQuestionComment(element) {
-
+        var content = CKEDITOR.instances.inputText2.getData();
+        //console.log("QUESTION");
+        var request = $.ajax({
+            url: "{$BASE_URL}api/questions/addCommentQuestion.php",
+            type: "POST",
+            data: { idQuestion: {$question.idquestion}, content:content}
+        });
+        request.always(function( ) {
+            location.reload();
+        });
     }
 </script>
 
