@@ -159,34 +159,26 @@ function changePassword($idUser, $password)
     $stmt->execute();
 }
 
-function getUsersByName() {
+function getUsers($type, $order) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
-        FROM webUser, country WHERE webUser.idCountry = country.idCountry
-        ORDER BY username;");
+    $query="SELECT username, imageLink, score, country.name AS country
+                   FROM webUser, country WHERE webUser.idCountry = country.idCountry
+                   ORDER BY " . $type . " " . $order;
+    $stmt = $conn->prepare($query);
 
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function getUsersByScore() {
+function getUsersModerator($order) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
-        FROM webUser, country WHERE webUser.idCountry = country.idCountry
-        ORDER BY score;");
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
-function getUsersModerator() {
-
-    global $conn;
-    $stmt = $conn->prepare("SELECT  username, imageLink, score, country.name AS country
-        FROM webUser, country WHERE webUser.idCountry = country.idCountry AND userGroup='moderator'
-        ORDER BY username;");
+    $query="SELECT  username, imageLink, score, country.name AS country
+                   FROM webUser, country WHERE webUser.idCountry = country.idCountry
+                   AND userGroup='moderator'
+                   ORDER BY username " . $order;
+    $stmt = $conn->prepare($query);
 
     $stmt->execute();
     return $stmt->fetchAll();

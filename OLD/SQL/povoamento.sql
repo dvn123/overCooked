@@ -1836,7 +1836,7 @@ INSERT INTO answerContent (idAnswer,idUser,date,html) VALUES (198,99,'2014-11-17
 INSERT INTO answerContent (idAnswer,idUser,date,html) VALUES (199,100,'2014-11-08','enim, sit amet ornare lectus justo eu arcu. Morbi sit amet massa. Quisque porttitor eros nec tellus. Nunc lectus pede, ultrices a, auctor non, feugiat nec, diam.');
 
 
-
+/*
 INSERT INTO questionComment (idComment,date,idQuestion) VALUES (1,'2013-05-21',51);
 INSERT INTO questionComment (idComment,date,idQuestion) VALUES (2,'2013-04-27',54);
 INSERT INTO questionComment (idComment,date,idQuestion) VALUES (3,'2014-03-06',6);
@@ -2037,9 +2037,10 @@ INSERT INTO answerComment (idComment,date,idAnswer) VALUES (96,'2014-10-10',94);
 INSERT INTO answerComment (idComment,date,idAnswer) VALUES (97,'2013-09-05',23);
 INSERT INTO answerComment (idComment,date,idAnswer) VALUES (98,'2014-07-27',43);
 INSERT INTO answerComment (idComment,date,idAnswer) VALUES (99,'2013-09-23',34);
-INSERT INTO answerComment (idComment,date,idAnswer) VALUES (100,'2014-11-18',83);
+INSERT INTO answerComment (idComment,date,idAnswer) VALUES (100,'2014-11-18',83);*/
 
- INSERT INTO questionCommentContent (idComment,idUser,content,date) VALUES (1,146,'nec, malesuada ut, sem. Nulla interdum. Curabitur dictum.','2014-08-03');
+/*
+INSERT INTO questionCommentContent (idComment,idUser,content,date) VALUES (1,146,'nec, malesuada ut, sem. Nulla interdum. Curabitur dictum.','2014-08-03');
 INSERT INTO questionCommentContent (idComment,idUser,content,date) VALUES (2,139,'lectus sit amet luctus vulputate, nisi','2014-09-11');
 INSERT INTO questionCommentContent (idComment,idUser,content,date) VALUES (3,179,'a, enim. Suspendisse aliquet, sem ut cursus luctus, ipsum leo elementum sem, vitae aliquam eros turpis non enim.','2014-07-24');
 INSERT INTO questionCommentContent (idComment,idUser,content,date) VALUES (4,154,'purus gravida sagittis. Duis gravida. Praesent eu nulla at sem molestie sodales. Mauris blandit','2015-01-04');
@@ -2240,3 +2241,4 @@ INSERT INTO answerCommentContent (idComment,idUser,content,date) VALUES (97,114,
 INSERT INTO answerCommentContent (idComment,idUser,content,date) VALUES (98,134,'lorem lorem, luctus ut, pellentesque eget, dictum placerat, augue. Sed molestie. Sed id','2014-04-21');
 INSERT INTO answerCommentContent (idComment,idUser,content,date) VALUES (99,48,'pulvinar arcu et pede. Nunc sed orci lobortis augue scelerisque mollis. Phasellus libero mauris, aliquam eu, accumsan','2014-05-16');
 INSERT INTO answerCommentContent (idComment,idUser,content,date) VALUES (100,198,'dictum eu, placerat eget, venenatis a,','2015-01-24');
+*/

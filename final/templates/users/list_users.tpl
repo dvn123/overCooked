@@ -1,36 +1,37 @@
 ﻿{include file='common/header.tpl'}
 
 <div class="container">
-	<form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
+	<form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/users/list_users.php" method="get" accept-charset="UTF-8">
         <div class="right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
              <input name="content" type="search" class="form-control" placeholder="Pesquisar" />
         </div>
-    </form>		
+    </form>
 </div>
 
 <div class="container">
-<!--<div class="col-md-9 pull-right">
-        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
-            <div class="right-inner-addon">
-                <i class="glyphicon glyphicon-search"></i>
-                <input name="content" type="search"
-                       class="form-control"
-                       placeholder="Pesquisar" />
-            </div>
-        </form>
-		</div>--> 
-	<div class="btn-group pull-right" data-toggle="buttons">
-        <label class="btn btn-default active">
-            <input type="radio" name="param" id="option1">Nome
-        </label>
-        <label class="btn btn-default">
-            <input type="radio" name="param" id="option2">Pontuação
-        </label>
-        <label class="btn btn-default">
-            <input type="radio" name="param" id="option3">Moderadores
-        </label>
-	</div>
+    <!--<div class="row pull-right container">
+        <div class="col-md-8"></div>-->
+
+	    <div class="btn-group pull-right" data-toggle="buttons">
+            <label class="btn btn-default {$selection_name}">
+                <input type="radio" name="param" id="name">Nome
+            </label>
+            <label class="btn btn-default {$selection_score}">
+                <input type="radio" name="param" id="score">Pontuação
+            </label>
+            <label class="btn btn-default {$selection_mod}">
+                <input type="radio" name="param" id="moderator">Moderadores
+            </label>
+	    </div>
+	    <div id="order" class="btn-group pull-right" data-toggle="buttons"">
+              <label class="btn btn-default {$selection_down}" id="desc1">
+                   <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
+              </label>
+              <label class="btn btn-default {$selection_up}" id="asc1">
+                   <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
+               </label>
+        </div>
 </div>
 <br>
 
@@ -71,5 +72,29 @@
         </div>
     </div>
 </div>
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
+<script>
+
+    $( document ).ready(function() {
+        var location = "{$BASE_URL}pages/users/list_users.php";
+
+        var type = "{$type}";
+        var order = "{$order}";
+
+        $('#asc, #desc').change(function(){
+            order = $(this).attr("id");
+            console.log(order + "  " + type);
+            window.location = location + "?type=" + type + "&order=" + order;
+        });
+
+        $('#name, #score, #moderator').change(function(){
+            type = $(this).attr("id");
+            window.location = location + "?type=" + type + "&order=" + order;
+        });
+    });
+</script>
 
 {include file='common/footer.tpl'}

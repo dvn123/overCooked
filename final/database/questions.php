@@ -1,5 +1,8 @@
 <?php
 
+function getCurrentDate() {
+    return date('Y-m-d H:i:s', time());
+}
 function isQuestionSubscribed($idUser,$idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT COUNT(*) AS subscribed FROM QuestionSubscription
@@ -273,7 +276,7 @@ function addQuestion($title, $idUser, $content)
     //echo date('Y-m-d', time());
     //echo $content;
     $stmt->bindParam(":user", $idUser);
-    $stmt->bindParam(":date",date('Y-m-d', time()) );
+    $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $content);
 
     return $stmt->execute();
@@ -306,6 +309,7 @@ function addCommentToQuestion($idQuestion, $idUser, $content)
     $stmt->bindParam(":question", $idQuestion);
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
+    $stmt->bindParam(":date", getCurrentDate());
 
     return $stmt->execute();
 }
@@ -320,6 +324,7 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
     $stmt->bindParam(":answer", $idAnswer);
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
+    $stmt->bindParam(":date", getCurrentDate());
 
     return $stmt->execute();
 }
@@ -391,7 +396,7 @@ function addCommentToAnswer($idAnswer, $idUser, $content)
     $stmt->execute();
 }*/
 
-function changeQuestionContent($idUser, $idQuestion, $html, $date)
+function changeQuestionContent($idUser, $idQuestion, $html)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO questionContent (idUser, idQuestion, html, date)
@@ -400,12 +405,12 @@ function changeQuestionContent($idUser, $idQuestion, $html, $date)
     $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":idQuestion", $idQuestion);
     $stmt->bindParam(":html", $html);
-    $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":date", getCurrentDate()); //TODO: changed to current date
 
     $stmt->execute();
 }
 
-function changeAnswerContent($idUser, $idAnswer, $html, $date)
+function changeAnswerContent($idUser, $idAnswer, $html)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO answerContent (idAnswer, idUser, date, html)
@@ -413,13 +418,13 @@ function changeAnswerContent($idUser, $idAnswer, $html, $date)
 
     $stmt->bindParam(":idAnswer", $idAnswer);
     $stmt->bindParam(":idUser", $idUser);
-    $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":html", $html);
 
     $stmt->execute();
 }
 
-function changeCommentToQuestionContent($idUser, $idComment, $html, $date)
+function changeCommentToQuestionContent($idUser, $idComment, $html)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO questionCommentContent (idComment, idUser, date, content)
@@ -427,13 +432,13 @@ function changeCommentToQuestionContent($idUser, $idComment, $html, $date)
 
     $stmt->bindParam(":idComment", $idComment);
     $stmt->bindParam(":idUser", $idUser);
-    $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $html);
 
     $stmt->execute();
 }
 
-function changeCommentToAnswerContent($idUser, $idComment, $html, $date)
+function changeCommentToAnswerContent($idUser, $idComment, $html)
 {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO answerCommentContent (idComment, idUser, date, content)
@@ -441,7 +446,7 @@ function changeCommentToAnswerContent($idUser, $idComment, $html, $date)
 
     $stmt->bindParam(":idComment", $idComment);
     $stmt->bindParam(":idUser", $idUser);
-    $stmt->bindParam(":date", $date);
+    $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $html);
 
     $stmt->execute();
