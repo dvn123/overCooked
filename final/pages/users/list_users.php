@@ -4,8 +4,8 @@ include_once($BASE_DIR .'database/users.php');
 
 if ($_GET['content']) {
 
-    $name = trim($_GET['content']);
-
+    $content = trim($_GET['content']);
+    $name=strtolower($content);
     $users=searchUsers("username", "ASC", $name);
     $selection_name = '';
     $selection_score = '';
