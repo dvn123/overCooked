@@ -35,6 +35,12 @@
 </div>
 <br>
 
+{if sizeof($users) == 0}
+<div class="container">
+    <h4 class="col-md-5">Não foram encontrados resultados.. :(</h4>
+</div>
+{else}
+
 <div class="container">
     <div class="panel panel-green">
         <div class="panel-body">
@@ -72,7 +78,7 @@
         </div>
     </div>
 </div>
-
+{/if}
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>

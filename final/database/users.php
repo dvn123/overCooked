@@ -184,4 +184,19 @@ function getUsersModerator($order) {
     return $stmt->fetchAll();
 }
 
+function searchUsers($type, $order, $name) {
+
+    global $conn;
+    $query="SELECT  username, imageLink, score, country.name AS country
+        FROM webUser, country WHERE webUser.idCountry = country.idCountry
+        AND username LIKE " . "'%".$name."%'" .
+        " ORDER BY "  . $type . " " . $order;
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+
 ?>
