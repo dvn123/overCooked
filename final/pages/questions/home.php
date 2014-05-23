@@ -1,11 +1,13 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR .'database/users.php');
 
 $num_questions = 10;
 
 $questions = getQuestionsByDate($num_questions,1);
 $questions_hot = getQuestionsHot($num_questions,1);
+
 
 /*
 foreach ($tweets as $key => $tweet) {
@@ -90,6 +92,18 @@ foreach($questions_hot as $key => $question) {
     $tags = getQuestionTags($question['idquestion']);
     $questions_hot[$key]['tags'] = $tags;
     $questions_hot = getDate2($question, $questions_hot, $key);
+}
+$username = $_SESSION['username'];
+if($username) {
+    $idUser=getIdUser($username);
+    $questions_subscribed=getQuestionsSubscribed($idUser);
+
+    foreach($questions_subscribed as $key => $question) {
+        $tags3= getQuestionTags($question['idquestion']);
+        $questions_subscribed[$key]['tags'] = $tags;
+        $questions_subscribed = getDate2($question, $questions_subscribed, $key);
+    }
+    $smarty->assign('questions_subs', $questions_subscribed);
 }
 
 $smarty->assign('questions', $questions);
