@@ -264,7 +264,7 @@ function getQuestionByTitle($title) {
 function addQuestion($title, $idUser, $content)
 {
     global $conn;
-    //$conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
 
     $stmt->bindParam(":title", $title);
@@ -283,12 +283,14 @@ function addAnswerToQuestion($idQuestion, $idUser, $content)
 {
     global $conn;
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
-    $stmt = $conn->prepare("INSERT INTO answer_vw (answer.idQuestion, answer.idUser, answerContent.html)
-        VALUES (:question, :idUser, :content);");
+    $stmt = $conn->prepare("INSERT INTO answer_vw (idQuestion, date, idUser, html)
+        VALUES (:question, :date, :idUser, :content);");
 
     $stmt->bindParam(":question", $idQuestion);
-    $stmt->bindParam(":user", $idUser);
+    $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":content", $content);
+    $stmt->bindParam(":date", date('Y-m-d', time()));
+
 
     return $stmt->execute();
 }
@@ -296,8 +298,9 @@ function addAnswerToQuestion($idQuestion, $idUser, $content)
 function addCommentToQuestion($idQuestion, $idUser, $content)
 {
     global $conn;
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO questionComment_vw (questionComment.idQuestion, questionCommentContent.idUser, questionCommentContent.content)
+        INSERT INTO questionComment_vw (idQuestion, idUser, content)
         VALUES(:question, :user, :content);");
 
     $stmt->bindParam(":question", $idQuestion);
@@ -310,8 +313,8 @@ function addCommentToQuestion($idQuestion, $idUser, $content)
 function addCommentToAnswer($idAnswer, $idUser, $content)
 {
     global $conn;
-    $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO answerComment_vw (answerComment.idQuestion, answerCommentContent.idUser, answerCommentContent.content)
+    $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
+    $stmt = $conn->prepare("INSERT INTO answerComment_vw (idAnswer, idUser, content)
         VALUES(:answer, :user, :content);");
 
     $stmt->bindParam(":answer", $idAnswer);

@@ -24,14 +24,14 @@
             console.log(data);
             if(data != 400 && data !=401 && data != 300) {
                 var url = "question.php?idQuestion=" + data;
-                window.location.href = url;
+                //window.location.href = url;
             } else {
-                location.reload();
+                //location.reload();
             }
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
-            location.reload();
+            //location.reload();
         });
     }
 </script>

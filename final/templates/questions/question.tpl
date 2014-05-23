@@ -4,7 +4,7 @@
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
+            <h3 class="title panel-title">
                 {$question.title}
                 <div class="pull-right panel panel-default">
                     <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
@@ -26,7 +26,8 @@
                 </button>
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
-                {$question.html}<br/><br/><small>{$question.date}</small>
+                <div class="content">{$question.html}</div>
+                <br/><br/><small>{$question.date}</small>
             </div>
             <div class="col-xs-2">
                 <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
@@ -34,6 +35,9 @@
                 </button>
                 <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                     Comentar
+                </button>
+                <button type="button" onclick="editQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                    Editar
                 </button>
             </div>
             <div class="col-xs-11 col-xs-offset-1">
@@ -220,6 +224,14 @@
         request.always(function( ) {
             location.reload();
         });
+    }
+    function editQuestion(element) {
+        $(element).html("Submeter Edição");
+        var editing = true;
+        var element2 = $(element).parent().parent();
+        var content = element2.find('.content');
+        var title = element2.parent().find('.title').html();
+        content.html("<textarea class=\"editor content\" style=\"width: 100%\">{$question.html}</textarea>");
     }
 </script>
 
