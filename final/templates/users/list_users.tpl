@@ -1,19 +1,17 @@
 ﻿{include file='common/header.tpl'}
 
 <div class="container">
-	<form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/users/list_users.php" method="get" accept-charset="UTF-8">
+    <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/users/list_users.php" method="get" accept-charset="UTF-8">
         <div class="right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
-             <input name="content" type="search" class="form-control" placeholder="Pesquisar" />
+            <input name="content" type="search" class="form-control" placeholder="Pesquisar" />
         </div>
     </form>
 </div>
 
 <div class="container">
-    <!--<div class="row pull-right container">
-        <div class="col-md-8"></div>-->
-
-	    <div class="btn-group pull-right" data-toggle="buttons">
+    <div class="row pull-right ">
+        <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_name}">
                 <input type="radio" name="param" id="name">Nome
             </label>
@@ -23,15 +21,17 @@
             <label class="btn btn-default {$selection_mod}">
                 <input type="radio" name="param" id="moderator">Moderadores
             </label>
-	    </div>
-	    <div id="order" class="btn-group pull-right" data-toggle="buttons"">
-              <label class="btn btn-default {$selection_down}" id="desc1">
-                   <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
-              </label>
-              <label class="btn btn-default {$selection_up}" id="asc1">
-                   <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
-               </label>
         </div>
+        <div id="order" class="btn-group" data-toggle="buttons"">
+            <label class="btn btn-default {$selection_down}" id="desc1">
+                <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
+            </label>
+            <label class="btn btn-default {$selection_up}" id="asc1">
+                <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
+            </label>
+        </div>
+        <div  class="col-md-1 pull-right"></div>
+    </div>
 </div>
 <br>
 
