@@ -13,6 +13,16 @@ if (!$_POST['username'] || !$_POST['realname'] || !$_POST['password']
 }
 
 $username = strip_tags($_POST['username']);
+
+if(strlen(utf8_decode($username))>15) {
+    $_SESSION['error_messages'][] = 'Nome de utilizador muito comprido. Tamanho máximo permitido: 15 carateres';
+    $_SESSION['field_errors']['username'] = 'O nome de utilizador muito comprido';
+    $_SESSION['form_values'] = $_POST;
+    header("Location: $BASE_URL" . 'pages/users/register.php');
+    exit;
+}
+
+
 $password = strip_tags($_POST['password']);
 $email = $_POST['email'];
 $realname = $_POST['realname'];
