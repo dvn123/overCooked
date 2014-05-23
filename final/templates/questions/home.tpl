@@ -72,6 +72,9 @@
     <ul class="nav nav-tabs ">
         <li class="active"><a href="#last" data-toggle="tab"><b>Últimas</b></a></li>
         <li><a href="#hot" data-toggle="tab"><b>Quentes</b></a></li>
+        {if $USERNAME}
+            <li><a href="#subscritas" data-toggle="tab"><b>Subscritas</b></a></li>
+        {/if}
     </ul>
 
     <!-- Tab panes -->
@@ -150,6 +153,44 @@
                 <a href="#" class="btn btn-info" alt="">Ver mais</a>
             </div>
         </div>
+        {if $USERNAME}
+            <div class="tab-pane" id="subscritas">
+                <table class="table table-hover table-responsive ">
+                    {foreach $questions_subs as $question_subs}
+                        <tr>
+                            <td class="col-md-1 text-center">
+                                <div class="row text-danger">{$question_subs.score}</div>
+                                <div class="row text-danger">votos</div>
+                            </td>
+                            <td class="col-md-2 text-center text-muted">
+                                <div class="row">{$question_subs.numanswers}</div>
+                                <div class="row">respostas</div>
+                            </td>
+                            <td class="col-md-8">
+                                <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
+                                <div class="row">
+                                    {foreach $question_subs.tags as $tag}
+                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                    {/foreach}
+                                </div>
+                            </td>
+                            <td class="col-md-1">
+                                <div class="row">
+                                    <a class="" href="{$BASE_URL}pages/users/profile.php?username={$question_subs.username}">
+                                        <b>{$question_subs.username}</b>
+                                    </a>
+                                </div>
+                                <div class="row">{$question_subs.date2}</div>
+                            </td>
+                        </tr>
+                    {/foreach}
+                </table>
+
+                <div class="text-center">
+                    <a href="#" class="btn btn-info" alt="">Ver mais</a>
+                </div>
+            </div>
+        {/if}
     </div>
 </div>
 
