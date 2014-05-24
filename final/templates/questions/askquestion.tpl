@@ -3,10 +3,9 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript">
+    var BASE_URL = "{$BASE_URL}";
     function submit_question() {
         var form = $("#askquestion_form").serializeArray();
-        console.log(form);
-        console.log(form[2].value);
         var tags = form[2].value.split(" ");
         var data = {};
         data["title"] = form[0].value;
@@ -14,24 +13,20 @@
         for(var i = 0; i < tags.length; i++) {
             data["tags"+i] = tags[i];
         }
-        console.log(data);
-        var request = $.ajax({
-            url: "../../api/questions/createquestion.php",
+        $.ajax({
+            url: BASE_URL + "api/questions/createquestion.php",
             type: "POST",
             data: data
-        });
-        request.done(function(data) {
-            console.log(data);
+        }).done(function(data) {
             if(data != 400 && data !=401 && data != 300) {
-                var url = "question.php?idQuestion=" + data;
-                //window.location.href = url;
+                var url = BASE_URL + "pages/questions/question.php?idQuestion=" + data;
+                window.location.href = url;
             } else {
-                //location.reload();
+                location.reload();
             }
-        });
-        request.fail(function( jqXHR, textStatus ) {
+        }).fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
-            //location.reload();
+            location.reload();
         });
     }
 </script>
@@ -61,12 +56,12 @@
                 </div>
                 <div class="text-center">
                     <button class="btn btn-default">Colocar Pergunta</button>
-                    <!-- <button onclick="submit_question(this.form)" class="btn btn-default">Colocar Pergunta</button> -->
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
