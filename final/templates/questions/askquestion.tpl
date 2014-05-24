@@ -1,35 +1,6 @@
 {include file='common/header.tpl'}
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<script type="text/javascript">
-    var BASE_URL = "{$BASE_URL}";
-    function submit_question() {
-        var form = $("#askquestion_form").serializeArray();
-        var tags = form[2].value.split(" ");
-        var data = {};
-        data["title"] = form[0].value;
-        data["content"] = form[1].value;
-        for(var i = 0; i < tags.length; i++) {
-            data["tags"+i] = tags[i];
-        }
-        $.ajax({
-            url: BASE_URL + "api/questions/createquestion.php",
-            type: "POST",
-            data: data
-        }).done(function(data) {
-            if(data != 400 && data !=401 && data != 300) {
-                var url = BASE_URL + "pages/questions/question.php?idQuestion=" + data;
-                window.location.href = url;
-            } else {
-                location.reload();
-            }
-        }).fail(function( jqXHR, textStatus ) {
-            console.log( "Request failed: " + textStatus );
-            location.reload();
-        });
-    }
-</script>
+<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
 
 <div class="container">
     <div class="panel panel-green">
@@ -62,7 +33,35 @@
     </div>
 </div>
 
-<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    var BASE_URL = "{$BASE_URL}";
+    function submit_question() {
+        var form = $("#askquestion_form").serializeArray();
+        var tags = form[2].value.split(" ");
+        var data = {};
+        data["title"] = form[0].value;
+        data["content"] = form[1].value;
+        for(var i = 0; i < tags.length; i++) {
+            data["tags"+i] = tags[i];
+        }
+        $.ajax({
+            url: BASE_URL + "api/questions/createquestion.php",
+            type: "POST",
+            data: data
+        }).done(function(data) {
+            if(data != "e400" && data != "e401" && data != "e300") {
+                var url = BASE_URL + "pages/questions/question.php?idQuestion=" + data;
+                window.location.href = url;
+            } else {
+                location.reload();
+            }
+        }).fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
+    }
+</script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 

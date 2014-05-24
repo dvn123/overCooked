@@ -264,17 +264,13 @@ function getQuestionByTitle($title) {
 }
 
 
-function addQuestion($title, $idUser, $content)
-{
+function addQuestion($title, $idUser, $content) {
     global $conn;
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("INSERT INTO question_vw (title, date, idUser, html) VALUES(:title, :date, :user, :content);");
 
     $stmt->bindParam(":title", $title);
-    //echo $title;
-    //echo $idUser;
-    //echo date('Y-m-d', time());
-    //echo $content;
+
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $content);
@@ -282,8 +278,7 @@ function addQuestion($title, $idUser, $content)
     return $stmt->execute();
 }
 
-function addAnswerToQuestion($idQuestion, $idUser, $content)
-{
+function addAnswerToQuestion($idQuestion, $idUser, $content) {
     global $conn;
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("INSERT INTO answer_vw (idQuestion, date, idUser, html)
@@ -292,19 +287,17 @@ function addAnswerToQuestion($idQuestion, $idUser, $content)
     $stmt->bindParam(":question", $idQuestion);
     $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":content", $content);
-    $stmt->bindParam(":date", date('Y-m-d', time()));
+    $stmt->bindParam(":date", getCurrentDate());
 
 
     return $stmt->execute();
 }
 
-function addCommentToQuestion($idQuestion, $idUser, $content)
-{
+function addCommentToQuestion($idQuestion, $idUser, $content) {
     global $conn;
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
-    $stmt = $conn->prepare("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-        INSERT INTO questionComment_vw (idQuestion, idUser, content)
-        VALUES(:question, :user, :content);");
+    $stmt = $conn->prepare("INSERT INTO questionComment_vw (idQuestion, date, idUser, content)
+        VALUES(:question, :date, :user, :content);");
 
     $stmt->bindParam(":question", $idQuestion);
     $stmt->bindParam(":user", $idUser);
@@ -314,18 +307,15 @@ function addCommentToQuestion($idQuestion, $idUser, $content)
     return $stmt->execute();
 }
 
-function addCommentToAnswer($idAnswer, $idUser, $content)
-{
+function addCommentToAnswer($idAnswer, $idUser, $content) {
     global $conn;
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
-    $stmt = $conn->prepare("INSERT INTO answerComment_vw (idAnswer, idUser, content)
-        VALUES(:answer, :user, :content);");
-
+    $stmt = $conn->prepare("INSERT INTO answerComment_vw (idAnswer, date, idUser, content)
+        VALUES(:answer, :date, :user, :content);");
     $stmt->bindParam(":answer", $idAnswer);
     $stmt->bindParam(":user", $idUser);
     $stmt->bindParam(":content", $content);
     $stmt->bindParam(":date", getCurrentDate());
-
     return $stmt->execute();
 }
 

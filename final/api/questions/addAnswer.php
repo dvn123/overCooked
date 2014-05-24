@@ -1,6 +1,8 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR .'database/users.php');
+
 
 if(!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = 'Não tem permissões para criar uma resposta';
@@ -24,7 +26,6 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content'])) {
 
 if (addAnswerToQuestion($_POST['idQuestion'], $idUser, $_POST['content'])) {
     $_SESSION['success_messages'][] = 'Criação de resposta bem sucedida!';
-    //$idQuestion = getQuestionByTitle($_POST['title'])['idquestion'];
     echo '200';
     exit;
 } else {

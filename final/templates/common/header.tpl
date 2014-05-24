@@ -11,38 +11,28 @@
 </head>
 <body>
 
-
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
-
         <a href="{$BASE_URL}" class="navbar-brand"><img src="{$BASE_URL}images/food-logo1.png"></a>
-
-
         <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-
         <div class="collapse navbar-collapse navHeaderCollapse">
-
             <ul class="nav navbar-nav navbar-right pull-left">
-
                 <li class = "active"> <a href = "#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a></li>
                 <li ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
                 <li><a href = "#">Perguntas</a></li>
                 <li><a href = "#">Tags</a></li>
                 <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
             </ul>
-
             {if $USERNAME}
                 {include file='common/menu_logged_in.tpl'}
             {else}
                 {include file='common/menu_logged_out.tpl'}
             {/if}
-
         </div>
-
     </div>
 </div>
 

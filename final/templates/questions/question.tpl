@@ -193,23 +193,29 @@
             type: "POST",
             data: { idQuestion: {$question.idquestion}, content:content}
         });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
 
-        request.always(function( msg ) {
+        request.done(function( data ) {
             location.reload();
         });
     }
     function submitAnswerComment(element) {
-        //var content = CKEDITOR.instances.inputText.document.getBody().getText();
         var content = CKEDITOR.instances.inputText.getData();
-        var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id'); //:)
-        //console.log(idAnswer);
-        //console.log("ANSWER");
+        var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id');
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentAnswer.php",
             type: "POST",
             data: { idAnswer: idAnswer, content:content}
         });
-        request.always(function( ) {
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
+        request.done(function( data ) {
+            console.log(data);
             location.reload();
         });
     }
@@ -221,7 +227,12 @@
             type: "POST",
             data: { idQuestion: {$question.idquestion}, content:content}
         });
-        request.always(function( ) {
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
+        request.done(function( data ) {
+            console.log(data);
             location.reload();
         });
     }

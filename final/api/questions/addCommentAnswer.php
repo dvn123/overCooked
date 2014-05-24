@@ -1,6 +1,7 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR .'database/users.php');
 
 if(!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = 'Não tem permissões para criar um comentário';
