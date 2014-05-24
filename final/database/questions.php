@@ -212,6 +212,27 @@ function getAnswerComments($idAnswer) {
     return $stmt->fetchAll();
 }
 
+function getAnswerComment($idComment) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM answerComment
+        WHERE idComment = :id;");
+
+    $stmt->bindParam(":id", $idComment);
+    $stmt->execute();
+    return $stmt->fetch();
+}
+
+
+function getQuestionComment($idComment) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT * FROM questionComment
+        WHERE idComment = :id;");
+
+    $stmt->bindParam(":id", $idComment);
+    $stmt->execute();
+    return $stmt->fetch();
+}
+
 function searchQuestions($text, $type, $order) {
 
     global $conn;
@@ -372,20 +393,6 @@ function addVoteToAnswer($idUser,$idAnswer,$value)
 
 }
 
-/* repeated??
-function addCommentToAnswer($idAnswer, $idUser, $content)
-{
-    global $conn;
-    $stmt = $conn->prepare("INSERT INTO answerComment_vw (answerComment.idQuestion, answerCommentContent.idUser, answerCommentContent.content)
-        VALUES(:answer, :user, :content);");
-
-    $stmt->bindParam(":answer", $idAnswer);
-    $stmt->bindParam(":user", $idUser);
-    $stmt->bindParam(":content", $content);
-
-    $stmt->execute();
-}*/
-
 function changeQuestionContent($idUser, $idQuestion, $html)
 {
     global $conn;
@@ -397,7 +404,17 @@ function changeQuestionContent($idUser, $idQuestion, $html)
     $stmt->bindParam(":html", $html);
     $stmt->bindParam(":date", getCurrentDate()); //TODO: changed to current date
 
-    $stmt->execute();
+    return $stmt->execute();
+}
+
+function changeQuestionTitle($idQuestion, $title)
+{
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Question SET title = :title WHERE idQuestion = :idQuestion");
+
+    $stmt->bindParam(":idQuestion", $idQuestion);
+    $stmt->bindParam(":title", $title);
+    return $stmt->execute();
 }
 
 function changeAnswerContent($idUser, $idAnswer, $html)
@@ -411,7 +428,7 @@ function changeAnswerContent($idUser, $idAnswer, $html)
     $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":html", $html);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function changeCommentToQuestionContent($idUser, $idComment, $html)
@@ -425,7 +442,7 @@ function changeCommentToQuestionContent($idUser, $idComment, $html)
     $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $html);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function changeCommentToAnswerContent($idUser, $idComment, $html)
@@ -439,7 +456,7 @@ function changeCommentToAnswerContent($idUser, $idComment, $html)
     $stmt->bindParam(":date", getCurrentDate());
     $stmt->bindParam(":content", $html);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 ?>

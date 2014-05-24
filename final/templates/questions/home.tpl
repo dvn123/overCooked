@@ -9,7 +9,6 @@
                        class="form-control"
                        placeholder="Pesquisar" />
             </div>
-
             <!-- <button type="submit" class="btn btn-default">
                 <span class="glyphicon glyphicon-search"></span>
                 Pesquisa
@@ -29,7 +28,6 @@
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
             <li data-target="#carousel-example-generic" data-slide-to="2"></li>
         </ol>
-
         <div class="carousel-inner text-center">
             <div class="item active">
                 <img src="{$BASE_URL}images/1.png" alt="1" class="img-responsive" style="width:100%">
@@ -38,24 +36,17 @@
 
                 </div>
             </div>
-
-
             <div class="item">
                 <img src="{$BASE_URL}images/2.png" alt="2" class="img-responsive" style="width:100%">
-
                 <div class="carousel-caption">
                 </div>
             </div>
-
             <div class="item">
                 <img src="{$BASE_URL}images/3.png" alt="3" class="img-responsive" style="width:100%">
-
                 <div class="carousel-caption">
                 </div>
             </div>
-
         </div>
-
         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
@@ -63,7 +54,6 @@
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
     </div>
-
 </div>
 
 <!-- style="width: 900px; margin: 0 auto;"-->
@@ -76,7 +66,6 @@
             <li><a href="#subscritas" data-toggle="tab"><b>Subscritas</b></a></li>
         {/if}
     </ul>
-
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane active" id="last">
@@ -484,9 +473,8 @@
 </div>
 
 
-
-<script src="{$BASE_URL}javascript/main.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 
 {include file='common/footer.tpl'}

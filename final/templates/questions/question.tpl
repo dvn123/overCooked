@@ -4,8 +4,8 @@
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="title panel-title">
-                {$question.title}
+            <h3 class="panel-title">
+                <div class="title">{$question.title}</div>
                 <div class="pull-right panel panel-default">
                     <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
                     </div>
@@ -36,7 +36,7 @@
                 <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                     Comentar
                 </button>
-                <button type="button" onclick="editQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                <button type="button" onclick="edit(this, 'question');"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                     Editar
                 </button>
             </div>
@@ -76,7 +76,6 @@
     </div>
 </div>
 
-
 <div class="container col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -93,7 +92,6 @@
                             <span class="glyphicon glyphicon-ok"></span>
                             </button>
                         <button type="button" id="answerUP{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},1)" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
-
                             <span class="glyphicon glyphicon-chevron-up"></span>
                         </button>
                         <div id="answerscore{$answer.idanswer}" class="text-center btn btn-default disabled" style="min-width:50px;">{$answer.score}</div>
@@ -112,8 +110,11 @@
                                 <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                                     Comentar
                                 </button>
+                                <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                    Editar
+                                </button>
                             </div>
-                            <br/>{$answer.html}<br/><br/><small>{$answer.date}</small>
+                            <br/><div class="content">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
@@ -122,7 +123,6 @@
                                 <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
                             </div>
                             {/foreach}
-
                         </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
     var BASE_URL = "{$BASE_URL}";
 </script>
@@ -141,8 +141,9 @@
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
 <link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
-<script>
+<script type="text/javascript">
     var answer_visible = false, comment_visible = false;
+    var last_edit_type, edit_content, edit_title, edit_button;
 
     function answerShow() {
         if(!answer_visible) {
@@ -236,13 +237,71 @@
             location.reload();
         });
     }
-    function editQuestion(element) {
-        $(element).html("Submeter Edição");
-        var editing = true;
+    function edit(element, type) {
+        //TODO permissions on buttons
         var element2 = $(element).parent().parent();
-        var content = element2.find('.content');
-        var title = element2.parent().find('.title').html();
-        content.html("<textarea class=\"editor content\" style=\"width: 100%\">{$question.html}</textarea>");
+        //if there is no previous edit or if there is a previous edit but it it's not this one close it and open this edit
+        console.log("das au2to");
+        if((!(edit_content == null || edit_content == undefined)  && (last_edit_type != type || edit_id != element2.find('.content').html()))) {
+            closeEdit();
+        }
+        last_edit_type = type;
+        edit_content = element2.find('.content');
+        edit_button = $(element);
+        edit_button.html("Submeter");
+        var editor;
+        if(type == "question") {
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">{$question.html}</textarea>");
+            edit_title = element2.parent().find('.title');
+            edit_title.html("<textarea class=\"editor-title title\" rows=\"1\" style=\"resize: none\">{$question.title}</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
+        } else {
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">{$question.html}</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
+        }
+    }
+    function closeEdit() {
+        edit_content.html("{$question.html}");
+        edit_button.html("Editar");
+        if(last_edit_type == "question") {
+            edit_title.html("{$question.title}");
+        }
+        edit_content = null;
+        edit_title = null;
+        edit_button = null;
+    }
+    function submitEdit() {
+        console.log("asdasd");
+        var url1, data;
+        if(last_edit_type == "question") {
+            url1 = "Question.php";
+            data = { idQuestion: {$question.idquestion}, title:edit_title.find('textarea').val(), content: CKEDITOR.instances.input4.getData()};
+        } else if(last_edit_type == "answer") {
+            var idAnswer = edit_button.parent().parent().parent().parent().parent().attr('id');
+            url1 = "Answer.php";
+            data = { idAnswer: idAnswer, content:CKEDITOR.instances.input4.getData()};
+        } else if(last_edit_type == "answercomment") {
+            url1 = "CommentAnswer.php";
+            data = { idComment: {$question.idquestion}, content:CKEDITOR.instances.input4.getData()};
+        } else if(last_edit_type == "questioncomment") {
+            url1 = "CommentQuestion.php";
+            data = { idComment: {$question.idquestion}, content:CKEDITOR.instances.input4.getData()};
+        }
+        var url = "{$BASE_URL}api/questions/edit" + url1;
+        var request = $.ajax({
+            url: url,
+            type: "POST",
+            data: data
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
+        request.done(function( data ) {
+            console.log(data);
+            location.reload();
+        });
+        closeEdit();
     }
 </script>
 
