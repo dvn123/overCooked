@@ -57,11 +57,11 @@
             <div id="{$comment.idcomment}" class="highlight col-xs-9 col-xs-offset-1" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                 <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
                 {if $comment.owner == 'true'}
-                    <div><div>
+                    <span><span>
                     <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                         Editar
                     </button>
-                    </div></div>
+                    </span></span>
                 {/if}
             </div>
             {/foreach}
@@ -141,11 +141,11 @@
                             <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
                                 {if $comment.owner == 'true'}
-                                <div>
+                                <span>
                                     <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                                         Editar
                                     </button>
-                                </div>
+                                </span>
                                 {/if}
                             </div>
                             {/foreach}
@@ -333,7 +333,7 @@
             location.reload();
         });
         request.done(function( data ) {
-            console.log(data);
+            //console.log(data);
             location.reload();
         });
         closeEdit();
