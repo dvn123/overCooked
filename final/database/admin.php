@@ -1,41 +1,5 @@
 <?php
 
-function getUsersByName() {
-
-    global $conn;
-    $stmt = $conn->prepare("SELECT  username, imageLink,  registrationDate,
-        about,  birthDate,  city,  email,  gender,  name,  numAnswers,
-        numComments,  numQuestions,  score,  idCountry,  userGroup
-        FROM webUser
-        ORDER BY username");
-    
-    $stmt->execute();
-    return $stmt->fetchAll();
-
-/*    $data = array();
-
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-
-    return json_encode($data);*/
-}
-
-function getUsersByScore() {
-
-    global $conn;
-    $stmt = $conn->prepare("SELECT  username, imageLink,  registrationDate,
-        about,  birthDate,  city,  email,  gender,  name,  numAnswers,  
-        numComments,  numQuestions,  score,  idCountry,  userGroup
-        FROM webUser
-        ORDER BY score");
-    
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
 function getMostActiveCountries($num) {
     global $conn;
     $stmt = $conn->prepare("SELECT country.name, COUNT(*) AS counter
@@ -87,9 +51,6 @@ function getAgeDistribution() {
     return $stmt->fetchAll();
 }
 
-
-//TODO: SQL008 - Obter valores de estatísticas
-
 function promoteUser($idUser) {
 
     global $conn;
@@ -102,7 +63,7 @@ function promoteUser($idUser) {
     $stmt->execute();
 }
 
-function deleteUser($idUser) {
+function banUser($idUser) {
     
     global $conn;
 
@@ -113,5 +74,45 @@ function deleteUser($idUser) {
 
     $stmt->execute();
 }
+
+function getUsers($type, $order) {
+
+    global $conn;
+    $query="SELECT username, score, userGroup, banned
+                   FROM webUser
+                   ORDER BY " . $type . " " . $order;
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getUsersModerator($order) {
+
+    global $conn;
+    $query="SELECT username, score, userGroup, banned
+                   FROM webUser
+                   AND userGroup='moderator'
+                   ORDER BY username " . $order;
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function searchUsers($type, $order, $name) {
+
+    global $conn;
+    $query="SELECT  username, score, userGroup, banned
+        FROM webUser
+        AND username LIKE " . "'%".$name."%'" .
+        " ORDER BY "  . $type . " " . $order;
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 
 ?>
