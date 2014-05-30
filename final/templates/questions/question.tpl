@@ -35,13 +35,13 @@
                     </button>
                 </div>
                 <div>
-                <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                <button type="button" onclick="commentShowQuestion(this);" class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                     Comentar
                 </button>
                 </div>
                 {if $question.owner == 'true'}
                 <div>
-                <button type="button" onclick="edit(this, 'question');"class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">
+                <button type="button" onclick="edit(this, 'question');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">
                     Editar
                 </button>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
                 {if $comment.owner == 'true'}
                     <span><span>
-                    <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                    <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                         Editar
                     </button>
                     </span></span>
@@ -115,24 +115,25 @@
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                             <div style="float:right; margin-left:10px;">
                                 <div class="panel panel-default">
-                                    <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;margin-top:0px;"> <a href="{$answer.userlink}">{$answer.username}</a>
+                                    <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;"> <a href="{$answer.userlink}">{$answer.username}</a>
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
                                 <div class="pull-right">
                                     <div>
-                                        <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                        <button type="button" onclick="commentShow(this);" class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                                             Comentar
                                         </button>
                                     </div>
                                     {if $answer.owner == 'true'}
                                     <div>
-                                        <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
+                                        <button type="button" onclick="edit(this, 'answer');" class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
                                             Editar
                                         </button>
                                     </div>
+                                    {/if}
                                 </div>
-                                {/if}
+
                             </div>
                             <br/><div class="content">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
                         </div>
@@ -142,7 +143,7 @@
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
                                 {if $comment.owner == 'true'}
                                 <span>
-                                    <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                                    <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                                         Editar
                                     </button>
                                 </span>
@@ -181,8 +182,8 @@
         }
     }
     function commentShow(element) {
+        var jquery = $('#input2');
         if(!comment_visible) {
-            var jquery = $('#input2');
             jquery.empty();
             jquery.remove();
             comment_visible = true;
@@ -191,25 +192,23 @@
             $('#input2').show("slow");
         } else {
             comment_visible = false;
-            var jquery = $('#input2');
             jquery.hide("slow");
         }
     }
     function commentShowQuestion(element) {
         //console.log(comment_visible);
+        var jquery = $('#input2');
         if(!comment_visible) {
-            var jquery = $('#input2');
             jquery.empty();
             jquery.remove();
             console.log($(element));
             comment_visible = true;
-            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitQuestionComment(this.parent);\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
+            $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitQuestionComment();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent());
             CKEDITOR.replace( 'inputText2' );
             $('#input2').show("slow");
 
         } else {
             comment_visible = false;
-            var jquery = $('#input2');
             jquery.hide("slow");
         }
     }
@@ -224,7 +223,7 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-        request.done(function( data ) {
+        request.done(function() {
             location.reload();
         });
     }
@@ -245,7 +244,7 @@
             location.reload();
         });
     }
-    function submitQuestionComment(element) {
+    function submitQuestionComment() {
         var content = CKEDITOR.instances.inputText2.getData();
         //console.log("QUESTION");
         var request = $.ajax({
@@ -332,7 +331,7 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-        request.done(function( data ) {
+        request.done(function() {
             //console.log(data);
             location.reload();
         });
