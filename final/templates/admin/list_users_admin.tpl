@@ -1,7 +1,7 @@
 {include file='common/header.tpl'}
 
 <div class="container">
-    <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/users/list_users.php" method="get" accept-charset="UTF-8">
+    <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/admin/list_users_admin.php" method="get" accept-charset="UTF-8">
         <div class="right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
             <input name="content" type="search" class="form-control" placeholder="Pesquisar" />
@@ -21,6 +21,9 @@
             <label class="btn btn-default {$selection_mod}">
                 <input type="radio" name="param" id="moderator">Moderadores
             </label>
+            <label class="btn btn-default {$selection_ban}">
+                <input type="radio" name="param" id="banned">Banidos
+            </label>
         </div>
         <div id="order" class="btn-group" data-toggle="buttons"">
             <label class="btn btn-default {$selection_down}" id="desc1">
@@ -36,7 +39,6 @@
 <br>
 
 
-
 <div class="container">
     <div class="panel panel-green text-center">
         <div class="panel-heading">
@@ -47,14 +49,23 @@
                 <h4 class="">Não foram encontrados resultados.. :(</h4>
             {/if}
             {foreach $users as $user}
-                <div  class="col-md-3">
+                <div  class="col-md-3" id="{$user.username}">
                     <div class="panel panel-green">
                         <div class="panel-body">
                             <b><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></b> - {$user.score} pts
                             <br><br>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success">Promover</button>
-                                <button type="button" class="btn btn-danger">Banir</button>
+                             {if $user.usergroup == 'moderator'}
+                                <button type="button" class="btn btn-warning promote">Despromover</button>
+                             {else}
+                                <button type="button" class="btn btn-success promote">Promover</button>
+                             {/if}
+                             {if $user.banned == 'true'}
+                                <button type="button" class="btn btn-info ban">Desbanir</button>
+                             {else}
+                                 <button type="button" class="btn btn-danger ban">Banir</button>
+                             {/if}
+
                             </div>
                         </div>
                     </div>
@@ -65,11 +76,16 @@
 </div>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+    var BASE_URL = "{$BASE_URL}";
+</script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="{$BASE_URL}javascript/users_admin.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script>
 
     $( document ).ready(function() {
-        var location = "{$BASE_URL}pages/users/list_users.php";
+        var location = "{$BASE_URL}pages/admin/list_users_admin.php";
 
         var type = "{$type}";
         var order = "{$order}";
@@ -80,9 +96,35 @@
             window.location = location + "?type=" + type + "&order=" + order;
         });
 
-        $('#name, #score, #moderator').change(function(){
+        $('#name, #score, #moderator, #banned').change(function(){
             type = $(this).attr("id");
             window.location = location + "?type=" + type + "&order=" + order;
+        });
+
+        $(".promote").click(function() {
+            if ($(this).text() == "Despromover")
+            {
+                //console.log($(this).parent().parent().parent().parent().attr('id'));
+
+                var username=$(this).parent().parent().parent().parent().attr('id');
+
+                relegateUser(username);
+                    $(this).text("Promover");
+                    $(this).removeClass('btn-warning');
+                    $(this).addClass('btn-success');
+
+
+            }
+            else
+            {
+                var username=$(this).parent().parent().parent().parent().attr('id');
+
+               promoteUser(username);
+                    $(this).text("Despromover");
+                    $(this).removeClass('btn-success');
+                    $(this).addClass('btn-warning');
+
+            }
         });
     });
 </script>
