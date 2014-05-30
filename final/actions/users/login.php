@@ -13,12 +13,17 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 if (isLoginCorrect($username, $password)) {
+    if(!isBanned($username)) {
+        $_SESSION['username'] = $username;
+        $_SESSION['success_messages'][] = 'Login bem sucedido!';
 
-    $_SESSION['username'] = $username;
-    $_SESSION['success_messages'][] = 'Login bem sucedido!';
+        $picture=getProfilePic($username);
 
-    $picture=getProfilePic($username);
-    $_SESSION['profile_pic'] = $picture['imagelink'];
+
+        $_SESSION['profile_pic'] = $picture['imagelink'];
+    }
+    else
+        $_SESSION['error_messages'][] = 'Estás banido! Não podes fazer login enquanto um administrador não te ativar a conta novamente';
 
 } else {
     $_SESSION['error_messages'][] = 'O login falhou!';
