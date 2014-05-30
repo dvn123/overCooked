@@ -60,7 +60,19 @@ function promoteUser($idUser) {
 
     $stmt->bindParam(":idUser", $idUser);
 
-    $stmt->execute();
+    return $stmt->execute();
+}
+
+function relegateUser($idUser) {
+
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE webUser
+        SET userGroup = 'user' WHERE idUser = :idUser;");
+
+    $stmt->bindParam(":idUser", $idUser);
+
+    return $stmt->execute();
 }
 
 function banUser($idUser) {
@@ -72,13 +84,13 @@ function banUser($idUser) {
 
     $stmt->bindParam(":idUser", $idUser);
 
-    $stmt->execute();
+    return $stmt->execute();
 }
 
 function getUsers($type, $order) {
 
     global $conn;
-    $query="SELECT username, score, userGroup, banned
+    $query="SELECT idUser, username, score, userGroup, banned
                    FROM webUser
                    ORDER BY " . $type . " " . $order;
     $stmt = $conn->prepare($query);
@@ -90,9 +102,22 @@ function getUsers($type, $order) {
 function getUsersModerator($order) {
 
     global $conn;
-    $query="SELECT username, score, userGroup, banned
+    $query="SELECT idUser, username, score, userGroup, banned
                    FROM webUser
-                   AND userGroup='moderator'
+                   WHERE userGroup='moderator'
+                   ORDER BY username " . $order;
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getUsersBanned($order) {
+
+    global $conn;
+    $query="SELECT idUser, username, score, userGroup, banned
+                   FROM webUser
+                   WHERE banned='true'
                    ORDER BY username " . $order;
     $stmt = $conn->prepare($query);
 
@@ -103,9 +128,9 @@ function getUsersModerator($order) {
 function searchUsers($type, $order, $name) {
 
     global $conn;
-    $query="SELECT  username, score, userGroup, banned
+    $query="SELECT  idUser, username, score, userGroup, banned
         FROM webUser
-        AND username LIKE " . "'%".$name."%'" .
+        WHERE username LIKE " . "'%".$name."%'" .
         " ORDER BY "  . $type . " " . $order;
 
     $stmt = $conn->prepare($query);
@@ -113,6 +138,4 @@ function searchUsers($type, $order, $name) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-
-
 ?>
