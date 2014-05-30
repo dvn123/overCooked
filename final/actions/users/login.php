@@ -16,11 +16,10 @@ if (isLoginCorrect($username, $password)) {
     if(!isBanned($username)) {
         $_SESSION['username'] = $username;
         $_SESSION['success_messages'][] = 'Login bem sucedido!';
+        $idUser = getIdUser($username);
+        $_SESSION['usergroup'] = getUserProfile($idUser)['usergroup'];
 
-    $_SESSION['username'] = $username;
-    $idUser = getIdUser($username);
-    $_SESSION['usergroup'] = getUserProfile($idUser)['usergroup'];
-
+        $picture=getProfilePic($username);
 
 
         $_SESSION['profile_pic'] = $picture['imagelink'];
