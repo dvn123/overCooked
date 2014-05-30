@@ -15,6 +15,10 @@ $password = $_POST['password'];
 if (isLoginCorrect($username, $password)) {
 
     $_SESSION['username'] = $username;
+    $idUser = getIdUser($username);
+    $_SESSION['usergroup'] = getUserProfile($idUser)['usergroup'];
+
+
     $_SESSION['success_messages'][] = 'Login bem sucedido!';
 
     $picture=getProfilePic($username);

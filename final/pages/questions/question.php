@@ -41,16 +41,29 @@ try{
             $acomment['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $acomment['username'];
         }
     }//------------
-    if(isset($_SESSION['username']))
+    if(isset($_SESSION['username']) && isset($_SESSION['usergroup']))
     {
         $idMyUser = getIdUser($_SESSION['username']);
-        if($question['iduser']==$idMyUser)
+        if($question['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
             $question['owner']=true;
         $question['subscribed'] = isQuestionSubscribed($idMyUser,$idQuestion);
         $question['vote'] = getQuestionVote($idQuestion, $idMyUser);
+
+        foreach ($question['comments'] as &$comment) {
+            if($comment['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+                $comment['owner']=true;
+        }
+
         foreach($question['answers'] as &$answer)
         {
             $answer['vote'] = getAnswerVote($answer['idanswer'], $idMyUser);
+            if($answer['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+                $answer['owner']=true;
+            foreach($answer['comments'] as &$acomment)
+            {
+                if($acomment['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+                    $acomment['owner']=true;
+            }
         }
     }
     //------------

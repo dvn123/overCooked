@@ -1,6 +1,5 @@
 {include file='common/header.tpl'}
 
-
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -30,15 +29,23 @@
                 <br/><br/><small>{$question.date}</small>
             </div>
             <div class="col-xs-2">
-                <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
-                    Responder
-                </button>
+                <div>
+                    <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
+                        Responder
+                    </button>
+                </div>
+                <div>
                 <button type="button" onclick="commentShowQuestion(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
                     Comentar
                 </button>
-                <button type="button" onclick="edit(this, 'question');"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                </div>
+                {if $question.owner == 'true'}
+                <div>
+                <button type="button" onclick="edit(this, 'question');"class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">
                     Editar
                 </button>
+                </div>
+                {/if}
             </div>
             <div class="col-xs-11 col-xs-offset-1">
             	{foreach $question.tags as $tag}
@@ -47,9 +54,15 @@
             </div>
             
             {foreach $question.comments as $comment}
-            <div class="highlight col-xs-9 col-xs-offset-1"
-                style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                <p>{$comment.content}<small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small></p> 
+            <div id="{$comment.idcomment}" class="highlight col-xs-9 col-xs-offset-1" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
+                <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
+                {if $comment.owner == 'true'}
+                    <div><div>
+                    <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                        Editar
+                    </button>
+                    </div></div>
+                {/if}
             </div>
             {/foreach}
         </div> 
@@ -88,8 +101,8 @@
                     <div class="panel-body">
                         <div class="col-xs-1">
                             <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn btn-success btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} disabled{/if}"
-                            style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
-                            <span class="glyphicon glyphicon-ok"></span>
+                                style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
+                                <span class="glyphicon glyphicon-ok"></span>
                             </button>
                         <button type="button" id="answerUP{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},1)" class="btn btn-default btn-md{if $answer.vote eq '1'} active{/if}" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-up"></span>
@@ -98,7 +111,6 @@
                         <button type="button" id="answerDOWN{$answer.idanswer}" onclick="voteAnswer({$answer.idanswer},-1)" class="btn btn-default btn-md{if $answer.vote eq '-1'} active{/if}" style="min-width:50px;">
                             <span class="glyphicon glyphicon-chevron-down"></span>
                         </button>
-
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                             <div style="float:right; margin-left:10px;">
@@ -107,20 +119,32 @@
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
-                                <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
-                                    Comentar
-                                </button>
-                                <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
-                                    Editar
-                                </button>
+                                <div>
+                                    <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                        Comentar
+                                    </button>
+                                </div>
+                                {if $answer.owner == 'true'}
+                                <div>
+                                    <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
+                                        Editar
+                                    </button>
+                                </div>
+                                {/if}
                             </div>
                             <br/><div class="content">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
-                            <div class="highlight col-xs-10"
-                            style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                                <p>{$acomment.content}<small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small></p> 
+                            <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
+                                <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
+                                {if $comment.owner == 'true'}
+                                <div>
+                                    <button type="button" onclick="edit(this, 'questioncomment');"class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                                        Editar
+                                    </button>
+                                </div>
+                                {/if}
                             </div>
                             {/foreach}
                         </div>
@@ -143,7 +167,7 @@
 <link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
 <script type="text/javascript">
     var answer_visible = false, comment_visible = false;
-    var last_edit_type, edit_content, edit_title, edit_button;
+    var last_edit_type, edit_content, edit_title, edit_button, old_content;
 
     function answerShow() {
         if(!answer_visible) {
@@ -198,7 +222,6 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-
         request.done(function( data ) {
             location.reload();
         });
@@ -238,31 +261,36 @@
         });
     }
     function edit(element, type) {
-        //TODO permissions on buttons
-        var element2 = $(element).parent().parent();
-        //if there is no previous edit or if there is a previous edit but it it's not this one close it and open this edit
-        console.log("das au2to");
-        if((!(edit_content == null || edit_content == undefined)  && (last_edit_type != type || edit_id != element2.find('.content').html()))) {
+        console.log(type);
+        var element2 = $(element).parent().parent().parent();
+        if((!(edit_content == null || edit_content == undefined)  && (last_edit_type != type || edit_content != element2.find('.content').html()))) {
+            console.log("closing");
             closeEdit();
         }
         last_edit_type = type;
-        edit_content = element2.find('.content');
+        edit_content = element2(":first-child .content");
         edit_button = $(element);
-        edit_button.html("Submeter");
+        edit_button.css( "display", "none" );
+        old_content = edit_content.html();
         var editor;
         if(type == "question") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">{$question.html}</textarea>");
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea>");
             edit_title = element2.parent().find('.title');
             edit_title.html("<textarea class=\"editor-title title\" rows=\"1\" style=\"resize: none\">{$question.title}</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
+        } else if(type == "questioncomment" || type == "answercomment") {
+            console.log(edit_content.html());
+            console.log($(element).html());
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         } else {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">{$question.html}</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         }
     }
     function closeEdit() {
-        edit_content.html("{$question.html}");
-        edit_button.html("Editar");
+        edit_content.html(old_content);
+        edit_button.css( "display", "inline" );
         if(last_edit_type == "question") {
             edit_title.html("{$question.title}");
         }
@@ -271,7 +299,6 @@
         edit_button = null;
     }
     function submitEdit() {
-        console.log("asdasd");
         var url1, data;
         if(last_edit_type == "question") {
             url1 = "Question.php";
@@ -281,11 +308,13 @@
             url1 = "Answer.php";
             data = { idAnswer: idAnswer, content:CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "answercomment") {
+            var idComment = edit_button.parent().attr('id');
             url1 = "CommentAnswer.php";
-            data = { idComment: {$question.idquestion}, content:CKEDITOR.instances.input4.getData()};
+            data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "questioncomment") {
+            var idComment = edit_button.parent().attr('id');
             url1 = "CommentQuestion.php";
-            data = { idComment: {$question.idquestion}, content:CKEDITOR.instances.input4.getData()};
+            data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
         }
         var url = "{$BASE_URL}api/questions/edit" + url1;
         var request = $.ajax({
