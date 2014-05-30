@@ -26,11 +26,13 @@ $gender = $_POST['gender'];
 $city = strip_tags($_POST['city']);
 $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
-$imagelink=$_GET['username'] .".". $extension;
+
+if(!$_FILES['photo'])
+    $imagelink=$_GET['username'] .".". $extension;
+else
+    $imagelink=$_SESSION['profile_pic'];
 
 $username = $_GET['username'];
-
-
 
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
