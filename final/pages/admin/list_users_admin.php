@@ -1,6 +1,6 @@
 <?php
 include_once('../../config/init.php');
-include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'database/admin.php');
 
 if ($_GET['content']) {
 
@@ -10,10 +10,12 @@ if ($_GET['content']) {
     $selection_name = '';
     $selection_score = '';
     $selection_moderator = '';
+    $selection_ban = '';
     $selection_up = '';
     $selection_down = '';
     $type2 = "name";
     $order = "asc";
+
 } else {
 
     $type2 = "name";
@@ -29,6 +31,7 @@ if ($_GET['content']) {
         $selection_date = '';
         $selection_answers = '';
         $selection_score = '';
+        $selection_ban = '';
 
         switch ($type2) {
             case "name":
@@ -72,11 +75,26 @@ if ($_GET['content']) {
 
                 $selection_mod = 'active';
                 break;
+            case "banned":
+
+                if($order === 'asc' || $order === "desc")
+                    $users = getUsersBanned($order);
+                else
+                    $users = getUsersBanned("ASC");
+
+                if($order === "desc")
+                    $selection_down = 'active';
+                else
+                    $selection_up = 'active';
+
+                $selection_ban = 'active';
+                break;
             default:
                 $users = getUsers("username", "ASC");
                 $selection_name = 'active';
                 $selection_score = '';
                 $selection_moderator = '';
+                $selection_ban = '';
                 $selection_down = '';
                 $selection_up = 'active';
                 $type2 = "name";
@@ -89,6 +107,7 @@ if ($_GET['content']) {
         $selection_name = 'active';
         $selection_score = '';
         $selection_moderator = '';
+        $selection_ban = '';
         $selection_up = 'active';
         $selection_down = '';
         $type2 = "name";
@@ -99,6 +118,7 @@ if ($_GET['content']) {
 $smarty->assign("selection_name", $selection_name);
 $smarty->assign("selection_score", $selection_score);
 $smarty->assign("selection_mod", $selection_mod);
+$smarty->assign("selection_ban", $selection_ban);
 $smarty->assign("selection_down", $selection_down);
 $smarty->assign("selection_up", $selection_up);
 
@@ -106,6 +126,5 @@ $smarty->assign("order",$order);
 $smarty->assign("type",$type2);
 $smarty->assign('users', $users);
 
-
-$smarty->display('users/list_users.tpl');
+$smarty->display('admin/list_users_admin.tpl');
 ?>

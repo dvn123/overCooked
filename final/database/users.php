@@ -82,7 +82,19 @@ function isLoginCorrect($username, $password)
     $data = $stmt->fetch();
 
     $hashed_password = hash(sha256,$data['salt'] . $password);
+
+
     return slow_equals($data['password'], $hashed_password);
+}
+
+function isBanned($username) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT banned
+                            FROM webUser
+                            WHERE username = :user");
+    $stmt->bindParam(":user", $username);
+    $stmt->execute();
+    return $stmt->fetch()['banned'];
 }
 
 function getProfilePic($username)
@@ -197,6 +209,7 @@ function searchUsers($type, $order, $name) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+
 
 
 ?>

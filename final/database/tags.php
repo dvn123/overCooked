@@ -17,6 +17,23 @@ function getTags() {
     return json_encode($data);*/
 }
 
+function getTagsByParam($type,$order) {
+
+    global $conn;
+    if($type=='name')
+    {
+        $stmt = $conn->prepare("SELECT name FROM tag ORDER BY name $order;");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }else if($type=='freq')
+    {
+        $stmt = $conn->prepare("SELECT COUNT(questiontag.idQuestion) as freq, tag.name as name FROM tag left join questiontag using(idTag) GROUP BY tag.idTag ORDER BY freq $order;");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+}
+
 function getQuestionByTag($tag) {
 
     global $conn;
@@ -53,7 +70,8 @@ function createQuestionTag($tag, $questionid) {
     global $conn;
     createTag($tag);
 
-    $tagid = getTag($tag)[0]['idtag'];
+    $tag2 = getTag($tag);
+    $tagid = $tag2[0]['idtag'];
     $stmt = $conn->prepare("INSERT INTO questiontag (idQuestion, idTag)
         VALUES (:questionid, :tagid);");
 
