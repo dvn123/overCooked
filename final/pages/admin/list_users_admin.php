@@ -1,6 +1,6 @@
 <?php
 include_once('../../config/init.php');
-include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'database/admin.php');
 
 if ($_GET['content']) {
 
@@ -72,6 +72,20 @@ if ($_GET['content']) {
 
                 $selection_mod = 'active';
                 break;
+            case "banned":
+
+                if($order === 'asc' || $order === "desc")
+                    $users = getUsersModerator($order);
+                else
+                    $users = getUsersModerator("ASC");
+
+                if($order === "desc")
+                    $selection_down = 'active';
+                else
+                    $selection_up = 'active';
+
+                $selection_mod = 'active';
+                break;
             default:
                 $users = getUsers("username", "ASC");
                 $selection_name = 'active';
@@ -106,6 +120,5 @@ $smarty->assign("order",$order);
 $smarty->assign("type",$type2);
 $smarty->assign('users', $users);
 
-
-$smarty->display('users/list_users.tpl');
+$smarty->display('admin/list_users_admin.tpl');
 ?>
