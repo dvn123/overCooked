@@ -46,7 +46,7 @@
         </div>
         <div class="panel-body">
             {if sizeof($users) == 0}
-                <h4 class="">Não foram encontrados resultados.. :(</h4>
+                <h4 class="">Não foram encontrados resultados... :(</h4>
             {/if}
             {foreach $users as $user}
                 <div  class="col-md-3" id="{$user.username}">
@@ -105,27 +105,30 @@
             if ($(this).text() == "Despromover")
             {
                 //console.log($(this).parent().parent().parent().parent().attr('id'));
+                var username=$(this).parent().parent().parent().parent().attr('id');
+                relegateUser(username, $(this));
+            }
+            else
+            {
+               var username=$(this).parent().parent().parent().parent().attr('id');
+               promoteUser(username, $(this));
+            }
+        });
 
+         $(".ban").click(function() {
+            if ($(this).text() == "Desbanir")
+            {
+                //console.log($(this).parent().parent().parent().parent().attr('id'));
                 var username=$(this).parent().parent().parent().parent().attr('id');
 
-                relegateUser(username);
-                    $(this).text("Promover");
-                    $(this).removeClass('btn-warning');
-                    $(this).addClass('btn-success');
-
-
+                acceptUser(username, $(this));
             }
             else
             {
                 var username=$(this).parent().parent().parent().parent().attr('id');
-
-               promoteUser(username);
-                    $(this).text("Despromover");
-                    $(this).removeClass('btn-success');
-                    $(this).addClass('btn-warning');
-
+                banUser(username, $(this));
             }
-        });
+         });
     });
 </script>
 

@@ -15,7 +15,7 @@ if (!isset($_POST['username'])) {
 
 $idUser=getIdUser($_POST['username']);
 
-if (promoteUser($idUser)) {
+if (acceptUser($idUser)) {
     echo'200';
 } else {
     echo '400';

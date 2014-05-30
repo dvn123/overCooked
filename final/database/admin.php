@@ -1,5 +1,20 @@
 <?php
 
+function getIdUser($username) {
+
+    global $conn;
+    $stmt = $conn->prepare("SELECT idUser FROM webUser
+          WHERE webUser.username LIKE :name;");
+
+    $stmt->bindParam(":name", $username);
+    $stmt->execute();
+
+    //return   $stmt->fetch()['iduser'];
+    $tmp = $stmt->fetch();
+    $tmp2 = $tmp['iduser'];
+    return $tmp2;
+}
+
 function getMostActiveCountries($num) {
     global $conn;
     $stmt = $conn->prepare("SELECT country.name, COUNT(*) AS counter
@@ -79,8 +94,20 @@ function banUser($idUser) {
     
     global $conn;
 
-    $stmt = $conn->prepare("DELETE FROM webUser
-        WHERE idUser = :idUser;");
+    $stmt = $conn->prepare("UPDATE webUser
+        SET banned = 'true' WHERE idUser = :idUser;");
+
+    $stmt->bindParam(":idUser", $idUser);
+
+    return $stmt->execute();
+}
+
+function acceptUser($idUser) {
+
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE webUser
+        SET banned = 'false' WHERE idUser = :idUser;");
 
     $stmt->bindParam(":idUser", $idUser);
 
