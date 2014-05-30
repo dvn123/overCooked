@@ -25,10 +25,10 @@
                 </button>
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
-                <div class="content">{$question.html}</div>
+                <div class="questioncontent">{$question.html}</div>
                 <br/><br/><small>{$question.date}</small>
             </div>
-            <div class="col-xs-2">
+            <div class="pull-right">
                 <div>
                     <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
                         Responder
@@ -52,7 +52,7 @@
                 <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
             </div>
-            
+
             {foreach $question.comments as $comment}
             <div id="{$comment.idcomment}" class="highlight col-xs-9 col-xs-offset-1" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                 <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
@@ -119,16 +119,18 @@
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
-                                        Comentar
-                                    </button>
-                                </div>
-                                {if $answer.owner == 'true'}
-                                <div>
-                                    <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
-                                        Editar
-                                    </button>
+                                <div class="pull-right">
+                                    <div>
+                                        <button type="button" onclick="commentShow(this);"class="comment-button-question btn btn-default btn-md" style="width: 100px;">
+                                            Comentar
+                                        </button>
+                                    </div>
+                                    {if $answer.owner == 'true'}
+                                    <div>
+                                        <button type="button" onclick="edit(this, 'answer');"class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
+                                            Editar
+                                        </button>
+                                    </div>
                                 </div>
                                 {/if}
                             </div>
@@ -268,15 +270,19 @@
             closeEdit();
         }
         last_edit_type = type;
-        edit_content = element2(":first-child .content");
+        if(type != "question") {
+            edit_content = element2.find(".content");
+        } else {
+            edit_content = element2.find(".questioncontent");
+        }
         edit_button = $(element);
         edit_button.css( "display", "none" );
         old_content = edit_content.html();
         var editor;
         if(type == "question") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea>");
+            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             edit_title = element2.parent().find('.title');
-            edit_title.html("<textarea class=\"editor-title title\" rows=\"1\" style=\"resize: none\">{$question.title}</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_title.html("<textarea class=\"editor-title title\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
             console.log(edit_content.html());
