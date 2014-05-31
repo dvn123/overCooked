@@ -135,7 +135,7 @@
                                 </div>
 
                             </div>
-                            <br/><div class="content">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
+                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
@@ -143,7 +143,7 @@
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
                                 {if $comment.owner == 'true'}
                                 <span>
-                                    <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                                    <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                                         Editar
                                     </button>
                                 </span>
@@ -269,10 +269,14 @@
             closeEdit();
         }
         last_edit_type = type;
-        if(type != "question") {
-            edit_content = element2.find(".content");
-        } else {
+        if(type == "question") {
             edit_content = element2.find(".questioncontent");
+        } else if(type == "answer") {
+            edit_content = element2.parent().find(".answercontent");
+        } else if(type == "answercomment") {
+            edit_content = $(element).parent().parent().find(".content");
+        } else {
+            edit_content = element2.find(".content");
         }
         edit_button = $(element);
         edit_button.css( "display", "none" );
@@ -309,15 +313,16 @@
             url1 = "Question.php";
             data = { idQuestion: {$question.idquestion}, title:edit_title.find('textarea').val(), content: CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "answer") {
-            var idAnswer = edit_button.parent().parent().parent().parent().parent().attr('id');
+            console.log(edit_button.parent().parent().parent().parent().parent().parent().parent().html());
+            var idAnswer = edit_button.parent().parent().parent().parent().parent().parent().parent().attr('id');
             url1 = "Answer.php";
             data = { idAnswer: idAnswer, content:CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "answercomment") {
-            var idComment = edit_button.parent().attr('id');
+            var idComment = edit_button.parent().parent().attr('id');
             url1 = "CommentAnswer.php";
             data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "questioncomment") {
-            var idComment = edit_button.parent().attr('id');
+            var idComment = edit_button.parent().parent().parent().attr('id');
             url1 = "CommentQuestion.php";
             data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
         }
