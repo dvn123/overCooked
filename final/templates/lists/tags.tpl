@@ -4,12 +4,12 @@
     <div class="pull-right">
         <div id="param" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_name}">
-               <input type="radio" name="param" id="name">Nome
-           </label>
-           <label class="btn btn-default {$selection_freq}">
-            <input type="radio" name="param" id="freq">Frequência
-        </label>
-    </div>
+                <input type="radio" name="param" id="name">Nome
+            </label>
+            <label class="btn btn-default {$selection_freq}">
+                <input type="radio" name="param" id="freq">Frequência
+            </label>
+        </div>
         <div id="order" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_down}" id="desc1">
                 <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
@@ -23,14 +23,14 @@
     <div  class="voffset4">
 
         <div class="panel">
-                <div class="panel-body">
-                            <!--{$rows = 10}-->
-                            {for $i = 0 to $tags.len}
-                           <!-- {if $i % $rows eq 0}<tr>{/if} -->
-                                <div class="panel panel-green panel-body col-md-2" style="text-align:center"><a href="#" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
-                            <!-- {if $i % $rows eq $rows-1}</tr>{/if} -->
-                            {/for}
-                </div>
+            <div class="panel-body">
+                <!--{$rows = 10}-->
+                {for $i = 0 to $tags.len}
+                    <!-- {if $i % $rows eq 0}<tr>{/if} -->
+                    <div class="panel panel-green panel-body col-md-2" style="text-align:center"><a href="#" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
+                    <!-- {if $i % $rows eq $rows-1}</tr>{/if} -->
+                {/for}
+            </div>
         </div>
     </div>
 </div>
@@ -58,6 +58,10 @@
             console.log(order + "  " + type);
             window.location = location + "?content=" + getvars + "&type=" + type + "&order=" + order;
         });
+
+
+        $('#tags').addClass('active');
+
     });
 </script>
 

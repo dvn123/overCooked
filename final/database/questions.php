@@ -140,7 +140,7 @@ function getQuestionsAsked($idUser) {
 function getQuestionsAnswered($idUser) {
 
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE idQuestion=
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE idQuestion in
     (SELECT idQuestion FROM answer_vw WHERE idUser=:id);");
 
     $stmt->bindParam(":id", $idUser);

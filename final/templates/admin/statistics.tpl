@@ -52,6 +52,7 @@
         }
 
         $( document ).ready(function() {
+            $('#admin').addClass('active');
             var request = $.ajax({
                 url: "../../api/admin/getStatistics.php?num=10"
             });

@@ -297,6 +297,7 @@
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script>
     $( document ).ready(function() {
+        $('#register').addClass('active');
         $('.helper').popover();
         $('.helper').hover(function() {
             this.popover();

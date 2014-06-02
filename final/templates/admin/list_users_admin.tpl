@@ -26,15 +26,15 @@
             </label>
         </div>
         <div id="order" class="btn-group" data-toggle="buttons"">
-            <label class="btn btn-default {$selection_down}" id="desc1">
-                <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
-            </label>
-            <label class="btn btn-default {$selection_up}" id="asc1">
-                <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
-            </label>
-        </div>
-        <div  class="col-md-1 pull-right"></div>
+        <label class="btn btn-default {$selection_down}" id="desc1">
+            <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
+        </label>
+        <label class="btn btn-default {$selection_up}" id="asc1">
+            <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
+        </label>
     </div>
+    <div  class="col-md-1 pull-right"></div>
+</div>
 </div>
 <br>
 
@@ -55,16 +55,16 @@
                             <b><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></b> - {$user.score} pts
                             <br><br>
                             <div class="btn-group">
-                             {if $user.usergroup == 'moderator'}
-                                <button type="button" class="btn btn-warning promote">Despromover</button>
-                             {else}
-                                <button type="button" class="btn btn-success promote">Promover</button>
-                             {/if}
-                             {if $user.banned == 'true'}
-                                <button type="button" class="btn btn-info ban">Desbanir</button>
-                             {else}
-                                 <button type="button" class="btn btn-danger ban">Banir</button>
-                             {/if}
+                                {if $user.usergroup == 'moderator'}
+                                    <button type="button" class="btn btn-warning promote">Despromover</button>
+                                {else}
+                                    <button type="button" class="btn btn-success promote">Promover</button>
+                                {/if}
+                                {if $user.banned == 'true'}
+                                    <button type="button" class="btn btn-info ban">Desbanir</button>
+                                {else}
+                                    <button type="button" class="btn btn-danger ban">Banir</button>
+                                {/if}
 
                             </div>
                         </div>
@@ -85,6 +85,7 @@
 <script>
 
     $( document ).ready(function() {
+        $('#admin').addClass('active');
         var location = "{$BASE_URL}pages/admin/list_users_admin.php";
 
         var type = "{$type}";
@@ -110,12 +111,12 @@
             }
             else
             {
-               var username=$(this).parent().parent().parent().parent().attr('id');
-               promoteUser(username, $(this));
+                var username=$(this).parent().parent().parent().parent().attr('id');
+                promoteUser(username, $(this));
             }
         });
 
-         $(".ban").click(function() {
+        $(".ban").click(function() {
             if ($(this).text() == "Desbanir")
             {
                 //console.log($(this).parent().parent().parent().parent().attr('id'));
@@ -128,7 +129,11 @@
                 var username=$(this).parent().parent().parent().parent().attr('id');
                 banUser(username, $(this));
             }
-         });
+
+
+
+
+        });
     });
 </script>
 

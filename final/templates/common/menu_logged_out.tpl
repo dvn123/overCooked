@@ -12,6 +12,6 @@
             </form>
         </div>
     </li>
-    <li><a href="{$BASE_URL}pages/users/register.php">Registar</a></li>
+    <li id="register"><a href="{$BASE_URL}pages/users/register.php">Registar</a></li>
 </ul>
 

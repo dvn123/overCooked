@@ -79,7 +79,7 @@
     </div>
 </div>
 {/if}
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script>
@@ -100,6 +100,11 @@
             type = $(this).attr("id");
             window.location = location + "?type=" + type + "&order=" + order;
         });
+
+        console.log("Benfica");
+        console.log("." +$("#list_users") + ".");
+        $('#list_users').addClass('active');
+
     });
 </script>
 

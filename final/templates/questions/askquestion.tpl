@@ -33,8 +33,14 @@
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="{$BASE_URL}javascript/main.js"></script>
+<script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 <script type="text/javascript">
+    $( document ).ready(function() {
+        $('#askquestion').addClass('active');
+    });
+
     var BASE_URL = "{$BASE_URL}";
     function submit_question() {
         var form = $("#askquestion_form").serializeArray();
@@ -60,9 +66,9 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
+
+
     }
 </script>
-<script src="{$BASE_URL}javascript/main.js"></script>
-<script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
 
 {include file='common/footer.tpl'}

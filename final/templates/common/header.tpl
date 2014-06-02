@@ -21,11 +21,11 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right pull-left">
-                <li ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
-                <li><a href = "#">Perguntas</a></li>
-                <li><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
-                <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
+                <li id="askquestion"><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
+                <li id="questions"><a href = "#">Perguntas</a></li>
+                <li id="tags"><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
+                <li id="list_users"><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
+                <li id="admin" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{$BASE_URL}pages/admin/list_users_admin.php">Gerir utilizadores</a></li>
                         <li><a href="{$BASE_URL}pages/admin/statistics.php">Estatísticas</a></li>
@@ -44,11 +44,11 @@
 <div id="error_messages">
     {foreach $ERROR_MESSAGES as $error}
         <div class="container">
-        <div class="alert alert-danger fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            {$error}
+            <div class="alert alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {$error}
+            </div>
         </div>
-    </div>
     {/foreach}
 </div>
 <div id="success_messages">
