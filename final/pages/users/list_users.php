@@ -1,6 +1,7 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
+include_once($BASE_DIR .'database/list_users.php');
 
 if ($_GET['content']) {
 

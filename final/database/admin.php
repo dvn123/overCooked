@@ -1,20 +1,5 @@
 <?php
 
-function getIdUser($username) {
-
-    global $conn;
-    $stmt = $conn->prepare("SELECT idUser FROM webUser
-          WHERE webUser.username LIKE :name;");
-
-    $stmt->bindParam(":name", $username);
-    $stmt->execute();
-
-    //return   $stmt->fetch()['iduser'];
-    $tmp = $stmt->fetch();
-    $tmp2 = $tmp['iduser'];
-    return $tmp2;
-}
-
 function getMostActiveCountries($num) {
     global $conn;
     $stmt = $conn->prepare("SELECT country.name, COUNT(*) AS counter
@@ -114,55 +99,5 @@ function acceptUser($idUser) {
     return $stmt->execute();
 }
 
-function getUsers($type, $order) {
 
-    global $conn;
-    $query="SELECT idUser, username, score, userGroup, banned
-                   FROM webUser
-                   ORDER BY " . $type . " " . $order;
-    $stmt = $conn->prepare($query);
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
-function getUsersModerator($order) {
-
-    global $conn;
-    $query="SELECT idUser, username, score, userGroup, banned
-                   FROM webUser
-                   WHERE userGroup='moderator'
-                   ORDER BY username " . $order;
-    $stmt = $conn->prepare($query);
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
-function getUsersBanned($order) {
-
-    global $conn;
-    $query="SELECT idUser, username, score, userGroup, banned
-                   FROM webUser
-                   WHERE banned='true'
-                   ORDER BY username " . $order;
-    $stmt = $conn->prepare($query);
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
-function searchUsers($type, $order, $name) {
-
-    global $conn;
-    $query="SELECT  idUser, username, score, userGroup, banned
-        FROM webUser
-        WHERE username LIKE " . "'%".$name."%'" .
-        " ORDER BY "  . $type . " " . $order;
-
-    $stmt = $conn->prepare($query);
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
 ?>
