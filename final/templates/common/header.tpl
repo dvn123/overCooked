@@ -21,11 +21,16 @@
         </button>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right pull-left">
-                <li class = "active"> <a href = "#"><span style="color:#7d094a;">over</span><span style="color:#a1a616;">Cooked</span></a></li>
                 <li ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
                 <li><a href = "#">Perguntas</a></li>
-                <li><a href = "#">Tags</a></li>
+                <li><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
                 <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{$BASE_URL}pages/admin/list_users_admin.php">Gerir utilizadores</a></li>
+                        <li><a href="{$BASE_URL}pages/admin/statistics.php">Estatísticas</a></li>
+                    </ul>
+                </li>
             </ul>
             {if $USERNAME}
                 {include file='common/menu_logged_in.tpl'}
