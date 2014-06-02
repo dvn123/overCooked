@@ -40,6 +40,7 @@
 
             <div class="col-lg-4">
                 <div id="public"> <!--class="voffset4"-->
+                    <p><b>Grupo: </b>{$profile_data.usergroup} </p>
                     <p><b>Data de registo: </b>{$profile_data.registrationdate} </p>
                     <p><b>País: </b>{$profile_data.country}</p>
                     <p><b>Sobre: </b></p>
