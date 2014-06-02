@@ -40,7 +40,14 @@
 
             <div class="col-lg-4">
                 <div id="public"> <!--class="voffset4"-->
-                    <p><b>Grupo: </b>{$profile_data.usergroup} </p>
+                    <p><b>Grupo: </b>
+                        {if $profile_data.usergroup=='user'}
+                            utilizador registado
+                         {else if $profile_data.usergroup=='moderator'}
+                            moderador
+                         {else}
+                            administrador
+                        {/if}</p>
                     <p><b>Data de registo: </b>{$profile_data.registrationdate} </p>
                     <p><b>País: </b>{$profile_data.country}</p>
                     <p><b>Sobre: </b></p>
