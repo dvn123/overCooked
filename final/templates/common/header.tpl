@@ -25,7 +25,7 @@
                 <li id="questions" ><a href = "#">Perguntas</a></li>
                 <li id="tags"><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
                 <li id="list_users"><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
-                {if $_SESSION['usergroup'] == 'admin'}
+                {if $USERGROUP == 'admin'}
                     <li id="admin" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{$BASE_URL}pages/admin/list_users_admin.php">Gerir utilizadores</a></li>

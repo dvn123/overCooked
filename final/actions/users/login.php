@@ -21,7 +21,6 @@ if (isLoginCorrect($username, $password)) {
 
         $picture=getProfilePic($username);
 
-
         $_SESSION['profile_pic'] = $picture['imagelink'];
     }
     else
