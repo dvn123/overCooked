@@ -4,6 +4,12 @@ include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/admin.php');
 include_once($BASE_DIR .'database/list_users.php');
 
+if( $_SESSION['usergroup'] != 'admin') {
+    $_SESSION['error_messages'][] = 'Ação não permitida';
+    header("Location: $BASE_URL");
+    exit;
+}
+
 if ($_GET['content']) {
 
     $content = trim($_GET['content']);

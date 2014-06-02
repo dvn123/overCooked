@@ -24,6 +24,15 @@ if(strlen(utf8_decode($username))>15) {
 
 
 $password = strip_tags($_POST['password']);
+$password_conf = strip_tags($_POST['conf_password']);
+
+if($password!=$password_conf) {
+    $_SESSION['error_messages'][] = 'Confirmação password incorreta';
+    $_SESSION['form_values'] = $_POST;
+    header("Location: $BASE_URL" .'pages/users/register.php');
+    exit;
+}
+
 $email = $_POST['email'];
 $realname = $_POST['realname'];
 $idCountry = $_POST['idCountry'];

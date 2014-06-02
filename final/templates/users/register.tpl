@@ -27,7 +27,7 @@
     <div class="col-sm-9">
         <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="{$FORM_VALUES.email}" required>
     </div>
-    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Este é o nome pelo qual vais ser conhecido. O nome que as outras pessoas vão ver."></a>
+    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Este é o teu email, o email que vai estar associado à tua conta."></a>
 </div>
 <div class="form-group">
     <label for="inputPassword" class="col-sm-2 control-label">Password</label>
@@ -35,6 +35,13 @@
         <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
     </div>
     <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="A senha que vais necessitar para entrar no nosso site."></a>
+</div>
+<div class="form-group">
+    <label for="inputPassword2" class="col-sm-2 control-label">Confirmar password</label>
+    <div class="col-sm-9">
+        <input type="password" class="form-control" id="inputPassword" name="conf_password" placeholder="Confirmar password" required>
+    </div>
+    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="A confirmação da senha que vais necessitar para entrar no nosso site."></a>
 </div>
 <div class="form-group">
 <label for="inputCountry" class="col-sm-2 control-label">País</label>
