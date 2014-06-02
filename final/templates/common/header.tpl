@@ -25,12 +25,14 @@
                 <li><a href = "#">Perguntas</a></li>
                 <li><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
                 <li><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{$BASE_URL}pages/admin/list_users_admin.php">Gerir utilizadores</a></li>
-                        <li><a href="{$BASE_URL}pages/admin/statistics.php">Estatísticas</a></li>
-                    </ul>
-                </li>
+                {if $_SESSION['usergroup'] == 'admin'}
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{$BASE_URL}pages/admin/list_users_admin.php">Gerir utilizadores</a></li>
+                            <li><a href="{$BASE_URL}pages/admin/statistics.php">Estatísticas</a></li>
+                        </ul>
+                    </li>
+                {/if}
             </ul>
             {if $USERNAME}
                 {include file='common/menu_logged_in.tpl'}
