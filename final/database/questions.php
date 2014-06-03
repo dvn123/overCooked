@@ -466,7 +466,7 @@ Hot is:
     - question in last 10 days
     - top 20
 */
-function selectHot()
+function setHot()
 {
         global $conn;
         $stmt = $conn->prepare("UPDATE Question SET hot = false");
