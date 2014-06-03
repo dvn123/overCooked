@@ -26,7 +26,7 @@
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
-                <br/><br/><small>{$question.date}</small>
+                <br/><br/><small>{if $question.date != $question.lastdate}Editado por {$question.lastusername}{else}Criado por {$question.username}{/if} às {$question.lastdate}</small>
             </div>
             <div class="pull-right">
                 <div>
@@ -55,7 +55,7 @@
 
             {foreach $question.comments as $comment}
             <div id="{$comment.idcomment}" class="highlight col-xs-9 col-xs-offset-1" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
+                <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.lastdate}</small>
                 {if $comment.owner == 'true'}
                     <span><span>
                     <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
@@ -135,12 +135,12 @@
                                 </div>
 
                             </div>
-                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
+                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{if $answer.date != $answer.lastdate}Editado por {$answer.lastusername}{else}Criado por {$answer.username}{/if} às {$answer.lastdate}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
                             <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
-                                <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
+                                <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.lastdate}</small>
                                 {if $comment.owner == 'true'}
                                 <span>
                                     <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
@@ -173,6 +173,8 @@
     var last_edit_type, edit_content, edit_title, edit_button, old_content;
 
     function answerShow() {
+        console.log("{$question.lastdate}");
+        console.log("{$question.date}");
         if(!answer_visible) {
             answer_visible = true;
             $('#answer').show("slow");

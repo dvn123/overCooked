@@ -48,8 +48,13 @@
         var data = {};
         data["title"] = form[0].value;
         data["content"] = form[1].value;
+        if(tags.length > 10) {
+            if(document.getElementById("tag_error") == null)
+                $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Demasiadas Tags</div>")
+            return;
+        }
         for(var i = 0; i < tags.length; i++) {
-            data["tags"+i] = tags[i];
+            data["tags"+i] = tags[i].toLowerCase();
         }
         $.ajax({
             url: BASE_URL + "api/questions/createquestion.php",

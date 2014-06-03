@@ -11,6 +11,8 @@ try{
     if(!$question)
         throw new Exception("Error Processing Request", 1);
     $user = getUserProfile($question['iduser']);
+    $lastuser = getUserProfile($question['lastuser']);
+    $question['lastusername'] = $lastuser['username'];
     $question['username'] = $user['username'];
     $question['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user['username'];
     if($user['imagelink'] == NULL)
@@ -28,6 +30,8 @@ try{
     foreach($question['answers'] as &$answer)
     {
         $user_answer = getUserProfile($answer['iduser']);
+        $lastuser = getUserProfile($answer['lastuser']);
+        $answer['lastusername'] = $lastuser['username'];
         $answer['username'] = $user_answer['username'];
         $answer['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user_answer['username'];
         if($user_answer['imagelink'] == NULL)
