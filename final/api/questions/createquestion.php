@@ -33,6 +33,11 @@ if (addQuestion($_POST['title'], $idUser, $_POST['content'])) {
     while(isset($_POST['tag'.$i])) {
         createQuestionTag($_POST['tag'.$i],$idQuestion);
         $i = $i + 1;
+        if($i > 10) {
+            $_SESSION['error_messages'][] = 'Algumas tags foram ignoradas porque o limite foi excedido';
+            echo $idQuestion;
+            exit;
+        }
     }
     echo $idQuestion;
     exit;

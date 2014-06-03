@@ -77,8 +77,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10">
-            </textarea>
+            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
