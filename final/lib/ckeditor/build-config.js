@@ -13,10 +13,10 @@
  * (1) http://ckeditor.com/builder
  *     Visit online builder to build CKEditor from scratch.
  *
- * (2) http://ckeditor.com/builder/a7667fa1ebe7888953bcdd09ac457021
+ * (2) http://ckeditor.com/builder/e728ac126d1109e6d6c64a4003971c4a
  *     Visit online builder to build CKEditor, starting with the same setup as before.
  *
- * (3) http://ckeditor.com/builder/download/a7667fa1ebe7888953bcdd09ac457021
+ * (3) http://ckeditor.com/builder/download/e728ac126d1109e6d6c64a4003971c4a
  *     Straight download link to the latest version of CKEditor (Optimized) with the same setup as before.
  *
  * NOTE:
@@ -25,7 +25,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'moono',
+	skin: 'moonocolor',
 	preset: 'standard',
 	ignore: [
 		'dev',
@@ -36,7 +36,6 @@ var CKBUILDER_CONFIG = {
 	],
 	plugins : {
 		'a11yhelp' : 1,
-		'about' : 1,
 		'autosave' : 1,
 		'basicstyles' : 1,
 		'blockquote' : 1,
@@ -51,6 +50,8 @@ var CKBUILDER_CONFIG = {
 		'horizontalrule' : 1,
 		'htmlwriter' : 1,
 		'image' : 1,
+		'imagepaste' : 1,
+		'imageresize' : 1,
 		'indentlist' : 1,
 		'link' : 1,
 		'list' : 1,
@@ -58,9 +59,12 @@ var CKBUILDER_CONFIG = {
 		'maximize' : 1,
 		'pastefromword' : 1,
 		'pastetext' : 1,
+		'preview' : 1,
 		'removeformat' : 1,
 		'resize' : 1,
 		'scayt' : 1,
+		'showborders' : 1,
+		'smiley' : 1,
 		'sourcearea' : 1,
 		'specialchar' : 1,
 		'stylescombo' : 1,
@@ -75,6 +79,7 @@ var CKBUILDER_CONFIG = {
 	},
 	languages : {
 		'en' : 1,
-		'pt' : 1
+		'pt' : 1,
+		'pt-br' : 1
 	}
 };
