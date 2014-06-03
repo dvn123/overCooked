@@ -1,5 +1,8 @@
 {include file='common/header.tpl'}
 
+<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
+<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
+
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -165,15 +168,12 @@
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/question.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
-<script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
+
 <script type="text/javascript">
     var answer_visible = false, comment_visible = false;
     var last_edit_type, edit_content, edit_title, edit_button, old_content;
 
     function answerShow() {
-        console.log("{$question.lastdate}");
-        console.log("{$question.date}");
         if(!answer_visible) {
             answer_visible = true;
             $('#answer').show("slow");
@@ -202,7 +202,6 @@
         if(!comment_visible) {
             jquery.empty();
             jquery.remove();
-            console.log($(element));
             comment_visible = true;
             $( "<div id=\"input2\" style=\"display:none;margin-top: 10px;\" class=\"container col-md-12\"><textarea style='margin-top: 10px;' class=\"comm-editor ckeditor form-control\" id=\"inputText2\" cols=\"40\"  rows=\"10\">\n</textarea><button type=\"button\" onclick=\"submitQuestionComment();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"commentShowQuestion(this);\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button></div>" ).insertAfter( $(element).parent().parent());
             CKEDITOR.replace( 'inputText2' );
@@ -246,7 +245,6 @@
             location.reload();
         });
         request.done(function( data ) {
-            console.log(data);
             location.reload();
         });
     }
@@ -268,15 +266,12 @@
             location.reload();
         });
         request.done(function( data ) {
-            console.log(data);
             location.reload();
         });
     }
     function edit(element, type) {
-        console.log(type);
         var element2 = $(element).parent().parent().parent();
         if((!(edit_content == null || edit_content == undefined)  && (last_edit_type != type || edit_content != element2.find('.content').html()))) {
-            console.log("closing");
             closeEdit();
         }
         last_edit_type = type;
@@ -299,8 +294,6 @@
             edit_title.html("<textarea class=\"editor-title title\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
-            console.log(edit_content.html());
-            console.log($(element).html());
             edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         } else {
@@ -324,7 +317,6 @@
             url1 = "Question.php";
             data = { idQuestion: {$question.idquestion}, title:edit_title.find('textarea').val(), content: CKEDITOR.instances.input4.getData()};
         } else if(last_edit_type == "answer") {
-            console.log(edit_button.parent().parent().parent().parent().parent().parent().parent().html());
             var idAnswer = edit_button.parent().parent().parent().parent().parent().parent().parent().attr('id');
             url1 = "Answer.php";
             data = { idAnswer: idAnswer, content:CKEDITOR.instances.input4.getData()};
