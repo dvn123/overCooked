@@ -26,7 +26,7 @@
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
-                <br/><br/><small>{if $question.date != $question.lastdate}Editado por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {/if}{$question.lastdate}</small>
+                <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {/if}{$question.lastdate}</small>
             </div>
             <div class="pull-right">
                 <div>
@@ -135,7 +135,7 @@
                                 </div>
 
                             </div>
-                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{if $answer.date != $answer.lastdate}Editado por <a href="{$answer.lastuserlink}">{$answer.lastusername}</a> às {/if}{$answer.lastdate}</small>
+                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}{if $answer.date != $answer.lastdate}<br>Ultima edição por <a href="{$answer.lastuserlink}">{$answer.lastusername}</a> às {$answer.lastdate}{/if}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
