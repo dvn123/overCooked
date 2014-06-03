@@ -459,4 +459,29 @@ function changeCommentToAnswerContent($idUser, $idComment, $html)
     return $stmt->execute();
 }
 
+/*
+Hot is:
+    - without best answer
+    - ordered by date of last answer
+    - question in last 10 days
+    - top 20
+*/
+function setHot()
+{
+        global $conn;
+        $stmt = $conn->prepare("UPDATE Question SET hot = false");
+        $stmt->execute();
+
+        $query = "(select nobest.idquestion as idqqq,newanswers.mdate from
+                        (select idquestion from question where not exists
+                            (select null from answer where bestanswer=true and idquestion = question.idquestion)
+                            and date_part('days', now()-date)<=10.0) as nobest
+                            left join (select max(date) as mdate, idquestion from answer group by idquestion)
+                            as newanswers using(idquestion) order by
+                            case when mdate is NULL then 1 else 0 end, mdate desc limit 20) as selectedquestions";
+        $qcomplete = "Update Question set hot = true where idquestion in (select selectedquestions.idqqq from ".$query.")";
+        $stmt2 = $conn->prepare($qcomplete);
+        $stmt2->execute();
+}
+
 ?>
