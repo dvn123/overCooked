@@ -231,6 +231,11 @@
     }
     function submitAnswerComment(element) {
         var content = CKEDITOR.instances.inputText.getData();
+        if(content.length > 200) {
+            if(document.getElementById("tag_error") == null)
+                $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tamanho do comentário tem de ser no máximo 200 caracteres</div>");
+            return;
+        }
         var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id');
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentAnswer.php",
@@ -248,6 +253,11 @@
     }
     function submitQuestionComment() {
         var content = CKEDITOR.instances.inputText2.getData();
+        if(content.length > 200) {
+            if(document.getElementById("tag_error") == null)
+                $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tamanho do comentário tem de ser no máximo 200 caracteres</div>");
+            return;
+        }
         //console.log("QUESTION");
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentQuestion.php",
