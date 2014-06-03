@@ -85,7 +85,7 @@ function getQuestionsByDate($numQuestions, $page) {
 
     global $conn;
     $offset = $numQuestions * ($page - 1);
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion ASC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion DESC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
 
     $stmt->bindParam("offset", $offset);
     $stmt->bindParam("num", $numQuestions);

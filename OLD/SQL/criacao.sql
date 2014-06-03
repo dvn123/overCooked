@@ -133,6 +133,7 @@ CREATE TABLE questionCommentContent (
   idUser INTEGER REFERENCES webUser (idUser),
   date TIMESTAMP NOT NULL,
   content TEXT default NULL,
+  CHECK char_length(content) <= 200,
   PRIMARY KEY (idComment, idUser, date)
 );
 
@@ -141,6 +142,7 @@ CREATE TABLE answerCommentContent (
   idUser INTEGER REFERENCES webUser (idUser),
   date TIMESTAMP NOT NULL,
   content TEXT default NULL,
+  CHECK char_length(content) <= 200,
   PRIMARY KEY (idComment, idUser, date)
 );
 
