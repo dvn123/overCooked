@@ -54,8 +54,9 @@
             return;
         }
         for(var i = 0; i < tags.length; i++) {
-            data["tags"+i] = tags[i].toLowerCase();
+            data["tag"+i] = tags[i].toLowerCase();
         }
+        console.log(data);
         $.ajax({
             url: BASE_URL + "api/questions/createquestion.php",
             type: "POST",
@@ -71,8 +72,6 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-
-
     }
 </script>
 

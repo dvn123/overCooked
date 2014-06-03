@@ -72,8 +72,7 @@ function createQuestionTag($tag, $questionid) {
 
     $tag2 = getTag($tag);
     $tagid = $tag2[0]['idtag'];
-    $stmt = $conn->prepare("INSERT INTO questiontag (idQuestion, idTag)
-        VALUES (:questionid, :tagid);");
+    $stmt = $conn->prepare("INSERT INTO questiontag (idQuestion, idTag) VALUES (:questionid, :tagid);");
 
     $stmt->bindParam(":tagid", $tagid);
     $stmt->bindParam(":questionid", $questionid);
