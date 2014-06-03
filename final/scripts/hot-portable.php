@@ -19,5 +19,6 @@ $query = "(select nobest.idquestion as idqqq,newanswers.mdate from
 $qcomplete = "Update Question set hot = true where idquestion in (select selectedquestions.idqqq from ".$query.")";
 $stmt2 = $conn->prepare($qcomplete);
 $stmt2->execute();
-
+echo "the end\n";
+$conn = null;
 ?>
