@@ -94,7 +94,8 @@ function isBanned($username) {
                             WHERE username = :user");
     $stmt->bindParam(":user", $username);
     $stmt->execute();
-    return $stmt->fetch()['banned'];
+    $o1 = $stmt->fetch();
+    return $o1['banned'];
 }
 
 function getProfilePic($username)

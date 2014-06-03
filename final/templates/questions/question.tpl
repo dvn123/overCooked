@@ -26,7 +26,7 @@
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
-                <br/><br/><small>{$question.date}</small>
+                <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {/if}{$question.lastdate}</small>
             </div>
             <div class="pull-right">
                 <div>
@@ -77,8 +77,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10">
-            </textarea>
+            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
@@ -135,7 +134,7 @@
                                 </div>
 
                             </div>
-                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}</small>
+                            <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}{if $answer.date != $answer.lastdate}<br>Ultima edição por <a href="{$answer.lastuserlink}">{$answer.lastusername}</a> às {$answer.lastdate}{/if}</small>
                         </div>
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
                             {foreach $answer.comments as $acomment}
@@ -173,6 +172,8 @@
     var last_edit_type, edit_content, edit_title, edit_button, old_content;
 
     function answerShow() {
+        console.log("{$question.lastdate}");
+        console.log("{$question.date}");
         if(!answer_visible) {
             answer_visible = true;
             $('#answer').show("slow");
@@ -229,6 +230,11 @@
     }
     function submitAnswerComment(element) {
         var content = CKEDITOR.instances.inputText.getData();
+        if(content.length > 200) {
+            if(document.getElementById("tag_error") == null)
+                $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tamanho do comentário tem de ser no máximo 200 caracteres</div>");
+            return;
+        }
         var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id');
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentAnswer.php",
@@ -246,6 +252,11 @@
     }
     function submitQuestionComment() {
         var content = CKEDITOR.instances.inputText2.getData();
+        if(content.length > 200) {
+            if(document.getElementById("tag_error") == null)
+                $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tamanho do comentário tem de ser no máximo 200 caracteres</div>");
+            return;
+        }
         //console.log("QUESTION");
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentQuestion.php",

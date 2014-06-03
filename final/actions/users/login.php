@@ -17,7 +17,8 @@ if (isLoginCorrect($username, $password)) {
         $_SESSION['username'] = $username;
         $_SESSION['success_messages'][] = 'Login bem sucedido!';
         $idUser = getIdUser($username);
-        $_SESSION['usergroup'] = getUserProfile($idUser)['usergroup'];
+        $userinfo = getUserProfile($idUser);
+        $_SESSION['usergroup'] = $userinfo['usergroup'];
 
         $picture=getProfilePic($username);
 

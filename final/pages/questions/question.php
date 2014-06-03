@@ -11,8 +11,11 @@ try{
     if(!$question)
         throw new Exception("Error Processing Request", 1);
     $user = getUserProfile($question['iduser']);
+    $lastuser = getUserProfile($question['lastuser']);
+    $question['lastusername'] = $lastuser['username'];
     $question['username'] = $user['username'];
     $question['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user['username'];
+    $question['lastuserlink'] = $BASE_URL . "pages/users/profile.php?username=" . $lastuser['username'];
     if($user['imagelink'] == NULL)
         $question['userphoto'] =$BASE_URL . "images/users/default.png";
     else $question['userphoto'] =$BASE_URL . "images/users/" . $user['imagelink'];
@@ -21,14 +24,20 @@ try{
     $question['comments'] = getQuestionComments($idQuestion);
     foreach ($question['comments'] as &$comment) {
         $comment['username'] = getUserName($comment['iduser']);
+        $lastuser = getUserProfile($comment['lastuser']);
+        $comment['lastusername'] = $lastuser['username'];
         $comment['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $comment['username'];
+        $comment['lastuserlink'] = $BASE_URL . "pages/users/profile.php?username=" . $lastuser['username'];
     }
     $question['answers'] = getQuestionAnswers($idQuestion);
     $question['numanswers'] = count($question['answers']);
     foreach($question['answers'] as &$answer)
     {
         $user_answer = getUserProfile($answer['iduser']);
+        $lastuser = getUserProfile($answer['lastuser']);
+        $answer['lastusername'] = $lastuser['username'];
         $answer['username'] = $user_answer['username'];
+        $answer['lastuserlink'] = $BASE_URL . "pages/users/profile.php?username=" . $lastuser['username'];
         $answer['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $user_answer['username'];
         if($user_answer['imagelink'] == NULL)
             $answer['userphoto'] =$BASE_URL . "images/users/default.png";
@@ -38,7 +47,10 @@ try{
         foreach($answer['comments'] as &$acomment)
         {
             $acomment['username'] = getUserName($acomment['iduser']);
+            $lastuser = getUserProfile($acomment['lastuser']);
+            $acomment['lastusername'] = $lastuser['username'];
             $acomment['userlink'] = $BASE_URL . "pages/users/profile.php?username=" . $acomment['username'];
+            $acomment['lastuserlink'] = $BASE_URL . "pages/users/profile.php?username=" . $lastuser['username'];
         }
     }//------------
     if(isset($_SESSION['username']) && isset($_SESSION['usergroup']))

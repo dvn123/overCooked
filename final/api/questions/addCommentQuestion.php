@@ -24,6 +24,12 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content'])) {
     }
 }
 
+if(strlen($_POST['content']) > 200) {
+    $_SESSION['error_messages'][] = 'Limite de caracteres excedido';
+    echo '400';
+    exit;
+}
+
 if (addCommentToQuestion($_POST['idQuestion'], $idUser, $_POST['content'])) {
     $_SESSION['success_messages'][] = 'Criação de comentário bem sucedida!';
     echo '200';
