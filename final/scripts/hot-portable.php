@@ -6,19 +6,22 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $conn->exec('SET SCHEMA \'overCooked\'');
 
-$stmt = $conn->prepare("UPDATE Question SET hot = false");
-$stmt->execute();
 
-$query = "(select nobest.idquestion as idqqq,newanswers.mdate from
-	(select idquestion from question where not exists
-		(select null from answer where bestanswer=true and idquestion = question.idquestion)
-		and date_part('days', now()-date)<=10.0) as nobest
-		left join (select max(date) as mdate, idquestion from answer group by idquestion)
-		as newanswers using(idquestion) order by
-		case when mdate is NULL then 1 else 0 end, mdate desc limit 20) as selectedquestions";
-$qcomplete = "Update Question set hot = true where idquestion in (select selectedquestions.idqqq from ".$query.")";
-$stmt2 = $conn->prepare($qcomplete);
-$stmt2->execute();
+        $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
+        $stmt->execute();
+
+        $query = "(select row_number() over(order by
+                            case when mdate is NULL then 1 else 0 end, mdate desc)
+						as hotRow, nobest.idquestion as idqqq,newanswers.mdate from
+                        (select idquestion from question where not exists
+                            (select null from answer where bestanswer=true and idquestion = question.idquestion)
+                            and date_part('days', now()-date)<=10.0) as nobest
+                            left join (select max(date) as mdate, idquestion from answer group by idquestion)
+                            as newanswers using(idquestion) limit 20) as selectedquestions";
+        $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query." 
+        				where question.idquestion = selectedquestions.idqqq";
+        $stmt2 = $conn->prepare($qcomplete);
+        $stmt2->execute();
 echo "the end\n";
 $conn = null;
 ?>
