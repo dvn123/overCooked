@@ -470,6 +470,55 @@ function changeCommentToAnswerContent($idUser, $idComment, $html)
     return $stmt->execute();
 }
 
+function deleteQuestion($idQuestion) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM questionContent WHERE idQuestion = :idQuestion;");
+    $stmt2->bindParam(":idQuestion", $idQuestion);
+    $stmt2->execute();
+
+    $stmt3 = $conn->prepare("DELETE FROM questionTag WHERE idQuestion = :idQuestion;");
+    $stmt3->bindParam(":idQuestion", $idQuestion);
+    $stmt3->execute();
+
+    $stmt = $conn->prepare("DELETE FROM question WHERE idQuestion = :idQuestion;");
+    $stmt->bindParam(":idQuestion", $idQuestion);
+    return $stmt->execute();
+}
+
+function deleteAnswer($idAnswer) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM answerContent WHERE idAnswer = :idAnswer;");
+    $stmt2->bindParam(":idAnswer", $idAnswer);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answer WHERE idAnswer = :idAnswer;");
+    $stmt->bindParam(":idAnswer", $idAnswer);
+    return $stmt->execute();
+}
+
+function deleteAnswerComment($idComment) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM answerComment WHERE idComment = :idComment;");
+    $stmt2->bindParam(":idComment", $idComment);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answerComment WHERE idComment = :idComment;");
+    $stmt->bindParam(":idComment", $idComment);
+    return $stmt->execute();
+}
+
+function deleteQuestionComment($idComment) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM questionComment WHERE idComment = :idComment;");
+    $stmt2->bindParam(":idComment", $idComment);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM questionComment WHERE idComment = :idComment;");
+    $stmt->bindParam(":idComment", $idComment);
+    return $stmt->execute();
+}
+
+
 /*
 Hot is:
     - without best answer
