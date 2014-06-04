@@ -4,12 +4,12 @@ include_once($BASE_DIR .'database/questions.php');
 include_once($BASE_DIR .'database/tags.php');
 
 
-if(!$_GET['param'])
-    $param = 'last';
-else if($_GET['param'] == 'hot' || $_GET['param'] == 'tag' || $_GET['param'] == 'subscription')
+if($_GET['param'] == 'last' ||$_GET['param'] == 'hot' || $_GET['param'] == 'tag' || $_GET['param'] == 'subscription')
     $param = $_GET['param'];
-else
+else if(!$_GET['tag'])
     $param = 'last';
+else
+    $param = 'tag';
 
 
 $type2 = $_GET['type'];
@@ -74,7 +74,12 @@ switch ($param) {
         $selection_up = 'disabled';
         break;
     case "tag":
-        $questions = getQuestionsByTag('nabo',50,1,$type,$order);//ByTag(50,1,$type, $order);
+        if(!$_GET['tag']) {
+            $_SESSION['error_messages'][] = 'Não existe tal tag';
+            header('Location: ' . $BASE_URL . "pages/lists/questions.php");
+            exit();
+        }
+        $questions = getQuestionsByTag($_GET['tag'],50,1,$type,$order);//ByTag(50,1,$type, $order);
         $selection_tag = 'active';
         break;
     case "subscription":
@@ -145,9 +150,16 @@ foreach($questions as $key => $question) {
     $questions = getDate2($question, $questions, $key);
 }
 
-$tmp = trim($_GET['param']);
-$content = str_replace(' ', '&', $tmp);
-$get = str_replace(' ', '+', $tmp);
+if($_GET['param']) {
+    $tmp = trim($_GET['param']);
+    $content = str_replace(' ', '&', $tmp);
+    $get = str_replace(' ', '+', $tmp);
+}
+else if ($_GET['tag']){
+    $tmp = trim($_GET['tag']);
+    $content = str_replace(' ', '&', $tmp);
+    $get = '&tag=' . str_replace(' ', '+', $tmp);
+}
 
 $smarty->assign("questions", $questions);
 $smarty->assign("get", $get);

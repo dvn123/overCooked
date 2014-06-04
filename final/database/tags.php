@@ -48,7 +48,7 @@ function getQuestionByTag($tag) {
 function getQuestionsByTag($tag,$numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
     $type = "question_list_vw." . $type;
     $offset = $numQuestions * ($page - 1);
-    
+
     $query = "SELECT * FROM question_list_vw, tag, questionTag
      WHERE tag.name=:name AND questionTag.idTag=tag.idTag AND question_list_vw.idQuestion=questionTag.idQuestion
      ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
