@@ -44,7 +44,7 @@
 </div>
 
 <div  class="col-md-12 voffset4">
-    </div>
+</div>
 
 <div class="container">
     <div  class="col-md-3">
@@ -54,6 +54,7 @@
             {if $USERNAME}
                 <li class="{$selection_subscription}" style="display:inline;"><a href="{$BASE_URL}pages/lists/questions.php?param=subscription">Subscritas</a></li>
             {/if}
+            <li class="{$selection_tag}" style="display:inline;"><a href="{$BASE_URL}pages/lists/tags.php">Tags</a></li>
             <!--<li class = "dropdown" style="display:inline;">
                 <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Por tag<b class="caret"></b></a>
                 <ul class = "dropdown-menu">
@@ -82,7 +83,7 @@
                         <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
                         <div class="row">
                             {foreach $question.tags as $tag}
-                                <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                             {/foreach}
                         </div>
                     </td>
@@ -97,17 +98,27 @@
                 </tr>
             {/foreach}
         </table>
+
         <div class="text-center">
             <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
+                <li class="{if $page == 1}disabled{/if}"><a {if $page != 1}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page-1}"{/if}>&laquo;</a></li>
+                {for $i =1 to $total_pages}
+                    {if $i == $page}
+                        <li class="active" ><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
+                    {else}
+                        <li><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
+                    {/if}
+                {/for}
+                <!--<li class="active"><a href="#">1</a></li>
                 <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
+                <li><a href="#">5</a></li> -->
+                <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page+1}"{/if}>&raquo;</a></li>
             </ul>
         </div>
+
+
     </div>
 </div>
 </div>
@@ -174,6 +185,8 @@
 <script>
 
     $( document ).ready(function() {
+        $('#questions').addClass('active');
+
         var location = "{$BASE_URL}pages/lists/questions.php";
         var getvars = "{$get}";
         var type = "{$type}";
