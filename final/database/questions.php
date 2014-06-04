@@ -80,6 +80,13 @@ function getAnswerVote($idAnswer, $idUser)
     else return 0;
 }
 
+function getNumQuestionsByDate() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
+}
 
 function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
@@ -103,6 +110,14 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
       return json_encode($data);*/
 }
 
+function getNumQuestionsHot() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hotnumber>0;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
+}
+
 function getQuestionsHot($numQuestions, $page) {
 
     global $conn;
@@ -116,6 +131,18 @@ function getQuestionsHot($numQuestions, $page) {
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getNumQuestionsSubscribed($idUser) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question, QuestionSubscription
+        WHERE QuestionSubscription.idUser = :id
+        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion");
+
+    $stmt->bindParam(":id", $idUser);
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getQuestionsSubscribed($idUser, $numQuestions = 15, $page = 1, $type = 'idQuestion', $order = 'desc') {
