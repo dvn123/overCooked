@@ -29,7 +29,7 @@
             </div>
             <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
-                <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {/if}{$question.lastdate}</small>
+                <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {$question.lastdate}{/if}</small>
             </div>
             <div class="pull-right">
                 <div>
