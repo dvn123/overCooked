@@ -42,7 +42,7 @@
                     Comentar
                 </button>
                 </div>
-                {if $question.owner == 'true'}
+                {if $question.owner == 'true' or $question.moderator == 'true'}
                     <div>
                         <button type="button" onclick="edit(this, 'question');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Editar</button>
                     </div>
@@ -60,7 +60,7 @@
             {foreach $question.comments as $comment}
             <div id="{$comment.idcomment}" class="highlight col-xs-9 col-xs-offset-1" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                 <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
-                {if $comment.owner == 'true'}
+                {if $comment.owner == 'true' or $comment.moderator == 'true'}
                     <span><span>
                     <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                         Editar
@@ -131,7 +131,7 @@
                                             Comentar
                                         </button>
                                     </div>
-                                    {if $answer.owner == 'true'}
+                                    {if $answer.owner == 'true' or $answer.moderator == 'true'}
                                     <div>
                                         <button type="button" onclick="edit(this, 'answer');" class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">
                                             Editar
@@ -150,7 +150,7 @@
                             {foreach $answer.comments as $acomment}
                             <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
-                                {if $comment.owner == 'true'}
+                                {if $comment.owner == 'true' or $comment.moderator == 'true'}
                                 <span>
                                     <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                                         Editar

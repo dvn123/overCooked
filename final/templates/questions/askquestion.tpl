@@ -8,22 +8,25 @@
             <form id="askquestion_form" class="form-horizontal" action="javascript:submit_question()" role="form">
                 <div class="form-group">
                     <label for="inputTitle" class="col-sm-2 control-label">Título</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Título">
                     </div>
+                    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Insira o título. Recomendamos que seja uma questão. Termine-o com um ponto de interrogação."></a>
                 </div>
                 <div class="form-group voffset5">
                     <label for="inputText" class="col-sm-2 control-label">Pergunta</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <textarea class="form-control ckeditor" name="content" id="inputText" cols="80"  rows="10">
                         </textarea>
                     </div>
+                    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="O conteúdo da sua questão deve ser de fácil leitura. Não utilize abreviaturas. Se desejar pode tornar o texto mais rico e adicionar imagens usando o menu fornecido."></a>
                 </div>
                 <div class="form-group voffset5">
                     <label for="inputTags" class="col-sm-2 control-label">Tags</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-9">
                         <input type="text" name="tags" class="form-control" id="inputTags" placeholder="Tags">
                     </div>
+                    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Indique até 10 palavras-chave para a pergunta."></a>
                 </div>
                 <div class="text-center">
                     <button class="btn btn-default">Colocar Pergunta</button>
@@ -39,6 +42,10 @@
 <script type="text/javascript">
     $( document ).ready(function() {
         $('#askquestion').addClass('active');
+        $('.helper').popover();
+        $('.helper').hover(function() {
+        this.popover();
+        });
     });
 
     var BASE_URL = "{$BASE_URL}";
