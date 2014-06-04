@@ -136,8 +136,12 @@ function bestAnswer(idAnswer)
 		if(data == '200')
 		{
 			$(".bestanswer").removeClass("active");
+			$(".bestanswer").removeClass("btn-success");
 			if(value==1)
+			{
 				$("#bestanswer"+idAnswer).addClass("active");
+				$("#bestanswer"+idAnswer).addClass("btn-success");
+			}
 		} else 
 		console.log("Error best answer");
 	});

@@ -102,7 +102,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-xs-1">
-                            <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn btn-success btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} disabled{/if}"
+                            <button type="button" id="bestanswer{$answer.idanswer}" onclick="bestAnswer({$answer.idanswer})" class="bestanswer btn  btn-md{if $answer.bestanswer eq 'true' and $question.owner eq 'true'} btn-success active{/if}{if $answer.bestanswer eq 'true' and $question.owner != 'true'} btn-success disabled{/if}"
                                 style="min-width:50px; margin-bottom:10px;{if $answer.bestanswer != 'true' and $question.owner != 'true'}display:none;{/if}">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>
