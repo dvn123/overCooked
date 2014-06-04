@@ -56,7 +56,6 @@
         for(var i = 0; i < tags.length; i++) {
             data["tag"+i] = tags[i].toLowerCase();
         }
-        console.log(data);
         $.ajax({
             url: BASE_URL + "api/questions/createquestion.php",
             type: "POST",

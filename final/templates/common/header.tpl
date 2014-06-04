@@ -22,8 +22,8 @@
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right pull-left">
                 <li id="askquestion" ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>
-                <li id="questions" ><a href = "#">Perguntas</a></li>
-                <li id="tags"><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
+                <li id="questions" ><a href = "{$BASE_URL}pages/lists/questions.php">Perguntas</a></li>
+                <li id="tags_tab"><a href = "{$BASE_URL}pages/lists/tags.php">Tags</a></li>
                 <li id="list_users"><a href = "{$BASE_URL}pages/users/list_users.php">Utilizadores</a></li>
                 {if $USERGROUP == 'admin'}
                     <li id="admin" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administração<b class="caret"></b></a>

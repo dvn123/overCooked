@@ -2,6 +2,7 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
 
+
 if(!$_GET['param'])
     $param = 'last';
 else if($_GET['param'] == 'hot' || $_GET['param'] == 'tag' || $_GET['param'] == 'subscription')
@@ -65,13 +66,20 @@ switch ($param) {
     case "hot":
         $questions = getQuestionsHot(50,1,$type, $order);
         $selection_hot = 'active';
+        $selection_date = 'disabled';
+        $selection_answers = 'disabled';
+        $selection_score = 'disabled';
+        $selection_down = 'disabled';
+        $selection_up = 'disabled';
         break;
     case "tag":
         $questions = getQuestionsByDate(50,1,$type, $order);
         $selection_tag = 'active';
         break;
     case "subscription":
-        $questions = getQuestionsByDate(50,1,$type, $order);
+        include_once($BASE_DIR .'database/users.php');
+        $user = getIdUser($_SESSION['username']);
+        $questions = getQuestionsSubscribed($user,50,1,$type, $order);
         $selection_subscription = 'active';
         break;
 

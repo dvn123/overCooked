@@ -103,13 +103,17 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
       return json_encode($data);*/
 }
 
-function getQuestionsHot($numQuestions, $page) {
+function getQuestionsHot($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
     global $conn;
     $offset = $numQuestions * ($page - 1);
+<<<<<<< HEAD
 
-
+    $query = "SELECT * FROM question_list_vw WHERE hot ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
+    $stmt = $conn->prepare($query);
+=======
     $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE hotnumber>0 ORDER BY hotnumber ASC LIMIT :num OFFSET :offset;");
+>>>>>>> b3c273d9ec7da2defceec1364a1f626da7bf0aa2
 
 
     $stmt->bindParam("offset", $offset);
