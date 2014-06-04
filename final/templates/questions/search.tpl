@@ -30,30 +30,12 @@
 
 </div>
 <div class="container voffset4">
-    <!--<div  class="col-md-3">
-        <ul class="nav nav-pills nav-stacked">
-            <li class="active" style="display:inline;"><a href="#">Últimas</a></li>
-            <li style="display:inline;"><a href="#">Quentes</a></li>
-            <li class = "dropdown" style="display:inline;">
-                <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Por tag<b class="caret"></b></a>
-                <ul class = "dropdown-menu">
-                    <li><a href = "#">vegetariano</a></li>
-                    <li><a href = "#">arroz</a></li>
-                    <li><a href = "#">cozinhaRapida</a></li>
-                    <li><a href = "#">bimby</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>-->
+
     <div class="row pull-right container">
         <div class="col-md-8">
 
         </div>
-        <!--<div class="btn-group col-md-4" role="param">
-            <button type="button" class="btn btn-default">Data</button>
-            <button type="button" class="btn btn-default">Pontuação</button>
-            <button type="button" class="btn btn-default">Nº Respostas</button>
-        </div> -->
+
         <div id="param" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_date}">
                <input type="radio" name="param" id="date">Data
@@ -65,11 +47,7 @@
                 <input type="radio" name="param" id="answers">Nº Respostas
             </label>
         </div>
-        <!--
-        <div class="btn-group col-md-2" role="order">
-            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></button>
-            <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></button>
-        </div>-->
+
         <div id="order" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_down}" id="desc1">
                 <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>

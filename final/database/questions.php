@@ -81,14 +81,16 @@ function getAnswerVote($idAnswer, $idUser)
 }
 
 
-function getQuestionsByDate($numQuestions, $page) {
+function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
     global $conn;
     $offset = $numQuestions * ($page - 1);
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw ORDER BY idQuestion DESC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
+    $query = "SELECT * FROM question_list_vw ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
 
-    $stmt->bindParam("offset", $offset);
-    $stmt->bindParam("num", $numQuestions);
+    $stmt = $conn->prepare($query); //TODO: alterar ASC para DESC
+
+    $stmt->bindParam(":offset", $offset);
+    $stmt->bindParam(":num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
 
@@ -101,11 +103,13 @@ function getQuestionsByDate($numQuestions, $page) {
       return json_encode($data);*/
 }
 
-function getQuestionsHot($numQuestions, $page) {
+function getQuestionsHot($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
     global $conn;
     $offset = $numQuestions * ($page - 1);
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE hot ORDER BY idQuestion ASC LIMIT :num OFFSET :offset;"); //TODO: alterar ASC para DESC
+
+    $query = "SELECT * FROM question_list_vw WHERE hot ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
+    $stmt = $conn->prepare($query);
 
 
     $stmt->bindParam("offset", $offset);
@@ -114,14 +118,21 @@ function getQuestionsHot($numQuestions, $page) {
     return $stmt->fetchAll();
 }
 
-function getQuestionsSubscribed($idUser) {
+function getQuestionsSubscribed($idUser, $numQuestions = 15, $page = 1, $type = 'idQuestion', $order = 'desc') {
 
+    $type = "question_list_vw." . $type;
     global $conn;
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw, QuestionSubscription
+    $offset = $numQuestions * ($page - 1);
+
+    $query = "SELECT * FROM question_list_vw, QuestionSubscription
         WHERE QuestionSubscription.idUser = :id
-        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion;");
+        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
+
+    $stmt = $conn->prepare($query);
 
     $stmt->bindParam(":id", $idUser);
+    $stmt->bindParam("offset", $offset);
+    $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
 }
