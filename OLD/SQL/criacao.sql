@@ -52,7 +52,7 @@ CREATE TABLE question (
   title TEXT NOT NULL,
   date TIMESTAMP NOT NULL,
   score INTEGER NOT NULL DEFAULT 0,
-  hot BOOLEAN NOT NULL DEFAULT FALSE,
+  hot INTEGER NOT NULL DEFAULT 0,
   idUser INTEGER REFERENCES webUser (idUser)
 );
 
@@ -133,7 +133,7 @@ CREATE TABLE questionCommentContent (
   idUser INTEGER REFERENCES webUser (idUser),
   date TIMESTAMP NOT NULL,
   content TEXT default NULL,
-  CHECK char_length(content) <= 200,
+  CHECK (char_length(content) <= 200),
   PRIMARY KEY (idComment, idUser, date)
 );
 
@@ -142,7 +142,7 @@ CREATE TABLE answerCommentContent (
   idUser INTEGER REFERENCES webUser (idUser),
   date TIMESTAMP NOT NULL,
   content TEXT default NULL,
-  CHECK char_length(content) <= 200,
+  CHECK (char_length(content) <= 200),
   PRIMARY KEY (idComment, idUser, date)
 );
 
@@ -675,7 +675,7 @@ CREATE INDEX answer_comment_index ON answercomment(idAnswer);
 CREATE UNIQUE INDEX best_answer_of_question_index ON answer(idQuestion)
     WHERE bestAnswer;
 
-CREATE INDEX hot_questions_index ON question(idQuestion) where hot;
+CREATE INDEX hot_questions_index ON question(idQuestion) where hot>0;
 
 CREATE INDEX search_question_index ON question USING gin(to_tsvector('portuguese', title));
 

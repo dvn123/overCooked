@@ -52,7 +52,7 @@ function createUser($username, $password, $email, $name, $idCountry)
     $stmt->bindParam(":username", $username);
     $stmt->bindParam(":password", $hashed_password);
     $stmt->bindParam(":salt", $salt);
-    $stmt->bindParam(":registrationDate",date('Y-m-d', time()) );
+   	$stmt->bindParam(":registrationDate",getCurrentDate());
     $stmt->bindParam(":email", $email);
     $stmt->bindParam(":name", $name);
     $stmt->bindParam(":idCountry", $idCountry);
