@@ -1,6 +1,7 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/questions.php');
+include_once($BASE_DIR .'database/tags.php');
 
 
 if(!$_GET['param'])
@@ -73,7 +74,7 @@ switch ($param) {
         $selection_up = 'disabled';
         break;
     case "tag":
-        $questions = getQuestionsByDate(50,1,$type, $order);
+        $questions = getQuestionsByTag('nabo',50,1,$type,$order);//ByTag(50,1,$type, $order);
         $selection_tag = 'active';
         break;
     case "subscription":
