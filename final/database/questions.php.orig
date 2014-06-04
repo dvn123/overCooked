@@ -1,5 +1,8 @@
 <?php
 
+function getCurrentDate() {
+    return date('Y-m-d H:i:s', time());
+}
 function isQuestionSubscribed($idUser,$idQuestion) {
     global $conn;
     $stmt = $conn->prepare("SELECT COUNT(*) AS subscribed FROM QuestionSubscription
@@ -100,11 +103,18 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
       return json_encode($data);*/
 }
 
-function getQuestionsHot($numQuestions, $page) {
+function getQuestionsHot($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
     global $conn;
     $offset = $numQuestions * ($page - 1);
-    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE hot>0 ORDER BY hot ASC LIMIT :num OFFSET :offset;");
+<<<<<<< HEAD
+
+    $query = "SELECT * FROM question_list_vw WHERE hot ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
+    $stmt = $conn->prepare($query);
+=======
+    $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE hotnumber>0 ORDER BY hotnumber ASC LIMIT :num OFFSET :offset;");
+>>>>>>> b3c273d9ec7da2defceec1364a1f626da7bf0aa2
+
 
     $stmt->bindParam("offset", $offset);
     $stmt->bindParam("num", $numQuestions);
@@ -474,7 +484,7 @@ Hot is:
 function setHot()
 {
         global $conn;
-        $stmt = $conn->prepare("UPDATE Question SET hot = 0");
+        $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
         $stmt->execute();
 
         $query = "(select row_number() over(order by
@@ -485,7 +495,7 @@ function setHot()
                             and date_part('days', now()-date)<=10.0) as nobest
                             left join (select max(date) as mdate, idquestion from answer group by idquestion)
                             as newanswers using(idquestion) limit 20) as selectedquestions";
-        $qcomplete = "Update question set hot = selectedquestions.hotrow from ".$query." 
+        $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query." 
         				where question.idquestion = selectedquestions.idqqq";
         $stmt2 = $conn->prepare($qcomplete);
         $stmt2->execute();
