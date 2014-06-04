@@ -26,12 +26,17 @@ if (!isset($_POST['title']) || !isset($_POST['content'])) {
     }
 }
 
-if (addQuestion($_POST['title'], $idUser, $_POST['content'])) {
+	$title = $_POST['title'];
+	$content = $_POST['content'];
+
+if (addQuestion($title, $idUser, $content)) {
     $_SESSION['success_messages'][] = 'Criação de Pergunta bem sucedida!';
-    $idQuestion = getQuestionByTitle($_POST['title'])['idquestion'];
+    $question = getQuestionByTitle($title);
+    $idQuestion = $question['idquestion'];
     $i = 0;
     while(isset($_POST['tag'.$i])) {
-        createQuestionTag($_POST['tag'.$i],$idQuestion);
+    	$tagi = $_POST['tag'.$i];
+        createQuestionTag($tagi,$idQuestion);
         $i = $i + 1;
         if($i > 10) {
             $_SESSION['error_messages'][] = 'Algumas tags foram ignoradas porque o limite foi excedido';

@@ -337,10 +337,10 @@
         });
         request.fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
-            location.reload();
+           //location.reload();
         });
-        request.done(function() {
-            //console.log(data);
+        request.done(function(out) {
+            console.log(out);
             location.reload();
         });
         closeEdit();

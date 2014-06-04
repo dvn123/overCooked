@@ -15,7 +15,7 @@ if (!isset($_POST['value']) || !isset($_POST['idAnswer'])) {
     exit;
 }
 
-if (addVoteToQuestion("$idUser",$_POST['idAnswer'],$_POST['value'])) {
+if (addVoteToAnswer("$idUser",$_POST['idAnswer'],$_POST['value'])) {
     echo'200';
 } else {
     echo '400';
