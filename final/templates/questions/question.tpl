@@ -43,11 +43,12 @@
                 </button>
                 </div>
                 {if $question.owner == 'true'}
-                <div>
-                <button type="button" onclick="edit(this, 'question');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">
-                    Editar
-                </button>
-                </div>
+                    <div>
+                        <button type="button" onclick="edit(this, 'question');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Editar</button>
+                    </div>
+                    <div>
+                        <button type="button" onclick="delete_ele(this, 'question');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
+                    </div>
                 {/if}
             </div>
             <div class="col-xs-11 col-xs-offset-1">
@@ -64,6 +65,9 @@
                     <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                         Editar
                     </button>
+                    </span></span>
+                    <span><span>
+                        <button type="button" onclick="delete_ele(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
                     </span></span>
                 {/if}
             </div>
@@ -133,6 +137,9 @@
                                             Editar
                                         </button>
                                     </div>
+                                    <div>
+                                        <button type="button" onclick="delete_ele(this, 'answer');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
+                                    </div>
                                     {/if}
                                 </div>
 
@@ -148,6 +155,9 @@
                                     <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
                                         Editar
                                     </button>
+                                </span>
+                                <span>
+                                    <button type="button" onclick="delete_ele(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
                                 </span>
                                 {/if}
                             </div>
@@ -344,6 +354,40 @@
             location.reload();
         });
         closeEdit();
+    }
+    function delete_ele(element, type) {
+        console.log(type);
+        var url1, data;
+        if(type == "question") {
+            url1 = "Question.php";
+            data = { idQuestion: {$question.idquestion}};
+        } else if(type == "answer") {
+            var idAnswer = $(element).parent().parent().parent().parent().parent().parent().parent().attr('id');
+            url1 = "Answer.php";
+            data = { idAnswer: idAnswer};
+        } else if(type == "answercomment") {
+            var idComment = $(element).parent().parent().attr('id');
+            url1 = "AnswerComment.php";
+            data = { idComment: idComment};
+        } else if(type == "questioncomment") {
+            var idComment = $(element).parent().parent().parent().attr('id');
+            url1 = "QuestionComment.php";
+            data = { idComment: idComment};
+        }
+        var url = "{$BASE_URL}api/questions/delete" + url1;
+        var request = $.ajax({
+            url: url,
+            type: "POST",
+            data: data
+        });
+        request.fail(function( jqXHR, textStatus ) {
+            console.log( "Request failed: " + textStatus );
+            location.reload();
+        });
+        request.done(function() {
+            //console.log(data);
+            location.reload();
+        });
     }
 </script>
 

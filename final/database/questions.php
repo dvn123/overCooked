@@ -470,6 +470,53 @@ function changeCommentToAnswerContent($idUser, $idComment, $html)
     return $stmt->execute();
 }
 
+function deleteQuestion($idQuestion) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM questionContent WHERE idQuestion = :idQuestion;");
+    $stmt2->bindParam(":idQuestion", $idQuestion);
+    $stmt2->execute();
+
+    $stmt3 = $conn->prepare("DELETE FROM questionTag WHERE idQuestion = :idQuestion;");
+    $stmt3->bindParam(":idQuestion", $idQuestion);
+    $stmt3->execute();
+
+    $stmt = $conn->prepare("DELETE FROM question WHERE idQuestion = :idQuestion;");
+    $stmt->bindParam(":idQuestion", $idQuestion);
+    return $stmt->execute();
+}
+
+function deleteAnswer($idAnswer) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM answerContent WHERE idAnswer = :idAnswer;");
+    $stmt2->bindParam(":idAnswer", $idAnswer);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answer WHERE idAnswer = :idAnswer;");
+    $stmt->bindParam(":idAnswer", $idAnswer);
+    return $stmt->execute();
+}
+
+function deleteAnswerComment($idComment) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM answerComment WHERE idComment = :idComment;");
+    $stmt2->bindParam(":idComment", $idComment);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answerComment WHERE idComment = :idComment;");
+    $stmt->bindParam(":idComment", $idComment);
+    return $stmt->execute();
+}
+
+function deleteQuestionComment($idComment) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM questionComment WHERE idComment = :idComment;");
+    $stmt2->bindParam(":idComment", $idComment);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM questionComment WHERE idComment = :idComment;");
+    $stmt->bindParam(":idComment", $idComment);
+    return $stmt->execute();
+}
 /*
 Hot is:
     - without best answer
@@ -477,24 +524,23 @@ Hot is:
     - question in last 10 days
     - top 20
 */
-function setHot()
-{
-        global $conn;
-        $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
-        $stmt->execute();
+function setHot() {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
+    $stmt->execute();
 
-        $query = "(select row_number() over(order by
-                            case when mdate is NULL then 1 else 0 end, mdate desc)
-						as hotRow, nobest.idquestion as idqqq,newanswers.mdate from
-                        (select idquestion from question where not exists
-                            (select null from answer where bestanswer=true and idquestion = question.idquestion)
-                            and date_part('days', now()-date)<=10.0) as nobest
-                            left join (select max(date) as mdate, idquestion from answer group by idquestion)
-                            as newanswers using(idquestion) limit 20) as selectedquestions";
-        $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query." 
-        				where question.idquestion = selectedquestions.idqqq";
-        $stmt2 = $conn->prepare($qcomplete);
-        $stmt2->execute();
+    $query = "(select row_number() over(order by
+                        case when mdate is NULL then 1 else 0 end, mdate desc)
+                    as hotRow, nobest.idquestion as idqqq,newanswers.mdate from
+                    (select idquestion from question where not exists
+                        (select null from answer where bestanswer=true and idquestion = question.idquestion)
+                        and date_part('days', now()-date)<=10.0) as nobest
+                        left join (select max(date) as mdate, idquestion from answer group by idquestion)
+                        as newanswers using(idquestion) limit 20) as selectedquestions";
+    $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query."
+                    where question.idquestion = selectedquestions.idqqq";
+    $stmt2 = $conn->prepare($qcomplete);
+    $stmt2->execute();
 }
 
 ?>
