@@ -46,7 +46,6 @@ if($_GET['type'] && $_GET['order']) {
         $selection_up = 'active';
 
 $smarty->assign("tags", $tags);
-$smarty->assign("get", $get);
 
 $smarty->assign("selection_name", $selection_name);
 $smarty->assign("selection_freq", $selection_freq);
@@ -56,6 +55,11 @@ $smarty->assign("selection_up", $selection_up);
 
 $smarty->assign("type",$type2);
 $smarty->assign("order",$order);
+if(isset($_GET['search']))
+{
+	$sea = $_GET['search'];
+	$smarty->assign("search",$sea);
+}
 
 $smarty->display('lists/tags.tpl');
 ?>
