@@ -39,12 +39,12 @@ function setQuestionSubscribed($idUser,$idQuestion,$value) {
     global $conn;
     if($value == '0' || $value == 0)
     {
-    $stmt = $conn->prepare("DELETE FROM questionsubscription
+        $stmt = $conn->prepare("DELETE FROM questionsubscription
     WHERE iduser = :idUser
     AND idquestion = :idQuestion");
-    $stmt->bindParam("idUser", $idUser);
-    $stmt->bindParam("idQuestion", $idQuestion);
-    return $stmt->execute();
+        $stmt->bindParam("idUser", $idUser);
+        $stmt->bindParam("idQuestion", $idQuestion);
+        return $stmt->execute();
     }
     $stmt = $conn->prepare("INSERT INTO questionsubscription (iduser,idquestion) VALUES (:idUser,:idQuestion)");
     $stmt->bindParam("idUser", $idUser);
@@ -93,14 +93,14 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
     $stmt->bindParam(":num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
 
-    /*  $data = array();
-      if ($stmt->num_rows() > 0) {
-          foreach ($stmt->result() as $row) {
-              $data[$row->id] = $row->name;
-          }
-      }
-      return json_encode($data);*/
+function getNumQuestionsByDate() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getQuestionsHot($numQuestions, $page) {
@@ -116,6 +116,14 @@ function getQuestionsHot($numQuestions, $page) {
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getNumQuestionsHot() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hotnumber>0;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getQuestionsSubscribed($idUser, $numQuestions = 15, $page = 1, $type = 'idQuestion', $order = 'desc') {
@@ -135,6 +143,18 @@ function getQuestionsSubscribed($idUser, $numQuestions = 15, $page = 1, $type = 
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getNumQuestionsSubscribed($idUser) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question, QuestionSubscription
+        WHERE QuestionSubscription.idUser = :id
+        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion");
+
+    $stmt->bindParam(":id", $idUser);
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getQuestionsAsked($idUser) {
@@ -362,10 +382,10 @@ function addVoteToQuestion($idUser,$idQuestion,$value)
         $stmt->bindParam("question", $idQuestion);
         $stmt->bindParam("user", $idUser);
         $res = $stmt->execute();
-       // throw new Exception($stmt->queryString, 1);
+        // throw new Exception($stmt->queryString, 1);
         return $res;
     }
-        //   throw new Exception("Error vote $value", 1);
+    //   throw new Exception("Error vote $value", 1);
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("UPDATE QuestionVote SET updown = :value WHERE idUser = :user AND idQuestion = :question");
     $stmt->bindParam("question", $idQuestion);
@@ -479,11 +499,11 @@ Hot is:
 */
 function setHot()
 {
-        global $conn;
-        $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
-        $stmt->execute();
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Question SET hot = false and hotnumber = 0");
+    $stmt->execute();
 
-        $query = "(select row_number() over(order by
+    $query = "(select row_number() over(order by
                             case when mdate is NULL then 1 else 0 end, mdate desc)
 						as hotRow, nobest.idquestion as idqqq,newanswers.mdate from
                         (select idquestion from question where not exists
@@ -491,10 +511,10 @@ function setHot()
                             and date_part('days', now()-date)<=10.0) as nobest
                             left join (select max(date) as mdate, idquestion from answer group by idquestion)
                             as newanswers using(idquestion) limit 20) as selectedquestions";
-        $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query." 
+    $qcomplete = "Update question set hot = true, hotNumber = selectedquestions.hotrow from ".$query."
         				where question.idquestion = selectedquestions.idqqq";
-        $stmt2 = $conn->prepare($qcomplete);
-        $stmt2->execute();
+    $stmt2 = $conn->prepare($qcomplete);
+    $stmt2->execute();
 }
 
 ?>

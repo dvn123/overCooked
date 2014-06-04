@@ -57,15 +57,26 @@ if($order === "desc")
 else
     $selection_up = 'active';
 
-
+$page = 1;
+$num_pages = 1;
 //getQuestions
 switch ($param) {
     case "last":
-        $questions = getQuestionsByDate(50,1,$type, $order);
+        $num_pages = ceil(getNumQuestionsByDate() / 50);
+        if($_GET['page'] && $_GET['page'] >= 1 &&  $_GET['page'] <= $num_pages)
+            $page = $_GET['page'];
+
+        $questions = getQuestionsByDate(50,$page,$type, $order);
+
         $selection_last = 'active';
         break;
     case "hot":
-        $questions = getQuestionsHot(50,1,$type, $order);
+        $num_pages = ceil(getNumQuestionsHot() / 50);
+        if($_GET['page'] && $_GET['page'] >= 1 &&  $_GET['page'] <= $num_pages)
+            $page = $_GET['page'];
+
+
+        $questions = getQuestionsHot(50,$page,$type, $order);
         $selection_hot = 'active';
         $selection_date = 'disabled';
         $selection_answers = 'disabled';
@@ -85,7 +96,12 @@ switch ($param) {
     case "subscription":
         include_once($BASE_DIR .'database/users.php');
         $user = getIdUser($_SESSION['username']);
-        $questions = getQuestionsSubscribed($user,50,1,$type, $order);
+        $num_pages = ceil(getNumQuestionsSubscribed($user) / 50);
+        if($_GET['page'] && $_GET['page'] >= 1 &&  $_GET['page'] <= $num_pages)
+            $page = $_GET['page'];
+
+
+        $questions = getQuestionsSubscribed($user,$page,1,$type, $order);
         $selection_subscription = 'active';
         break;
 
@@ -162,6 +178,10 @@ else if ($_GET['tag']){
 }
 
 $smarty->assign("questions", $questions);
+$smarty->assign("param", $_GET['param']);
+$smarty->assign("type", $_GET['type']);
+$smarty->assign("order", $_GET['order']);
+
 $smarty->assign("get", $get);
 
 $smarty->assign("selection_date", $selection_date);
@@ -180,6 +200,10 @@ $smarty->assign("selection_tag", $selection_tag);
 
 $smarty->assign("type",$type2);
 $smarty->assign("order",$order);
+
+
+$smarty->assign("total_pages",$num_pages);
+$smarty->assign("page",$page);
 
 $smarty->display('lists/questions.tpl');
 ?>
