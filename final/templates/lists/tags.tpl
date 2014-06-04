@@ -30,7 +30,7 @@
                 <!--{$rows = 10}-->
                 {for $i = 0 to $tags.len}
                     <!-- {if $i % $rows eq 0}<tr>{/if} -->
-                    <div tag="{$tags.$i.name}" class="panel panel-body col-md-2 mytag" style="text-align:center"><a href="#" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
+                    <div tag="{$tags.$i.name}" class="panel panel-body col-md-2 mytag" style="text-align:center"><a href="{$BASE_URL}pages/lists/questions.php?tag={$tags.$i.name}" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
                     <!-- {if $i % $rows eq $rows-1}</tr>{/if} -->
                 {/for}
             </div>

@@ -85,7 +85,7 @@
                                 <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
                                 <div class="row">
                                     {foreach $question.tags as $tag}
-                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                        <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                     {/foreach}
                                 </div>
                             </td>
@@ -122,7 +122,7 @@
                             <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_hot.idquestion}"><b>{$question_hot.title}</b></a></div>
                             <div class="row">
                                 {foreach $question_hot.tags as $tag}
-                                    <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                    <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                 {/foreach}
                             </div>
                         </td>
@@ -159,7 +159,7 @@
                                 <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
                                 <div class="row">
                                     {foreach $question_subs.tags as $tag}
-                                        <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                                        <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                                     {/foreach}
                                 </div>
                             </td>
