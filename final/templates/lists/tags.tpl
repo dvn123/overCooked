@@ -19,11 +19,7 @@
         </div>
         <div class="btn-group right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
-            {if isset($search)}
-            <input id="search" type="search" class="form-control" placeholder="Pesquisar" value="{$search}"/>
-            {else}
-            <input id="search" type="search" class="form-control" placeholder="Pesquisar"/>
-            {/if}
+            <input id="search" type="search" class="form-control" placeholder="Pesquisar" {if isset($search)} value="{$search}"{/if} autocomplete="off"/>
         </div>
     </div>
     <br/><br/>
@@ -49,6 +45,9 @@
 <script>
 
     $( document ).ready(function() {
+
+    	$('#tags_tab').addClass('active');
+
         var location = "{$BASE_URL}pages/lists/tags.php";
         var order = "{$order}";
         var type = "{$type}";
