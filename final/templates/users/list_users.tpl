@@ -45,18 +45,18 @@
     <div class="panel panel-green">
         <div class="panel-body">
             {foreach $users as $user}
-                <div  class="col-md-3">
+                <div  class="col-md-3 col-sm-4 col-xs-6">
                     <div class="panel panel-green">
                         <div class="panel-body">
 							<div class="row">
-								<div  class="col-md-3">
+								<div  class="col-sm-3">
 									{if $user.imagelink == null}
 										<img src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;margin-top:0px;">
 									{else}
 										<img src="{$BASE_URL}images/users/{$user.imagelink}" style="width:50px;height:50px;margin-top:0px;">
 									{/if}
 								</div>
-								<div  class="col-md-9">
+								<div  class="col-sm-9">
 									<b><span><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></span></b><br>
 									{if $user.country=='British Indian Ocean Territory'}
 										British Indian O.T.
