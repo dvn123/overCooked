@@ -14,7 +14,7 @@
 </div>
 <br>
 
-<div class="row pull-right container">
+<div class="row pull-right container hidden-xs">
     <div class="col-md-7">
 
     </div>
@@ -46,7 +46,7 @@
 <div  class="col-md-12 voffset4">
 </div>
 
-<div class="container">
+<div class="container ">
     <div  class="col-md-3">
         <ul class="nav nav-pills nav-stacked">
             <li class="{$selection_last}" style="display:inline;"><a href="{$BASE_URL}pages/lists/questions.php">Últimas</a></li>
@@ -67,17 +67,19 @@
         </ul>
     </div>
 
+
     <div  class="col-md-9">
         <table class="table table-hover table-responsive ">
             {foreach $questions as $question}
                 <tr>
-                    <td class="col-md-1 text-center">
+                    <td class="col-md-1 col-sm-1 text-center">
                         <div class="row text-danger hidden-xs">{$question.score}</div>
                         <div class="row text-danger hidden-xs">votos</div>
                     </td>
-                    <td class="col-md-2 text-center text-muted">
+                    <td class="col-md-2 col-sm-1 text-center text-muted">
                         <div class="row hidden-xs">{$question.numanswers}</div>
-                        <div class="row hidden-xs">respostas</div>
+                        <div class="row hidden-xs hidden-sm">respostas</div>
+                        <div class="row visible-sm">resp.</div>
                     </td>
                     <td class="col-md-8">
                         <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
