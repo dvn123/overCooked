@@ -22,8 +22,10 @@ if(!isset($_SESSION['username'])) {
 }
 $idUser = getIdUser($_SESSION['username']);
 
-if(getUserProfile($idUser)['usergroup'] == 'user' && !(getQuestion($_POST['idQuestion'])['iduser'] == $idUser)) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para apagar a pergunta';
+$question = getQuestion($_POST['idQuestion']);
+$user = getUserProfile($idUser);
+if($user['usergroup'] == 'user' && !($question['iduser'] == $idUser)) {
+    $_SESSION['error_messages'][] = 'Não tem permissões para editar a pergunta';
     echo '403';
     exit;
 }
