@@ -8,7 +8,7 @@ if (!isset($_POST['idComment']) || !isset($_POST['content'])) {
     echo '400';
     exit;
 } else {
-    if($_POST['idComment'] == "" || $_POST['content'] == "") {
+    if($_POST['idComment'] == "" || $_POST['content'] == "" || strlen($_POST['content']) > 1000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         echo '400';
         exit;

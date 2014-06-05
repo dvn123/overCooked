@@ -18,7 +18,7 @@ if (!isset($_POST['title']) || !isset($_POST['content'])) {
     echo 'e400';
     exit;
 } else {
-    if($_POST['title'] == "" || $_POST['content'] == "") {
+    if($_POST['title'] == "" || $_POST['content'] == "" || strlen($_POST['title']) > 25 || strlen($_POST['content']) > 1000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         $_SESSION['form_values'] = $_POST;
         echo 'e400';
@@ -31,13 +31,18 @@ if (addQuestion($_POST['title'], $idUser, $_POST['content'])) {
     $idQuestion = getQuestionByTitle($_POST['title'])['idquestion'];
     $i = 0;
     while(isset($_POST['tag'.$i])) {
-        createQuestionTag($_POST['tag'.$i],$idQuestion);
-        $i = $i + 1;
         if($i > 10) {
             $_SESSION['error_messages'][] = 'Algumas tags foram ignoradas porque o limite foi excedido';
             echo $idQuestion;
             exit;
         }
+        if(strlen($_POST['tag'.$i]) > 25) {
+            $_SESSION['error_messages'][] = 'Algumas tags foram ignoradas porque o excidiam o limite de tamanho';
+            echo $idQuestion;
+            exit;
+        }
+        createQuestionTag($_POST['tag'.$i],$idQuestion);
+        $i = $i + 1;
     }
     echo $idQuestion;
     exit;
