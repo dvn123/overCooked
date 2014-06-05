@@ -90,7 +90,12 @@ switch ($param) {
             header('Location: ' . $BASE_URL . "pages/lists/questions.php");
             exit();
         }
-        $questions = getQuestionsByTag($_GET['tag'],50,1,$type,$order);//ByTag(50,1,$type, $order);
+        $num_pages = ceil(getNumQuestionsByTag($_GET['tag']) / 50);
+        if($_GET['page'] && $_GET['page'] >= 1 &&  $_GET['page'] <= $num_pages)
+            $page = $_GET['page'];
+
+
+        $questions = getQuestionsByTag($_GET['tag'],50,$page,$type,$order);//ByTag(50,1,$type, $order);
         $selection_tag = 'active';
         break;
     case "subscription":
@@ -166,6 +171,7 @@ foreach($questions as $key => $question) {
     $questions = getDate2($question, $questions, $key);
 }
 
+$param2 = $_GET['param'];
 if($_GET['param']) {
     $tmp = trim($_GET['param']);
     $content = str_replace(' ', '&', $tmp);
@@ -175,10 +181,11 @@ else if ($_GET['tag']){
     $tmp = trim($_GET['tag']);
     $content = str_replace(' ', '&', $tmp);
     $get = '&tag=' . str_replace(' ', '+', $tmp);
+    $param2 = '&tag=' . str_replace(' ', '+', $tmp);
 }
 
 $smarty->assign("questions", $questions);
-$smarty->assign("param", $_GET['param']);
+$smarty->assign("param", $param2);
 $smarty->assign("type", $_GET['type']);
 $smarty->assign("order", $_GET['order']);
 

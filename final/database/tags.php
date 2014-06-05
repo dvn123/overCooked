@@ -67,6 +67,18 @@ function getQuestionsByTag($tag,$numQuestions, $page, $type = 'idQuestion', $ord
     return $stmt->fetchAll();
 }
 
+function getNumQuestionsByTag($tag) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT count(*) FROM question_list_vw, tag, questionTag
+     WHERE tag.name=:name AND questionTag.idTag=tag.idTag AND question_list_vw.idQuestion=questionTag.idQuestion");
+
+    $stmt->bindParam(":name", $tag);
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
+}
+
 function getTag($tag) {
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM tag WHERE tag.name = :name;");

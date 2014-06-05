@@ -109,11 +109,6 @@
                         <li><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
                     {/if}
                 {/for}
-                <!--<li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
                 <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page+1}"{/if}>&raquo;</a></li>
             </ul>
         </div>

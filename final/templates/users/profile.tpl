@@ -97,7 +97,7 @@
 										<div class="row">respostas</div>
 									</td>
 									<td class="col-md-8">
-										<div class="row"><b>{$question_subscribed.title}</b></div>
+										<div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subscribed.idquestion}"><b>{$question_subscribed.title}</b></a></div>
 										<div class="row">
 											{foreach $question_subscribed.tags as $tag}
 												<a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
