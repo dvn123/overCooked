@@ -22,7 +22,9 @@ if(!isset($_SESSION['username'])) {
 }
 $idUser = getIdUser($_SESSION['username']);
 
-if(getUserProfile($idUser)['usergroup'] == 'user' && !(getQuestionComment($_POST['idComment'])['iduser'] == $idUser)) {
+$user = getUserProfile($idUser);
+$comment = getAnswerComment($_POST['idComment']);
+if($user['usergroup'] == 'user' && !($comment['iduser'] == $idUser)) {
     $_SESSION['error_messages'][] = 'Não tem permissões para editar o comentário';
     echo '403';
     exit;

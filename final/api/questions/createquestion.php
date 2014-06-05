@@ -28,7 +28,8 @@ if (!isset($_POST['title']) || !isset($_POST['content'])) {
 
 if (addQuestion($_POST['title'], $idUser, $_POST['content'])) {
     $_SESSION['success_messages'][] = 'Criação de Pergunta bem sucedida!';
-    $idQuestion = getQuestionByTitle($_POST['title'])['idquestion'];
+    $question = getQuestionByTitle($_POST['title']);
+    $idQuestion = $question['idquestion'];
     $i = 0;
     while(isset($_POST['tag'.$i])) {
         if($i > 10) {
