@@ -18,7 +18,6 @@ if($idUser==null) {
 
 $photo = $_FILES['photo'];
 $extension = end(explode(".", $photo["name"]));
-
 $realname = strip_tags($_POST['realname']);
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];

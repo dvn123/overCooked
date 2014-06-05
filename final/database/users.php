@@ -38,13 +38,13 @@ function getIdUser($username) {
     return $tmp2;
 }
 
-function createUser($username, $password, $email, $name, $idCountry)
+function createUser($username, $password, $email, $name, $birthdate, $idCountry)
 {
     global $conn;
 
     $stmt = $conn->prepare(
         "INSERT INTO webUser (username, password, salt, registrationDate, birthDate, city, email, gender, name, idCountry, userGroup)
-        VALUES (:username,:password, :salt, :registrationDate,NULL,NULL,:email,NULL,:name,:idCountry,'user');"
+        VALUES (:username,:password, :salt, :registrationDate,:birth,NULL,:email,NULL,:name,:idCountry,'user');"
     );
 
     $salt = base64_encode(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
@@ -55,6 +55,7 @@ function createUser($username, $password, $email, $name, $idCountry)
     $stmt->bindParam(":registrationDate",date('Y-m-d', time()) );
     $stmt->bindParam(":email", $email);
     $stmt->bindParam(":name", $name);
+    $stmt->bindParam(":birth", $birthdate);
     $stmt->bindParam(":idCountry", $idCountry);
     return $stmt->execute();
 

@@ -2,8 +2,8 @@
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/users.php');
 
-if (!$_POST['username'] || !$_POST['realname'] || !$_POST['password']
-    || !$_POST['email'] || !$_POST['idCountry'])
+if (!$_POST['username'] || !$_POST['realname'] || !$_POST['password']  || !$_POST['conf_password']
+    || !$_POST['email']  || !$_POST['birthdate'] || !$_POST['idCountry'])
 {
     $_SESSION['error_messages'][] = 'Todos os campos são obrigatórios';
     $_SESSION['form_values'] = $_POST;
@@ -36,9 +36,10 @@ if($password!=$password_conf) {
 $email = $_POST['email'];
 $realname = $_POST['realname'];
 $idCountry = $_POST['idCountry'];
+$birthdate = $_POST['birthdate'];
 
 try {
-    createUser($username, $password, $email, $realname, $idCountry);
+    createUser($username, $password, $email, $realname, $birthdate, $idCountry);
 } catch (PDOException $e) {
 
 if (strpos($e->getMessage(), 'webuser_username_key') !== false) {

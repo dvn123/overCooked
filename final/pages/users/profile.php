@@ -103,6 +103,8 @@ foreach($questions_subscribed as $key => $question) {
     $questions_subscribed[$key]['tags'] = $tags;
     $questions_subscribed = getDate2($question, $questions_subscribed, $key);
 }
+$profile_data['birthdate'] = date('d-m-Y',strtotime($profile_data['birthdate']));
+$profile_data['registrationdate'] = date('d-m-Y',strtotime($profile_data['registrationdate']));
 
 $smarty->assign('username_edit', $_GET['username']);
 $smarty->assign('profile_data', $profile_data);
