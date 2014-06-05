@@ -55,12 +55,27 @@
         var data = {};
         data["title"] = form[0].value;
         data["content"] = form[1].value;
+        if(title.length > 25) {
+            if(document.getElementById("title_error") == null)
+                $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
+            return;
+        }
+        if(form[1].value.length > 1000) {
+            if(document.getElementById("content_error") == null)
+                $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteudo demasiado comprido</div>")
+            return;
+        }
         if(tags.length > 10) {
             if(document.getElementById("tag_error") == null)
                 $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Demasiadas Tags</div>")
             return;
         }
         for(var i = 0; i < tags.length; i++) {
+            if(tags[i].length > 25) {
+                if(document.getElementById("tag_length_error") == null)
+                    $("#error_messages").append("<div id=\"tag_length_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tags demasiado compridas</div>")
+                return;
+            }
             data["tag"+i] = tags[i].toLowerCase();
         }
         $.ajax({
