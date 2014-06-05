@@ -77,6 +77,13 @@ function getAnswerVote($idAnswer, $idUser)
     else return 0;
 }
 
+function getNumQuestionsByDate() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
+}
 
 function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order = 'desc') {
 
@@ -100,6 +107,14 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
       return json_encode($data);*/
 }
 
+function getNumQuestionsHot() {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hotnumber>0;");
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
+}
+
 function getQuestionsHot($numQuestions, $page) {
 
     global $conn;
@@ -110,6 +125,18 @@ function getQuestionsHot($numQuestions, $page) {
     $stmt->bindParam("num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getNumQuestionsSubscribed($idUser) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT count(*) FROM question, QuestionSubscription
+        WHERE QuestionSubscription.idUser = :id
+        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion");
+
+    $stmt->bindParam(":id", $idUser);
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getQuestionsSubscribed($idUser, $numQuestions = 15, $page = 1, $type = 'idQuestion', $order = 'desc') {
@@ -466,21 +493,72 @@ function changeCommentToAnswerContent($idUser, $idComment, $html)
 
 function deleteQuestion($idQuestion) {
     global $conn;
-    $stmt2 = $conn->prepare("DELETE FROM questionContent WHERE idQuestion = :idQuestion;");
-    $stmt2->bindParam(":idQuestion", $idQuestion);
-    $stmt2->execute();
+    deleteQuestionComments($idQuestion);
+    deleteQuestionAnswers($idQuestion);
 
-    $stmt3 = $conn->prepare("DELETE FROM questionTag WHERE idQuestion = :idQuestion;");
+    $stmt5 = $conn->prepare("DELETE FROM questionSubscription WHERE idQuestion = :idQuestion;");
+    $stmt5->bindParam(":idQuestion", $idQuestion);
+    $stmt5->execute();
+
+    $stmt4 = $conn->prepare("DELETE FROM questionVote WHERE idQuestion = :idQuestion;");
+    $stmt4->bindParam(":idQuestion", $idQuestion);
+    $stmt4->execute();
+
+    $stmt3 = $conn->prepare("DELETE FROM questionContent WHERE idQuestion = :idQuestion;");
     $stmt3->bindParam(":idQuestion", $idQuestion);
     $stmt3->execute();
+
+    $stmt2 = $conn->prepare("DELETE FROM questionTag WHERE idQuestion = :idQuestion;");
+    $stmt2->bindParam(":idQuestion", $idQuestion);
+    $stmt2->execute();
 
     $stmt = $conn->prepare("DELETE FROM question WHERE idQuestion = :idQuestion;");
     $stmt->bindParam(":idQuestion", $idQuestion);
     return $stmt->execute();
 }
 
+function deleteQuestionComments($idQuestion) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM questionCommentContent USING questionComment WHERE idQuestion = :idQuestion AND questionComment.idComment = questionCommentContent.idComment;");
+    $stmt2->bindParam(":idQuestion", $idQuestion);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM questionComment WHERE idQuestion = :idQuestion;");
+    $stmt->bindParam(":idQuestion", $idQuestion);
+    return $stmt->execute();
+}
+
+function deleteQuestionAnswers($idQuestion) {
+    global $conn;
+    $stmt4 = $conn->prepare("DELETE FROM answerCommentContent USING answer, answerComment WHERE answer.idQuestion = :idQuestion AND answerComment.idAnswer = answer.idAnswer AND answerComment.idComment = answerCommentContent.idComment");
+    $stmt4->bindParam(":idQuestion", $idQuestion);
+    $stmt4->execute();
+
+    $stmt3 = $conn->prepare("DELETE FROM answerComment USING answer WHERE answer.idQuestion = :idQuestion AND answerComment.idAnswer = answer.idAnswer;");
+    $stmt3->bindParam(":idQuestion", $idQuestion);
+    $stmt3->execute();
+
+    $stmt5 = $conn->prepare("DELETE FROM answerVote USING answer WHERE answer.idQuestion = :idQuestion AND answer.idAnswer = answerVote.idAnswer;");
+    $stmt5->bindParam(":idQuestion", $idQuestion);
+    $stmt5->execute();
+
+    $stmt2 = $conn->prepare("DELETE FROM answerContent USING answer WHERE answer.idQuestion = :idQuestion AND answer.idAnswer = answerContent.idAnswer;");
+    $stmt2->bindParam(":idQuestion", $idQuestion);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answer WHERE idQuestion = :idQuestion;");
+    $stmt->bindParam(":idQuestion", $idQuestion);
+    return $stmt->execute();
+}
+
+
 function deleteAnswer($idAnswer) {
     global $conn;
+    deleteAnswerComments($idAnswer);
+    $stmt5 = $conn->prepare("DELETE FROM answerVote WHERE idAnswer = :idAnswer;");
+    $stmt5->bindParam(":idQuestion", $idQuestion);
+    $stmt5->execute();
+
     $stmt2 = $conn->prepare("DELETE FROM answerContent WHERE idAnswer = :idAnswer;");
     $stmt2->bindParam(":idAnswer", $idAnswer);
     $stmt2->execute();
@@ -490,9 +568,20 @@ function deleteAnswer($idAnswer) {
     return $stmt->execute();
 }
 
+function deleteAnswerComments($idAnswer) {
+    global $conn;
+    $stmt2 = $conn->prepare("DELETE FROM answerCommentContent WHERE idAnswer = :idAnswer;");
+    $stmt2->bindParam(":idAnswer", $idAnswer);
+    $stmt2->execute();
+
+    $stmt = $conn->prepare("DELETE FROM answerComment WHERE idAnswer = :idAnswer;");
+    $stmt->bindParam(":idAnswer", $idAnswer);
+    return $stmt->execute();
+}
+
 function deleteAnswerComment($idComment) {
     global $conn;
-    $stmt2 = $conn->prepare("DELETE FROM answerComment WHERE idComment = :idComment;");
+    $stmt2 = $conn->prepare("DELETE FROM answerCommentContent WHERE idComment = :idComment;");
     $stmt2->bindParam(":idComment", $idComment);
     $stmt2->execute();
 
@@ -503,7 +592,7 @@ function deleteAnswerComment($idComment) {
 
 function deleteQuestionComment($idComment) {
     global $conn;
-    $stmt2 = $conn->prepare("DELETE FROM questionComment WHERE idComment = :idComment;");
+    $stmt2 = $conn->prepare("DELETE FROM questionCommentContent WHERE idComment = :idComment;");
     $stmt2->bindParam(":idComment", $idComment);
     $stmt2->execute();
 

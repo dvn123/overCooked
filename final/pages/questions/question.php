@@ -56,25 +56,33 @@ try{
     if(isset($_SESSION['username']) && isset($_SESSION['usergroup']))
     {
         $idMyUser = getIdUser($_SESSION['username']);
-        if($question['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+        if($question['iduser']==$idMyUser)
             $question['owner']=true;
+        if($_SESSION['usergroup'] != 'user')
+        	$question['moderator'] = true;
         $question['subscribed'] = isQuestionSubscribed($idMyUser,$idQuestion);
         $question['vote'] = getQuestionVote($idQuestion, $idMyUser);
 
         foreach ($question['comments'] as &$comment) {
-            if($comment['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+            if($comment['iduser']==$idMyUser)
                 $comment['owner']=true;
+            if($_SESSION['usergroup'] != 'user')
+        		$comment['moderator'] = true;
         }
 
         foreach($question['answers'] as &$answer)
         {
             $answer['vote'] = getAnswerVote($answer['idanswer'], $idMyUser);
-            if($answer['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+            if($answer['iduser']==$idMyUser)
                 $answer['owner']=true;
+            if($_SESSION['usergroup'] != 'user')
+        		$answer['moderator'] = true;
             foreach($answer['comments'] as &$acomment)
             {
-                if($acomment['iduser']==$idMyUser || $_SESSION['usergroup'] != 'user')
+                if($acomment['iduser']==$idMyUser)
                     $acomment['owner']=true;
+                if($_SESSION['usergroup'] != 'user')
+        			$acomment['moderator'] = true;
             }
         }
     }

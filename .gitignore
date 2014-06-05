@@ -12,3 +12,4 @@
 /final/config/init.php
 
 final/config/init.php
+final/api/questions/deleteQuestionGet.php
