@@ -20,11 +20,8 @@ if($idUser==null) {
 
 $profile_data=getUserProfile($idUser);
 $questions_asked=getQuestionsAsked($idUser);
-//var_dump(1,$questions_asked);
 $questions_answered=getQuestionsAnswered($idUser);
-//var_dump(2,$questions_answered);
 $questions_subscribed=getQuestionsSubscribed($idUser);
-//var_dump(3,$questions_subscribed);
 
 /**
  * @param $question

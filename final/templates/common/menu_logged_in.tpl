@@ -1,6 +1,5 @@
 <ul class="nav navbar-nav navbar-right pull-right">
     <li id="profile"> <span><a href="{$BASE_URL}pages/users/profile.php?username={$USERNAME}">
-                <!--<img src="../../images/default.png" style="width:50px;height:50px;margin-top:0px;"> </img> -->
                 {if {$PROFILE_PIC} == null}
                     <img src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;margin-top:0px;">
                 {else}

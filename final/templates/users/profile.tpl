@@ -115,17 +115,6 @@
 								</tr>
 							{/foreach}
 						</table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
 					</div>
 				{/if}
                 <div class="tab-pane active" id="asked">
@@ -159,17 +148,6 @@
                             </tr>
                         {/foreach}
                     </table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
                 </div>
                 <div class="tab-pane " id="answered">
                     <table class="table table-hover table-responsive ">
@@ -202,17 +180,6 @@
                             </tr>
                         {/foreach}
                     </table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
                 </div>
             </div>
         </div>
