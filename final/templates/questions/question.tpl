@@ -1,7 +1,6 @@
 {include file='common/header.tpl'}
 
 <script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
 
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
@@ -27,7 +26,7 @@
                     <span class="glyphicon glyphicon-pushpin"></span>
                 </button>
             </div>
-            <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
+            <div class="col-xs-8 col-md-8 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
                 <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {$question.lastdate}{/if}</small>
             </div>
