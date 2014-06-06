@@ -14,7 +14,7 @@
 </div>
 <br>
 
-<div class="row pull-right container">
+<div class="row pull-right container hidden-xs">
     <div class="col-md-7">
 
     </div>
@@ -39,14 +39,14 @@
             <input type="radio" name="order" id="asc"><span class="glyphicon glyphicon-chevron-up"></span>
         </label>
     </div>
-
-
+</div>
+<div  class="col-md-12 voffset2 visible-sm">
 </div>
 
 <div  class="col-md-12 voffset4">
 </div>
 
-<div class="container">
+<div class="container ">
     <div  class="col-md-3">
         <ul class="nav nav-pills nav-stacked">
             <li class="{$selection_last}" style="display:inline;"><a href="{$BASE_URL}pages/lists/questions.php">Últimas</a></li>
@@ -55,15 +55,6 @@
                 <li class="{$selection_subscription}" style="display:inline;"><a href="{$BASE_URL}pages/lists/questions.php?param=subscription">Subscritas</a></li>
             {/if}
             <li class="{$selection_tag}" style="display:inline;"><a href="{$BASE_URL}pages/lists/tags.php">Tags</a></li>
-            <!--<li class = "dropdown" style="display:inline;">
-                <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">Por tag<b class="caret"></b></a>
-                <ul class = "dropdown-menu">
-                    <li><a href = "#">vegetariano</a></li>
-                    <li><a href = "#">arroz</a></li>
-                    <li><a href = "#">cozinhaRapida</a></li>
-                    <li><a href = "#">bimby</a></li>
-                </ul>
-            </li> -->
         </ul>
     </div>
 
@@ -71,16 +62,17 @@
         <table class="table table-hover table-responsive ">
             {foreach $questions as $question}
                 <tr>
-                    <td class="col-md-1 text-center">
-                        <div class="row text-danger">{$question.score}</div>
-                        <div class="row text-danger">votos</div>
+                    <td class="col-md-1 col-sm-1 text-center">
+                        <div class="row text-danger hidden-xs">{$question.score}</div>
+                        <div class="row text-danger hidden-xs">votos</div>
                     </td>
-                    <td class="col-md-2 text-center text-muted">
-                        <div class="row">{$question.numanswers}</div>
-                        <div class="row">respostas</div>
+                    <td class="col-md-2 col-sm-1 text-center text-muted">
+                        <div class="row hidden-xs">{$question.numanswers}</div>
+                        <div class="row hidden-xs hidden-sm">respostas</div>
+                        <div class="row visible-sm">resp.</div>
                     </td>
                     <td class="col-md-8">
-                        <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
+                        <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
                         <div class="row">
                             {foreach $question.tags as $tag}
                                 <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -109,73 +101,11 @@
                         <li><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
                     {/if}
                 {/for}
-                <!--<li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
                 <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page+1}"{/if}>&raquo;</a></li>
             </ul>
         </div>
 
 
-    </div>
-</div>
-</div>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Registar</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Nome</label>
-
-                        <div class="col-sm-10">
-                            <input type="name" class="form-control" id="inputName" placeholder="Nome Completo">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPassword" class="col-sm-2 control-label">Password</label>
-
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputCountry" class="col-sm-2 control-label">País</label>
-
-                        <div class="col-sm-10">
-                            <input type="dropdown" class="form-control" id="inputCountry" placeholder="País">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputCity" class="col-sm-2 control-label">Cidade</label>
-
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputCity" placeholder="Cidade">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Regista-te!</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 

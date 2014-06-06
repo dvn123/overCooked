@@ -329,31 +329,6 @@
 
 </div>
 
-<!--<div class="form-group">
-    <label for="inputPic" class="col-sm-2 control-label">Foto perfil</label>
-    <div class="col-sm-10">
-        <div class="fileinput fileinput-new" data-provides="fileinput">
-            <div class="media">
-                <a href="#" class="pull-left">
-                    <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" alt="..." class="img-thumbnail">
-                    <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" class="media-object" alt="Sample Image">
-                </a>
-                <div class="media-body">
-
-                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
-                        <img src="{$BASE_URL}images/users/{$PROFILE_PIC}" style="width: 198px; height: 148px;">
-                    </div>
-                    <div>
-            <span class="btn btn-default btn-file"><span class="fileinput-new">Selecionar imagem</span>
-                <input type="file" name="..." value="{$profile_data.imagelink}"></span>
-                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remover imagem</a>
-                   </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="form-group">
     <div class="col-sm-8"></div>
     <div class="col-sm-1 col-sm-offset-1">

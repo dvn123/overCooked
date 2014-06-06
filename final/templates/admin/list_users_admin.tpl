@@ -105,7 +105,6 @@
         $(".promote").click(function() {
             if ($(this).text() == "Despromover")
             {
-                //console.log($(this).parent().parent().parent().parent().attr('id'));
                 var username=$(this).parent().parent().parent().parent().attr('id');
                 relegateUser(username, $(this));
             }
@@ -119,9 +118,7 @@
         $(".ban").click(function() {
             if ($(this).text() == "Desbanir")
             {
-                //console.log($(this).parent().parent().parent().parent().attr('id'));
                 var username=$(this).parent().parent().parent().parent().attr('id');
-
                 acceptUser(username, $(this));
             }
             else
@@ -129,10 +126,6 @@
                 var username=$(this).parent().parent().parent().parent().attr('id');
                 banUser(username, $(this));
             }
-
-
-
-
         });
     });
 </script>

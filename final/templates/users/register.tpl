@@ -30,6 +30,13 @@
     <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Este é o teu email, o email que vai estar associado à tua conta."></a>
 </div>
 <div class="form-group">
+    <label for="inputBirthDate" class="col-sm-2 control-label">Data de nascimento</label>
+    <div class="col-sm-9">
+        <input type="date" class="form-control" id="inputBirthDate" name="birthdate" placeholder="Data de nascimento" value="{$FORM_VALUES.birthdate}" required>
+    </div>
+    <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="Esta é a tua data de nascimento."></a>
+</div>
+<div class="form-group">
     <label for="inputPassword" class="col-sm-2 control-label">Password</label>
     <div class="col-sm-9">
         <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>

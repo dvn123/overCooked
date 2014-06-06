@@ -7,14 +7,6 @@ function getTags() {
 
     $stmt->execute();
     return $stmt->fetchAll();
-
-    /*$data = array();
-    if ($stmt->num_rows() > 0) {
-        foreach ($stmt->result() as $row) {
-            $data[$row->id] = $row->name;
-        }
-    }
-    return json_encode($data);*/
 }
 
 function getTagsByParam($type,$order) {
@@ -53,11 +45,7 @@ function getQuestionsByTag($tag,$numQuestions, $page, $type = 'idQuestion', $ord
      WHERE tag.name=:name AND questionTag.idTag=tag.idTag AND question_list_vw.idQuestion=questionTag.idQuestion
      ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
 
-
-
     global $conn;
-    /*"SELECT * FROM question_vw, tag, questionTag
-        WHERE tag.name=:name AND questionTag.idTag=tag.idTag AND question_vw.idQuestion=questionTag.idQuestion;"*/
     $stmt = $conn->prepare($query);
 
     $stmt->bindParam(":name", $tag);
@@ -65,6 +53,18 @@ function getQuestionsByTag($tag,$numQuestions, $page, $type = 'idQuestion', $ord
     $stmt->bindParam(":num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
+}
+
+function getNumQuestionsByTag($tag) {
+    global $conn;
+
+    $stmt = $conn->prepare("SELECT count(*) FROM question_list_vw, tag, questionTag
+     WHERE tag.name=:name AND questionTag.idTag=tag.idTag AND question_list_vw.idQuestion=questionTag.idQuestion");
+
+    $stmt->bindParam(":name", $tag);
+    $stmt->execute();
+    $x = $stmt->fetch();
+    return $x['count'];
 }
 
 function getTag($tag) {
@@ -82,8 +82,6 @@ function createTag($tag) {
                             SELECT (:name)
                             WHERE NOT EXISTS (SELECT * FROM Tag
                             WHERE name = :name);");
-    /*$stmt = $conn->prepare("INSERT INTO tag (name)
-                            VALUES (:name);");*/
     $stmt->bindParam(":name", $tag);
     return $stmt->execute();
 }

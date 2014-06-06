@@ -22,7 +22,9 @@ if(!isset($_SESSION['username'])) {
 }
 $idUser = getIdUser($_SESSION['username']);
 
-if(getUserProfile($idUser)['usergroup'] == 'user' && !(getAnswer($_POST['idAnswer'])['iduser'] == $idUser)) {
+$answer = getAnswer($_POST['idAnswer']);
+$user = getUserProfile($idUser);
+if($user['usergroup'] == 'user' && !($answer['iduser'] == $idUser)) {
     $_SESSION['error_messages'][] = 'Não tem permissões para editar a resposta';
     echo '403';
     exit;

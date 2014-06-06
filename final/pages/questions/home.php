@@ -9,17 +9,6 @@ $questions = getQuestionsByDate($num_questions,1);
 $questions_hot = getQuestionsHot($num_questions,1);
 
 
-/*
-foreach ($tweets as $key => $tweet) {
-    unset($photo);
-    if (file_exists($BASE_DIR.'images/users/'.$tweet['username'].'.png'))
-        $photo = 'images/users/'.$tweet['username'].'.png';
-    if (file_exists($BASE_DIR.'images/users/'.$tweet['username'].'.jpg'))
-        $photo = 'images/users/'.$tweet['username'].'.jpg';
-    if (!$photo) $photo = 'images/assets/default.png';
-    $tweets[$key]['photo'] = $photo;
-}*/
-
 /**
  * @param $question
  * @param $questions
@@ -74,10 +63,6 @@ function getDate2($question, $questions, $key)
         $questions[$key]['date2'] = 'há ' . $data . $text;
         return $questions;
     }
-    /*else {
-          $date = new DateTime($question['date']);
-          $questions[$key]['date2'] = $date->format('d-m-Y');
-     }*/
 }
 
 foreach($questions as $key => $question) {

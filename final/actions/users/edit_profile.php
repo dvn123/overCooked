@@ -18,7 +18,6 @@ if($idUser==null) {
 
 $photo = $_FILES['photo'];
 $extension = end(explode(".", $photo["name"]));
-
 $realname = strip_tags($_POST['realname']);
 $email = $_POST['email'];
 $birthdate = $_POST['birthdate'];
@@ -27,13 +26,19 @@ $city = strip_tags($_POST['city']);
 $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
 
-if(!$_FILES['photo'])
+if($_FILES['photo']['size'] != 0) {
     $imagelink=$_GET['username'] .".". $extension;
-else
+    echo 'benfica';
+}
+else {
     $imagelink=$_SESSION['profile_pic'];
+    echo 'campeao';
+
+}
 
 $username = $_GET['username'];
 
+var_dump($_FILES['photo']);
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
     move_uploaded_file($photo["tmp_name"],$BASE_DIR .  "images/users/" . $username . '.' . $extension); // this is dangerous
@@ -48,7 +53,7 @@ try {
     else $_SESSION['error_messages'][] = 'Erro ao guardar alterações. Tente outra vez';
 
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/edit_profile.php?username='.$_SESSION['username']);
+    //header("Location: $BASE_URL" . 'pages/users/edit_profile.php?username='.$_SESSION['username']);
     exit;
 }
 
