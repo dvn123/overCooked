@@ -535,7 +535,7 @@ function deleteAnswer($idAnswer) {
     global $conn;
     deleteAnswerComments($idAnswer);
     $stmt5 = $conn->prepare("DELETE FROM answerVote WHERE idAnswer = :idAnswer;");
-    $stmt5->bindParam(":idQuestion", $idQuestion);
+    $stmt5->bindParam(":idAnswer", $idAnswer);
     $stmt5->execute();
 
     $stmt2 = $conn->prepare("DELETE FROM answerContent WHERE idAnswer = :idAnswer;");
@@ -549,7 +549,7 @@ function deleteAnswer($idAnswer) {
 
 function deleteAnswerComments($idAnswer) {
     global $conn;
-    $stmt2 = $conn->prepare("DELETE FROM answerCommentContent WHERE idAnswer = :idAnswer;");
+    $stmt2 = $conn->prepare("DELETE FROM answerCommentContent USING answerComment WHERE answerComment.idAnswer = :idAnswer AND answerCommentContent.idComment = answerComment.idComment;");
     $stmt2->bindParam(":idAnswer", $idAnswer);
     $stmt2->execute();
 
