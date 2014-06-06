@@ -100,7 +100,7 @@
             </div>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=last">Ver mais</a>
             </div>
         </div>
         <div class="tab-pane" id="hot">
@@ -136,7 +136,7 @@
             </table>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=hot">Ver mais</a>
             </div>
         </div>
         {if $USERNAME}
@@ -173,7 +173,7 @@
                 </table>
 
                 <div class="text-center">
-                    <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=subscription">Ver mais</a>
                 </div>
             </div>
         {/if}

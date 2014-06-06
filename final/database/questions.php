@@ -121,9 +121,8 @@ function getQuestionsHot($numQuestions, $page) {
 
 function getNumQuestionsSubscribed($idUser) {
     global $conn;
-    $stmt = $conn->prepare("SELECT count(*) FROM question, QuestionSubscription
-        WHERE QuestionSubscription.idUser = :id
-        AND QuestionSubscription.idQuestion = question_list_vw.idQuestion");
+    $stmt = $conn->prepare("SELECT count(*) FROM QuestionSubscription
+        WHERE QuestionSubscription.idUser = :id");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
