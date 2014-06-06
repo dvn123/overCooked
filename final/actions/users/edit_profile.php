@@ -26,10 +26,15 @@ $city = strip_tags($_POST['city']);
 $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
 
-if($_FILES['photo'])
+if($_FILES['photo']['size'] != 0) {
     $imagelink=$_GET['username'] .".". $extension;
-else
+    echo 'benfica';
+}
+else {
     $imagelink=$_SESSION['profile_pic'];
+    echo 'campeao';
+
+}
 
 $username = $_GET['username'];
 
@@ -48,7 +53,7 @@ try {
     else $_SESSION['error_messages'][] = 'Erro ao guardar alterações. Tente outra vez';
 
     $_SESSION['form_values'] = $_POST;
-    header("Location: $BASE_URL" . 'pages/users/edit_profile.php?username='.$_SESSION['username']);
+    //header("Location: $BASE_URL" . 'pages/users/edit_profile.php?username='.$_SESSION['username']);
     exit;
 }
 

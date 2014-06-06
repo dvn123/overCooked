@@ -55,7 +55,7 @@
         var data = {};
         data["title"] = form[0].value;
         data["content"] = form[1].value;
-        if(title.length > 25) {
+        if(data["title"].length > 25) {
             if(document.getElementById("title_error") == null)
                 $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
             return;
