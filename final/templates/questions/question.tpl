@@ -8,7 +8,7 @@
             <h3 class="panel-title">
                 <div class="title">{$question.title}</div>
                 <div class="pull-right panel panel-default">
-                    <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
+                    <div class="panel-body"><img alt="user profile picture" src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
                     </div>
                 </div>
             </h3>
@@ -30,7 +30,7 @@
                 <div class="questioncontent">{$question.html}</div>
                 <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {$question.lastdate}{/if}</small>
             </div>
-            <div class="pull-right">
+            <div class="pull-right col-md-offset-1">
                 <div>
                     <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
                         Responder
@@ -120,7 +120,7 @@
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                             <div style="float:right; margin-left:10px;">
                                 <div class="panel panel-default">
-                                    <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;"> <a href="{$answer.userlink}">{$answer.username}</a>
+                                    <div class="panel-body"><img alt="user profile picture" src="{$answer.userphoto}" style="width:30px;height:30px;"> <a href="{$answer.userlink}">{$answer.username}</a>
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
