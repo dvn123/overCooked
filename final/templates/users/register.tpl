@@ -46,7 +46,7 @@
 <div class="form-group">
     <label for="inputPassword2" class="col-sm-2 control-label">Confirmar password</label>
     <div class="col-sm-9">
-        <input type="password" class="form-control" id="inputPassword" name="conf_password" placeholder="Confirmar password" required>
+        <input type="password" class="form-control" id="inputPassword2" name="conf_password" placeholder="Confirmar password" required>
     </div>
     <a class="col-sm-1 glyphicon glyphicon-question-sign helper text-muted" href="#" data-container="body" data-toggle="popover" data-placement="left" data-content="A confirmação da senha que vais necessitar para entrar no nosso site."></a>
 </div>
@@ -301,8 +301,6 @@
     </div>
 </div>
 </form>
-</div>
-</div>
 </div>
 </div>
 </div>

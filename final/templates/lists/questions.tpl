@@ -104,8 +104,6 @@
                 <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&amp;type={$type}&amp;order={$order}&amp;page={$page+1}"{/if}>&raquo;</a></li>
             </ul>
         </div>
-
-
     </div>
 </div>
 

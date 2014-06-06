@@ -16,7 +16,7 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content']) || !isset($_POST['
 }
 
 if(!isset($_SESSION['username'])) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para editar a pergunta';
+    $_SESSION['error_messages'][] = 'Faça login para editar a pergunta';
     echo '401';
     exit;
 }
