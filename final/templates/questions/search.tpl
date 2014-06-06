@@ -68,12 +68,12 @@
                 {foreach $questions as $question}
                     <tr>
                         <td class="col-md-1 text-center">
-                            <div class="row text-danger">{$question.score}</div>
-                            <div class="row text-danger">votos</div>
+                            <div class="row text-danger hidden-xs">{$question.score}</div>
+                            <div class="row text-danger hidden-xs">votos</div>
                         </td>
                         <td class="col-md-2 text-center text-muted">
-                            <div class="row">{$question.numanswers1}</div>
-                            <div class="row">respostas</div>
+                            <div class="row hidden-xs">{$question.numanswers1}</div>
+                            <div class="row hidden-xs">respostas</div>
                         </td>
                         <td class="col-md-8">
                             <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>

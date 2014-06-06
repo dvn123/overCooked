@@ -62,12 +62,12 @@
                 <div class="content">{$comment.content}</div><small> - <a href="{$comment.userlink}">{$comment.username}</a>, {$comment.date}</small>
                 {if $comment.owner == 'true' or $comment.moderator == 'true'}
                     <span><span>
-                    <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                    <button type="button" onclick="edit(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right; margin-bottom: 5px;width: 100px;">
                         Editar
                     </button>
                     </span></span>
                     <span><span>
-                        <button type="button" onclick="delete_ele(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
+                        <button type="button" onclick="delete_ele(this, 'questioncomment');" class="comment-button-question btn btn-default btn-md" style="float:right; margin-bottom: 5px;width: 100px;">Apagar</button>
                     </span></span>
                 {/if}
             </div>
@@ -138,7 +138,7 @@
                                         </button>
                                     </div>
                                     <div>
-                                        <button type="button" onclick="delete_ele(this, 'answer');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
+                                        <button type="button" onclick="delete_ele(this, 'answer');" class="comment-button-question btn btn-default btn-md" style="width: 100px;margin-top: 5px;">Apagar</button>
                                     </div>
                                     {/if}
                                 </div>
@@ -146,18 +146,18 @@
                             </div>
                             <br/><div class="answercontent">{$answer.html}</div><br/><br/><small>{$answer.date}{if $answer.date != $answer.lastdate}<br>Ultima edição por <a href="{$answer.lastuserlink}">{$answer.lastusername}</a> às {$answer.lastdate}{/if}</small>
                         </div>
-                        <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1"> 
+                        <div class="col-xs-8 col-md-11 col-md-offset-1 col-xs-offset-0">
                             {foreach $answer.comments as $acomment}
                             <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
-                                {if $comment.owner == 'true' or $comment.moderator == 'true'}
+                                {if $acomment.owner == 'true' or $acomment.moderator == 'true'}
                                 <span>
-                                    <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;; margin-bottom: 5px;width: 100px;">
+                                    <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right; margin-bottom: 5px;width: 100px;">
                                         Editar
                                     </button>
                                 </span>
                                 <span>
-                                    <button type="button" onclick="delete_ele(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="width: 100px; margin-top: 5px;">Apagar</button>
+                                    <button type="button" onclick="delete_ele(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right;width: 100px;">Apagar</button>
                                 </span>
                                 {/if}
                             </div>
@@ -172,7 +172,7 @@
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
     var BASE_URL = "{$BASE_URL}";
 </script>
 <script src="{$BASE_URL}javascript/main.js"></script>
@@ -224,6 +224,8 @@
     }
     function submitAnswer() {
         var content = CKEDITOR.instances.inputText3.getData();
+        if(!check(content, null))
+            return;
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addAnswer.php",
             type: "POST",
@@ -245,6 +247,8 @@
             return;
         }
         var idAnswer = $(element).parent().parent().parent().parent().parent().attr('id');
+        if(!check(content, null))
+            return;
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentAnswer.php",
             type: "POST",
@@ -265,6 +269,8 @@
                 $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tamanho do comentário tem de ser no máximo 200 caracteres</div>");
             return;
         }
+        if(!check(content, null))
+            return;
         //console.log("QUESTION");
         var request = $.ajax({
             url: "{$BASE_URL}api/questions/addCommentQuestion.php",
@@ -278,6 +284,21 @@
         request.done(function( data ) {
             location.reload();
         });
+    }
+    function check(content, title) {
+        if(content.length > 1000) {
+            if(document.getElementById("content_error") == null)
+                $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteúdo demasiado comprido</div>")
+            return false;
+        }
+        if(title != null) {
+            if(title.length > 25) {
+                if(document.getElementById("title_error") == null)
+                    $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
+                return false;
+            }
+        }
+        return true;
     }
     function edit(element, type) {
         var element2 = $(element).parent().parent().parent();
@@ -297,6 +318,7 @@
         edit_button = $(element);
         edit_button.css( "display", "none" );
         old_content = edit_content.html();
+
         var editor;
         if(type == "question") {
             edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
@@ -322,10 +344,20 @@
         edit_button = null;
     }
     function submitEdit() {
+        if(CKEDITOR.instances.input4.getData().length > 1000) {
+            if(document.getElementById("content_error") == null)
+                $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteudo demasiado comprido</div>")
+            return;
+        }
         var url1, data;
         if(last_edit_type == "question") {
             url1 = "Question.php";
             data = { idQuestion: {$question.idquestion}, title:edit_title.find('textarea').val(), content: CKEDITOR.instances.input4.getData()};
+            if(edit_title.find('textarea').val().length > 25) {
+                if(document.getElementById("title_error") == null)
+                    $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
+                return;
+            }
         } else if(last_edit_type == "answer") {
             var idAnswer = edit_button.parent().parent().parent().parent().parent().parent().parent().attr('id');
             url1 = "Answer.php";
@@ -384,7 +416,7 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-        request.done(function() {
+        request.done(function(data) {
             //console.log(data);
             location.reload();
         });

@@ -10,9 +10,9 @@
             <div class="col-lg-4 ">
                 <div class="text-center" >
                     {if $profile_data.imagelink == null}
-                        <img src="{$BASE_URL}images/users/default.png" style="width:100px;height:100px; margin: auto auto;">
+                        <img src="{$BASE_URL}images/users/default.png" alt="user profile picture" style="width:100px;height:100px; margin: auto auto;">
                     {else}
-                        <img src="{$BASE_URL}images/users/{$profile_data.imagelink}" style="width:100px;height:100px; margin: auto auto;">
+                        <img src="{$BASE_URL}images/users/{$profile_data.imagelink}" alt="user profile picture" style="width:100px;height:100px; margin: auto auto;">
                     {/if}
                 </div>
 
@@ -65,7 +65,6 @@
         </div>
     </div>
 </div>
-</div>
 
 <div class="container" >
     <div class="panel panel-green">
@@ -97,7 +96,7 @@
 										<div class="row">respostas</div>
 									</td>
 									<td class="col-md-8">
-										<div class="row"><b>{$question_subscribed.title}</b></div>
+										<div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subscribed.idquestion}"><b>{$question_subscribed.title}</b></a></div>
 										<div class="row">
 											{foreach $question_subscribed.tags as $tag}
 												<a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -115,17 +114,6 @@
 								</tr>
 							{/foreach}
 						</table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
 					</div>
 				{/if}
                 <div class="tab-pane active" id="asked">
@@ -159,17 +147,6 @@
                             </tr>
                         {/foreach}
                     </table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
                 </div>
                 <div class="tab-pane " id="answered">
                     <table class="table table-hover table-responsive ">
@@ -184,7 +161,7 @@
                                     <div class="row">respostas</div>
                                 </td>
                                 <td class="col-md-8">
-                                    <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_answered.idquestion}"><b>{$question_answered.title}</b></a></div>
+                                    <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_answered.idquestion}"><b>{$question_answered.title}</b></a></div>
                                     <div class="row">
                                         {foreach $question_answered.tags as $tag}
                                             <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -202,17 +179,6 @@
                             </tr>
                         {/foreach}
                     </table>
-                    <!--<div class="text-center">
-                        <ul class="pagination">
-                            <li><a href="#">&laquo;</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
-                    </div>-->
                 </div>
             </div>
         </div>

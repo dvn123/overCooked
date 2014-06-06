@@ -20,7 +20,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
             chart.draw(data, options);
 
-            //console.log(JSONdata[1][0]);
             var tmparray = [['País', 'Número de Posts']];
             for(var i = 0; i < JSONdata[1].length; i++) {
                 tmparray.push([JSONdata[1][i]["name"], parseInt(JSONdata[1][i]["counter"])]);
@@ -35,7 +34,6 @@
             var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
             chart.draw(data, options);
 
-            //console.log(JSONdata[0][0]["n"]);
             var tmparray = [['Idade', 'Número de Visitas']];
             for(var i = 0; i < JSONdata[0].length; i++) {
                 tmparray.push([JSONdata[0][i]["age"], parseInt(JSONdata[0][i]["n"])]);
@@ -64,7 +62,6 @@
             });
             request.fail(function( jqXHR, textStatus ) {
                 console.log( "Request failed: " + textStatus );
-                //location.reload();
             });
         });
     </script>

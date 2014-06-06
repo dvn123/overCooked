@@ -8,7 +8,7 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content']) || !isset($_POST['
     echo '400';
     exit;
 } else {
-    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || $_POST['title'] == "") {
+    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || $_POST['title'] == "" || strlen($_POST['title']) > 25 || strlen($_POST['content']) > 1000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         echo '400';
         exit;
@@ -26,6 +26,7 @@ $question = getQuestion($_POST['idQuestion']);
 
 $profile = getUserProfile($idUser);
 if($profile['usergroup'] == 'user' && $question['iduser'] != $idUser) {
+
     $_SESSION['error_messages'][] = 'Não tem permissões para editar a pergunta';
     echo '403';
     exit;

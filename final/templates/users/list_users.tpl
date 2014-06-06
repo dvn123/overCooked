@@ -1,12 +1,12 @@
 ﻿{include file='common/header.tpl'}
 
 <div class="container">
-    <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/users/list_users.php" method="get" accept-charset="UTF-8">
+    <div class="navbar-form navbar-right" role="search">
         <div class="right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
-            <input name="content" type="search" class="form-control" placeholder="Pesquisar" />
+            <input id="search" name="content" type="search" class="form-control" placeholder="Pesquisar" {if isset($content)} value="{$content}"{/if} autocomplete="off"/>
         </div>
-    </form>
+    </div>
 </div>
 
 <div class="container">
@@ -22,7 +22,7 @@
                 <input type="radio" name="param" id="moderator">Moderadores
             </label>
         </div>
-        <div id="order" class="btn-group" data-toggle="buttons"">
+        <div id="order" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_down}" id="desc1">
                 <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
             </label>
@@ -35,36 +35,32 @@
 </div>
 <br>
 
-{if sizeof($users) == 0}
-<div class="container">
-    <h4 class="col-md-5">Não foram encontrados resultados.. :(</h4>
-</div>
-{else}
-
 <div class="container">
     <div class="panel panel-green">
         <div class="panel-body">
             {foreach $users as $user}
-                <div  class="col-md-3">
+                <div id="{$user.username}" class="col-md-3 col-sm-4 col-xs-6 myuser">
                     <div class="panel panel-green">
                         <div class="panel-body">
 							<div class="row">
-								<div  class="col-md-3">
+								<div  class="col-sm-3">
 									{if $user.imagelink == null}
-										<img src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;margin-top:0px;">
+										<img src="{$BASE_URL}images/users/default.png" alt="user profile picture" style="width:50px;height:50px;margin-top:0px;">
 									{else}
-										<img src="{$BASE_URL}images/users/{$user.imagelink}" style="width:50px;height:50px;margin-top:0px;">
+										<img src="{$BASE_URL}images/users/{$user.imagelink}" alt="user profile picture" style="width:50px;height:50px;margin-top:0px;">
 									{/if}
 								</div>
-								<div  class="col-md-9">
+								<div class="col-sm-9">
 									<b><span><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></span></b><br>
 									{if $user.country=='British Indian Ocean Territory'}
 										British Indian O.T.
 									{else if $user.country=='Democratic Republic of the Congo'}
-										Democratic R. Congo
+										D. R. Congo
 									{else if $user.country=='Saint Vincent and the Grenadines'}
 										S. Vincent & Grenadines
-									{else}
+                                    {else if $user.country=='Central African Republic'}
+                                        Cent. African R.
+                                    {else}
 										{$user.country}
 									{/if}
 									<br>
@@ -78,10 +74,11 @@
         </div>
     </div>
 </div>
-{/if}
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="{$BASE_URL}javascript/main.js"></script>
 <script src="{$BASE_URL}javascript/libs/bootstrap/bootstrap.js"></script>
+<script src="{$BASE_URL}javascript/list_users.js"></script>
 <script>
 
     $( document ).ready(function() {
@@ -93,15 +90,22 @@
         $('#asc, #desc').change(function(){
             order = $(this).attr("id");
             console.log(order + "  " + type);
-            window.location = location + "?type=" + type + "&order=" + order;
+            var url = location + "?type=" + type + "&order=" + order;
+            var srch = $("#search").val();
+            if(srch && srch!="")
+                window.location = url + "&content=" + srch;
+            else window.location = url;
         });
 
         $('#name, #score, #moderator').change(function(){
             type = $(this).attr("id");
-            window.location = location + "?type=" + type + "&order=" + order;
+            var url = location + "?type=" + type + "&order=" + order;
+            var srch = $("#search").val();
+            if(srch && srch!="")
+                window.location = url + "&content=" + srch;
+            else window.location = url;
         });
 
-        console.log("Benfica");
         console.log("." +$("#list_users") + ".");
         $('#list_users').addClass('active');
 

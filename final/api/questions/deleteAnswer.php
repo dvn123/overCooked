@@ -16,24 +16,25 @@ if (!isset($_POST['idAnswer'])) {
 }
 
 if(!isset($_SESSION['username'])) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para apagar a pergunta';
+    $_SESSION['error_messages'][] = 'Não tem permissões para apagar a resposta';
     echo '401';
     exit;
 }
 $idUser = getIdUser($_SESSION['username']);
 
-if(getUserProfile($idUser)['usergroup'] == 'user' && !(getAnswer($_POST['idAnswer'])['iduser'] == $idUser)) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para apagar a pergunta';
+$answer = getAnswer($_POST['idAnswer']);
+$user = getUserProfile($idUser);
+if($user['usergroup'] == 'user' && !($answer['iduser'] == $idUser)) {
+    $_SESSION['error_messages'][] = 'Não tem permissões para editar a resposta';
     echo '403';
     exit;
 }
-
 if (deleteAnswer($_POST['idAnswer'])) {
-    $_SESSION['success_messages'][] = 'Remoção de pergunta bem sucedida!';
+    $_SESSION['success_messages'][] = 'Remoção de resposta bem sucedida!';
     echo '200';
     exit;
 } else {
-    $_SESSION['error_messages'][] = 'A remoção de pergunta falhou!';
+    $_SESSION['error_messages'][] = 'A remoção de resposta falhou!';
     echo '400';
     exit;
 }
