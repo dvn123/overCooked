@@ -53,7 +53,7 @@
             </div>
             <div class="col-xs-11 col-xs-offset-1">
             	{foreach $question.tags as $tag}
-                <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
             </div>
 
