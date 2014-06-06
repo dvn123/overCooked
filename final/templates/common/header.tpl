@@ -53,7 +53,7 @@
         </div>
     {/foreach}
 </div>
-<div id="success_messages">
+<div id="success_messages" class="row">
     {foreach $SUCCESS_MESSAGES as $success}
         <div class="container">
             <div class="alert alert-success fade in">

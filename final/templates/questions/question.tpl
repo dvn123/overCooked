@@ -150,7 +150,7 @@
                             {foreach $answer.comments as $acomment}
                             <div id="{$acomment.idcomment}" class="highlight col-xs-10" style="margin-top:10px; padding-top:5px; background-color:LightGrey;">
                                 <div class="content">{$acomment.content}</div><small> - <a href="{$acomment.userlink}">{$acomment.username}</a>, {$acomment.date}</small>
-                                {if $comment.owner == 'true' or $comment.moderator == 'true'}
+                                {if $acomment.owner == 'true' or $acomment.moderator == 'true'}
                                 <span>
                                     <button type="button" onclick="edit(this, 'answercomment');" class="comment-button-question btn btn-default btn-md" style="float:right; margin-bottom: 5px;width: 100px;">
                                         Editar
@@ -416,7 +416,7 @@
             console.log( "Request failed: " + textStatus );
             location.reload();
         });
-        request.done(function() {
+        request.done(function(data) {
             //console.log(data);
             location.reload();
         });
