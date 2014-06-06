@@ -1,19 +1,13 @@
 {include file='common/header.tpl'}
-
-<div class="container">
-    <div  class="pull-right">
-        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
-            <div class="right-inner-addon">
-                <i class="glyphicon glyphicon-search"></i>
-                <input name="content" type="search"
-                       class="form-control"
-                       placeholder="Pesquisar" />
-            </div>
-        </form>
-    </div>
+<br/><br/>
+<div class="text-center hidden-xs">
+<img src="{$BASE_URL}images/text.png" style="width: 20%; height: 20%">
 </div>
-
-<div class="container ">
+<div class="text-center visible-xs">
+<img src="{$BASE_URL}images/food-logo2.png" style="width: 40%; height: 40%">
+</div>
+<div class="container hidden-xs">
+<br/>
     <div id="carousel-example-generic" class="carousel slide container" data-ride="carousel" style="padding:0;">
 
         <ol class="carousel-indicators">
@@ -44,6 +38,19 @@
         <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
+    </div>
+<br/><br/>
+</div>
+<div class="container">
+    <div  class="pull-right">
+        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
+            <div class="right-inner-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input name="content" type="search"
+                       class="form-control"
+                       placeholder="Pesquisar" />
+            </div>
+        </form>
     </div>
 </div>
 
