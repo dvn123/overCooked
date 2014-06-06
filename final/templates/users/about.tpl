@@ -1,5 +1,8 @@
 {include file='common/header.tpl'}
-<div class="jumbotron col-md-8" style="margin-top: -20px;background-color:#FFF;">
+<div class="container" >
+    <div>
+        <img alt="logo" src="{$BASE_URL}images/food-logo2.png">
+    </div>
     <div class="container">
         <h2>Quem Somos?</h2>
         A overCooked lda. é uma empresa de culinária criada em 1999 por 5 jovens empresários que tinham o sonho de confecionar comida de qualidade. Com a ajuda de empresários russos em 2009 foi possível concretizar o nosso sonho criando o site overCooked. Hoje o site é 13º mais visitado do mundo e não há cozinheiro que prescinda do seu uso!
