@@ -26,13 +26,14 @@ $city = strip_tags($_POST['city']);
 $idCountry = $_POST['idCountry'];
 $about = strip_tags($_POST['about']);
 
-if(!$_FILES['photo'])
+if($_FILES['photo'])
     $imagelink=$_GET['username'] .".". $extension;
 else
     $imagelink=$_SESSION['profile_pic'];
 
 $username = $_GET['username'];
 
+var_dump($_FILES['photo']);
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
     move_uploaded_file($photo["tmp_name"],$BASE_DIR .  "images/users/" . $username . '.' . $extension); // this is dangerous
