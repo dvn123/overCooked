@@ -11,8 +11,8 @@ function searchIt()
 	var tag = $("#search").val();
     if(tag != "")
     {
-       $(".mytag[tag^="+tag+"]").show();
-   	   $(".mytag:not([tag^="+tag+"])").hide();	
+       $(".mytag[tagname^="+tag+"]").show();
+   	   $(".mytag:not([tagname^="+tag+"])").hide();	
     } else
     {
     	$(".mytag").show();
