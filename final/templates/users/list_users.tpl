@@ -1,7 +1,7 @@
 ﻿{include file='common/header.tpl'}
 
 <div class="container">
-    <div class="navbar-form navbar-right" role="search" accept-charset="UTF-8">
+    <div class="navbar-form navbar-right" role="search">
         <div class="right-inner-addon">
             <i class="glyphicon glyphicon-search"></i>
             <input id="search" name="content" type="search" class="form-control" placeholder="Pesquisar" {if isset($content)} value="{$content}"{/if} autocomplete="off"/>
@@ -32,7 +32,7 @@
         </div>
         <div  class="col-md-1 pull-right"></div>
     </div>
-    </div>
+</div>
 <br>
 
 <div class="container">
@@ -51,7 +51,6 @@
 									{/if}
 								</div>
 								<div class="col-sm-9">
-								<div  class="col-sm-9">
 									<b><span><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></span></b><br>
 									{if $user.country=='British Indian Ocean Territory'}
 										British Indian O.T.
