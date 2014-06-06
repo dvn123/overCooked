@@ -101,15 +101,7 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
 
 function getNumQuestionsHot() {
     global $conn;
-    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hotnumber>0;");
-    $stmt->execute();
-    $x = $stmt->fetch();
-    return $x['count'];
-}
-
-function getNumQuestionsHot() {
-    global $conn;
-    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hotnumber>0;");
+    $stmt = $conn->prepare("SELECT count(*) FROM question WHERE hot>0;");
     $stmt->execute();
     $x = $stmt->fetch();
     return $x['count'];
