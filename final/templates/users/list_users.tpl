@@ -61,7 +61,7 @@
 									{if $user.country=='British Indian Ocean Territory'}
 										British Indian O.T.
 									{else if $user.country=='Democratic Republic of the Congo'}
-										Democratic R. Congo
+										D. R. Congo
 									{else if $user.country=='Saint Vincent and the Grenadines'}
 										S. Vincent & Grenadines
 									{else}
@@ -101,7 +101,6 @@
             window.location = location + "?type=" + type + "&order=" + order;
         });
 
-        console.log("Benfica");
         console.log("." +$("#list_users") + ".");
         $('#list_users').addClass('active');
 

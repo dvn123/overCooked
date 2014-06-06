@@ -94,20 +94,12 @@ function getQuestionsByDate($numQuestions, $page, $type = 'idQuestion', $order =
     $offset = $numQuestions * ($page - 1);
     $query = "SELECT * FROM question_list_vw ORDER BY " . $type . ' ' . $order . " LIMIT :num OFFSET :offset;";
 
-    $stmt = $conn->prepare($query); //TODO: alterar ASC para DESC
+    $stmt = $conn->prepare($query);
 
     $stmt->bindParam(":offset", $offset);
     $stmt->bindParam(":num", $numQuestions);
     $stmt->execute();
     return $stmt->fetchAll();
-
-    /*  $data = array();
-      if ($stmt->num_rows() > 0) {
-          foreach ($stmt->result() as $row) {
-              $data[$row->id] = $row->name;
-          }
-      }
-      return json_encode($data);*/
 }
 
 function getNumQuestionsHot() {
@@ -274,22 +266,6 @@ function getQuestionComment($idComment) {
 function searchQuestions($text, $type, $order) {
 
     global $conn;
-    /*$stmt = $conn->prepare("
-       SELECT question.idQuestion, question.title, question.DATE, question.score, webUser.username, webUser.imagelink,
-        (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
-        FROM questionContent, question, answer, answerContent, webUser
-        WHERE questionContent.idQuestion = question.idQuestion
-        AND questionContent.DATE =
-            (SELECT MAX(questionContent.DATE) FROM questionContent WHERE questionContent.idQuestion = question.idQuestion)
-        AND answerContent.DATE = (SELECT MAX(answerContent.DATE) FROM answerContent WHERE answerContent.idAnswer = answer.idAnswer)
-        AND question.idQuestion = answer.idQuestion
-        AND answer.idAnswer = answerContent.idAnswer
-        AND (to_tsvector('portuguese', question.title) @@ to_tsquery('portuguese', :text)
-        OR to_tsvector('portuguese', questionContent.html) @@ to_tsquery('portuguese', :text)
-        OR to_tsvector('portuguese', answerContent.html) @@ to_tsquery('portuguese', :text))
-        AND question.idUser = webUser.idUser
-        GROUP BY question.idQuestion, webuser.username,webuser.imagelink
-        ORDER BY question.idquestion DESC;");*/
 
     $query1 = "SELECT question.idQuestion, question.title, question.DATE, question.score,
 (SELECT COUNT(*) FROM answer WHERE question.idquestion = answer.idquestion) AS numAnswers1
@@ -378,7 +354,6 @@ function addCommentToAnswer($idAnswer, $idUser, $content) {
     return $stmt->execute();
 }
 
-//TODO: SQL026 - Adicionar voto a pergunta
 function addVoteToQuestion($idUser,$idQuestion,$value)
 {
     global $conn;
@@ -389,10 +364,9 @@ function addVoteToQuestion($idUser,$idQuestion,$value)
         $stmt->bindParam("question", $idQuestion);
         $stmt->bindParam("user", $idUser);
         $res = $stmt->execute();
-       // throw new Exception($stmt->queryString, 1);
         return $res;
     }
-        //   throw new Exception("Error vote $value", 1);
+
     $conn->exec("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;");
     $stmt = $conn->prepare("UPDATE QuestionVote SET updown = :value WHERE idUser = :user AND idQuestion = :question");
     $stmt->bindParam("question", $idQuestion);
@@ -409,7 +383,7 @@ function addVoteToQuestion($idUser,$idQuestion,$value)
 
     return ($res1 && $res2);
 }
-//TODO: SQL027 - Adicionar voto a resposta
+
 function addVoteToAnswer($idUser,$idAnswer,$value)
 {
     global $conn;
@@ -428,7 +402,6 @@ function addVoteToAnswer($idUser,$idAnswer,$value)
     $res2 = $stmt2->execute();
 
     return ($res1 && $res2);
-
 }
 
 function changeQuestionContent($idUser, $idQuestion, $html)
@@ -440,7 +413,7 @@ function changeQuestionContent($idUser, $idQuestion, $html)
     $stmt->bindParam(":idUser", $idUser);
     $stmt->bindParam(":idQuestion", $idQuestion);
     $stmt->bindParam(":html", $html);
-    $stmt->bindParam(":date", getCurrentDate()); //TODO: changed to current date
+    $stmt->bindParam(":date", getCurrentDate());
 
     return $stmt->execute();
 }

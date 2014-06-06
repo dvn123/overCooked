@@ -1,12 +1,12 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'database/admin.php');
-//TODO CHECK ADMIN
-/*if(!isset($_SESSION['username'])) {
+
+if(!isset($_SESSION['username'])) {
     $_SESSION['error_messages'][] = 'Não tem permissões para criar uma pergunta';
     echo '401';
     exit;
-}*/
+}
 
 if (!isset($_GET['num'])) {
     $_SESSION['error_messages'][] = 'Campos Invalidos!';
