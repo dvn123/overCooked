@@ -22,7 +22,7 @@
                 <input type="radio" name="param" id="moderator">Moderadores
             </label>
         </div>
-        <div id="order" class="btn-group" data-toggle="buttons"">
+        <div id="order" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default {$selection_down}" id="desc1">
                 <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
             </label>
@@ -32,7 +32,7 @@
         </div>
         <div  class="col-md-1 pull-right"></div>
     </div>
-</div>
+    </div>
 <br>
 
 <div class="container">
@@ -45,9 +45,9 @@
 							<div class="row">
 								<div  class="col-sm-3">
 									{if $user.imagelink == null}
-										<img src="{$BASE_URL}images/users/default.png" style="width:50px;height:50px;margin-top:0px;">
+										<img src="{$BASE_URL}images/users/default.png" alt="user profile picture" style="width:50px;height:50px;margin-top:0px;">
 									{else}
-										<img src="{$BASE_URL}images/users/{$user.imagelink}" style="width:50px;height:50px;margin-top:0px;">
+										<img src="{$BASE_URL}images/users/{$user.imagelink}" alt="user profile picture" style="width:50px;height:50px;margin-top:0px;">
 									{/if}
 								</div>
 								<div class="col-sm-9">
@@ -59,7 +59,9 @@
 										D. R. Congo
 									{else if $user.country=='Saint Vincent and the Grenadines'}
 										S. Vincent & Grenadines
-									{else}
+                                    {else if $user.country=='Central African Republic'}
+                                        Cent. African R.
+                                    {else}
 										{$user.country}
 									{/if}
 									<br>
