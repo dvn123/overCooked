@@ -72,7 +72,7 @@
                                 <div class="row hidden-xs">respostas</div>
                             </td>
                             <td class="col-md-8">
-                                <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
+                                <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question.idquestion}"><b>{$question.title}</b></a></div>
                                 <div class="row">
                                     {foreach $question.tags as $tag}
                                         <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -93,7 +93,7 @@
             </div>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+                <a href="#" class="btn btn-info">Ver mais</a>
             </div>
         </div>
         <div class="tab-pane" id="hot">
@@ -109,7 +109,7 @@
                             <div class="row">respostas</div>
                         </td>
                         <td class="col-md-8">
-                            <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_hot.idquestion}"><b>{$question_hot.title}</b></a></div>
+                            <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_hot.idquestion}"><b>{$question_hot.title}</b></a></div>
                             <div class="row">
                                 {foreach $question_hot.tags as $tag}
                                     <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -129,7 +129,7 @@
             </table>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info" alt="">Ver mais</a>
+                <a href="#" class="btn btn-info">Ver mais</a>
             </div>
         </div>
         {if $USERNAME}
@@ -146,7 +146,7 @@
                                 <div class="row">respostas</div>
                             </td>
                             <td class="col-md-8">
-                                <div class="row"><a class="text-grey"href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
+                                <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
                                 <div class="row">
                                     {foreach $question_subs.tags as $tag}
                                         <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
@@ -166,7 +166,7 @@
                 </table>
 
                 <div class="text-center">
-                    <a href="#" class="btn btn-info" alt="">Ver mais</a>
+                    <a href="#" class="btn btn-info">Ver mais</a>
                 </div>
             </div>
         {/if}
