@@ -83,7 +83,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
+            <textarea class="form-control ckeditor" maxlength="1000" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
@@ -320,15 +320,15 @@
 
         var editor;
         if(type == "question") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\" maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             edit_title = element2.parent().find('.title');
-            edit_title.html("<textarea class=\"editor-title title\" rows=\"1\">{$question.title}</textarea>");
+            edit_title.html("<textarea class=\"editor-title title\" maxlength=\"25\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         } else {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         }
     }
