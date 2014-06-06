@@ -25,7 +25,7 @@
                 <input type="radio" name="param" id="banned">Banidos
             </label>
         </div>
-        <div id="order" class="btn-group" data-toggle="buttons"">
+        <div id="order" class="btn-group" data-toggle="buttons">
         <label class="btn btn-default {$selection_down}" id="desc1">
             <input type="radio" name="order" id="desc"><span class="glyphicon glyphicon-chevron-down"></span>
         </label>

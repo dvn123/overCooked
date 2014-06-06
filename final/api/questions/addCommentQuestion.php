@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/users.php');
 
 
 if(!isset($_SESSION['username'])) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para criar um comentário';
+    $_SESSION['error_messages'][] = 'Faça login para criar um comentário';
     echo '401';
     exit;
 }

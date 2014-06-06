@@ -16,7 +16,7 @@ if (!isset($_POST['idQuestion'])) {
 }
 
 if(!isset($_SESSION['username'])) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para apagar a pergunta';
+    $_SESSION['error_messages'][] = 'Faça login para apagar a pergunta';
     echo '401';
     exit;
 }

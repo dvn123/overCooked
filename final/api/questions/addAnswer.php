@@ -5,7 +5,7 @@ include_once($BASE_DIR .'database/users.php');
 
 
 if(!isset($_SESSION['username'])) {
-    $_SESSION['error_messages'][] = 'Não tem permissões para criar uma resposta';
+    $_SESSION['error_messages'][] = 'Faça login para criar uma resposta';
     echo '401';
     exit;
 }
