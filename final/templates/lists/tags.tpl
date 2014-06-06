@@ -27,7 +27,7 @@
         <div class="panel">
             <div class="panel-body">
                 {for $i = 0 to $tags.len}
-                    <div tagname="{$tags.$i.name}" class="panel panel-body col-md-2 mytag" style="text-align:center"><a href="{$BASE_URL}pages/lists/questions.php?tag={$tags.$i.name}" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
+                    <div id="{$tags.$i.name}" class="panel panel-body col-md-2 mytag" style="text-align:center"><a href="{$BASE_URL}pages/lists/questions.php?tag={$tags.$i.name}" style="text-decoration: none; text-align:center"><div class="tag label label-pink" style="text-align:center">{$tags.$i.name}</div><br/>{if isset($tags.$i.freq)}({$tags.$i.freq}){/if}</a></div>
                 {/for}
             </div>
         </div>
