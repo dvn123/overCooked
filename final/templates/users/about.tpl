@@ -1,7 +1,7 @@
 {include file='common/header.tpl'}
 <div class="container" >
-    <div>
-        <img alt="logo" src="{$BASE_URL}images/food-logo2.png">
+    <div class="text-center voffset4">
+        <img alt="logo" style="width:30%;height:30%" src="{$BASE_URL}images/food-logo2.png">
     </div>
     <div class="container">
         <h2>Quem Somos?</h2>
