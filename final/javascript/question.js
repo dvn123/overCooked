@@ -28,8 +28,11 @@ function voteQuestion(idQuestion, updown)
 		return;
 	}
 
-	$.post( BASE_URL + "api/questions/insertvotequestion.php", {"idQuestion" : idQuestion, "value" : value},function( data ) {
+	console.log(value);
 
+	$.post( BASE_URL + "api/questions/insertvotequestion.php", {"idQuestion" : idQuestion, "value" : value},function( data ) {
+		console.log(data);
+		//console.log(value);
 		if(data == '200')
 		{
 			$("#questionUP").removeClass("active");
@@ -77,8 +80,11 @@ function voteAnswer(idAnswer, updown)
 		return;
 	}
 
-	$.post( BASE_URL + "api/questions/insertvoteanswer.php", {"idAnswer" : idAnswer, "value" : value},function( data ) {
+	console.log(value);
 
+	$.post( BASE_URL + "api/questions/insertvoteanswer.php", {"idAnswer" : idAnswer, "value" : value},function( data ) {
+		console.log(data);
+		//console.log(value);
 		if(data == '200')
 		{
 			$("#answerUP"+idAnswer).removeClass("active");
@@ -106,7 +112,8 @@ function pinquestion(idQuestion)
 		value = 1; //set
 
 	$.post( BASE_URL + "api/questions/pinquestion.php", {"idQuestion" : idQuestion, "value" : value},function( data ) {
-
+		console.log(data);
+		//console.log(value);
 		if(data == '200')
 		{
 			$("#questionpin").toggleClass("active");
@@ -124,7 +131,8 @@ function bestAnswer(idAnswer)
 		value = 1; //set
 
 	$.post( BASE_URL + "api/questions/setbestanswer.php", {"idAnswer" : idAnswer, "value" : value},function( data ) {
-
+		console.log(data);
+		//console.log(value);
 		if(data == '200')
 		{
 			$(".bestanswer").removeClass("active");

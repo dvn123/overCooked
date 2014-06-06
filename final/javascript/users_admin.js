@@ -1,11 +1,15 @@
 function promoteUser(username, object) {
 
     $.post( BASE_URL + "api/admin/promote_user.php", {"username" : username},function( data ) {
+        console.log(data);
+        //console.log(value);
 
         if(data == '200')
         {
             console.log("Promoted successfully");
-
+            /*console.log("nabo" + "#" + idUser + " .promote");
+            console.log($("#" + username + " .promote").val());
+            $("#" + username + " .promote").val("Despromover");*/
             object.text("Despromover");
             object.removeClass('btn-success');
             object.addClass('btn-warning');
@@ -21,6 +25,8 @@ function promoteUser(username, object) {
 function relegateUser(username, object) {
 
     $.post( BASE_URL + "api/admin/relegate_user.php", {"username" : username},function( data ) {
+        console.log(data);
+        //console.log(value);
 
         if(data == '200')
         {
@@ -41,6 +47,8 @@ function relegateUser(username, object) {
 function banUser(username, object) {
 
     $.post( BASE_URL + "api/admin/ban_user.php", {"username" : username},function( data ) {
+            console.log(data);
+            //console.log(value);
 
             if(data == '200')
             {
@@ -60,10 +68,15 @@ function banUser(username, object) {
 function acceptUser(username, object) {
 
     $.post( BASE_URL + "api/admin/accept_user.php", {"username" : username},function( data ) {
+            console.log(data);
+            //console.log(value);
 
             if(data == '200')
             {
                 console.log("Accepted successfully");
+                /*console.log("nabo" + "#" + idUser + " .promote");
+                 console.log($("#" + username + " .promote").val());
+                 $("#" + username + " .promote").val("Despromover");*/
                 object.text("Banir");
                 object.removeClass('btn-info');
                 object.addClass('btn-danger');

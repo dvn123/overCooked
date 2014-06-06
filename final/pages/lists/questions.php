@@ -106,7 +106,7 @@ switch ($param) {
             $page = $_GET['page'];
 
 
-        $questions = getQuestionsSubscribed($user,$page,1,$type, $order);
+        $questions = getQuestionsSubscribed($user,50,$page,$type, $order);
         $selection_subscription = 'active';
         break;
 
