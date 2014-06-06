@@ -13,7 +13,7 @@
 
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <a href="{$BASE_URL}" class="navbar-brand"><img src="{$BASE_URL}images/food-logo1.png"></a>
+        <a href="{$BASE_URL}" class="navbar-brand"><img src="{$BASE_URL}images/food-logo1.png" alt="company logo"></a>
         <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>

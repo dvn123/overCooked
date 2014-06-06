@@ -93,15 +93,15 @@
 
         <div class="text-center">
             <ul class="pagination">
-                <li class="{if $page == 1}disabled{/if}"><a {if $page != 1}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page-1}"{/if}>&laquo;</a></li>
+                <li class="{if $page == 1}disabled{/if}"><a {if $page != 1}href="{$BASE_URL}pages/lists/questions.php?param={$param}&amp;type={$type}&amp;order={$order}&amp;page={$page-1}"{/if}>&laquo;</a></li>
                 {for $i =1 to $total_pages}
                     {if $i == $page}
-                        <li class="active" ><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
+                        <li class="active" ><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&amp;type={$type}&amp;order={$order}&amp;page={$i}">{$i}</a></li>
                     {else}
-                        <li><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$i}">{$i}</a></li>
+                        <li><a href="{$BASE_URL}pages/lists/questions.php?param={$param}&amp;type={$type}&amp;order={$order}&amp;page={$i}">{$i}</a></li>
                     {/if}
                 {/for}
-                <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&type={$type}&order={$order}&page={$page+1}"{/if}>&raquo;</a></li>
+                <li class="{if $page+1 > $total_pages}disabled{/if}"><a {if $page+1 <= $total_pages}href="{$BASE_URL}pages/lists/questions.php?param={$param}&amp;type={$type}&amp;order={$order}&amp;page={$page+1}"{/if}>&raquo;</a></li>
             </ul>
         </div>
 
