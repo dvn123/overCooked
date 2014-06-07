@@ -32,7 +32,7 @@ if($profile['usergroup'] == 'user' && $question['iduser'] != $idUser) {
     exit;
 }
 
-if (changeQuestionContent($idUser, $_POST['idQuestion'], $_POST['content']) && changeQuestionTitle($idUser, $_POST['idQuestion'], $_POST['title'])) {
+if (changeQuestionContent($idUser, $_POST['idQuestion'], $_POST['content']) && changeQuestionTitle($_POST['idQuestion'], $_POST['title'])) {
     $_SESSION['success_messages'][] = 'Edição de pergunta bem sucedida!';
     echo '200';
     exit;
