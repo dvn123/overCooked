@@ -170,6 +170,8 @@
     </div>
 </div>
 
+<div class="container col-xs-12"/>
+
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
     var BASE_URL = "{$BASE_URL}";
