@@ -49,7 +49,7 @@
                 <h4 class="">Não foram encontrados resultados... :(</h4>
             {/if}
             {foreach $users as $user}
-                <div  class="col-md-3" id="{$user.username}">
+                <div  class="col-md-3 col-sm-6 col-xs-12" id="{$user.username}">
                     <div class="panel panel-green">
                         <div class="panel-body">
                             <b><a href="{$BASE_URL}pages/users/profile.php?username={$user.username}">{$user.username}</a></b> - {$user.score} pts

@@ -39,7 +39,7 @@
     <div class="panel panel-green">
         <div class="panel-body">
             {foreach $users as $user}
-                <div id="{$user.username}" class="col-md-3 col-sm-4 col-xs-6 myuser">
+                <div id="{$user.username}" class="col-md-3 col-sm-4 col-xs-12 myuser">
                     <div class="panel panel-green">
                         <div class="panel-body">
 							<div class="row">
