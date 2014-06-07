@@ -25,6 +25,7 @@ $smarty->assign('FIELD_ERRORS', $_SESSION['field_errors']);
 $smarty->assign('SUCCESS_MESSAGES', $_SESSION['success_messages']);
 $smarty->assign('FORM_VALUES', $_SESSION['form_values']);
 $smarty->assign('USERNAME', $_SESSION['username']);
+$smarty->assign('PROFILE_PIC', $_SESSION['profile_pic']);
 $smarty->assign('USERGROUP', $_SESSION['usergroup']);
 
 unset($_SESSION['success_messages']);
