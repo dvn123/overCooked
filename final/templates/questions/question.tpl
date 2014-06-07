@@ -343,6 +343,7 @@
         edit_content = null;
         edit_title = null;
         edit_button = null;
+        last_edit_type = null;
     }
     function submitEdit() {
         if(CKEDITOR.instances.input4.getData().length > 1000) {
@@ -371,6 +372,8 @@
             var idComment = edit_button.parent().parent().parent().attr('id');
             url1 = "CommentQuestion.php";
             data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
+        } else {
+            return;
         }
         var url = "{$BASE_URL}api/questions/edit" + url1;
         var request = $.ajax({
