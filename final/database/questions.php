@@ -122,7 +122,7 @@ function getQuestionsHot($numQuestions, $page) {
 function getNumQuestionsSubscribed($idUser) {
     global $conn;
     $stmt = $conn->prepare("SELECT count(*) FROM QuestionSubscription
-        WHERE QuestionSubscription.idUser = :id");
+        WHERE QuestionSubscription.idUser = :id ORDER BY idQuestion DESC;");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
@@ -153,7 +153,7 @@ function getQuestionsAsked($idUser) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM question_list_vw
-        WHERE question_list_vw.idUser = :id;");
+        WHERE question_list_vw.idUser = :id ORDER BY idQuestion DESC;");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
@@ -164,7 +164,7 @@ function getQuestionsAnswered($idUser) {
 
     global $conn;
     $stmt = $conn->prepare("SELECT * FROM question_list_vw WHERE idQuestion in
-    (SELECT idQuestion FROM answer_vw WHERE idUser=:id);");
+    (SELECT idQuestion FROM answer_vw WHERE idUser=:id) ORDER BY idQuestion DESC;");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();
