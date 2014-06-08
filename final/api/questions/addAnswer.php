@@ -17,7 +17,7 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content'])) {
     echo '400';
     exit;
 } else {
-    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || strlen($_POST['content']) > 1000) {
+    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || strlen($_POST['content']) > 10000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         echo '400';
         exit;
