@@ -108,12 +108,12 @@
                 {foreach $questions_hot as $question_hot}
                     <tr>
                         <td class="col-md-1 text-center">
-                            <div class="row text-danger">{$question_hot.score}</div>
-                            <div class="row text-danger">votos</div>
+                            <div class="row text-danger hidden-xs">{$question_hot.score}</div>
+                            <div class="row text-danger hidden-xs">votos</div>
                         </td>
                         <td class="col-md-2 text-center text-muted">
-                            <div class="row">{$question_hot.numanswers}</div>
-                            <div class="row">respostas</div>
+                            <div class="row hidden-xs">{$question_hot.numanswers}</div>
+                            <div class="row hidden-xs">respostas</div>
                         </td>
                         <td class="col-md-8">
                             <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_hot.idquestion}"><b>{$question_hot.title}</b></a></div>
@@ -145,12 +145,12 @@
                     {foreach $questions_subs as $question_subs}
                         <tr>
                             <td class="col-md-1 text-center">
-                                <div class="row text-danger">{$question_subs.score}</div>
-                                <div class="row text-danger">votos</div>
+                                <div class="row text-danger hidden-xs">{$question_subs.score}</div>
+                                <div class="row text-danger hidden-xs">votos</div>
                             </td>
                             <td class="col-md-2 text-center text-muted">
-                                <div class="row">{$question_subs.numanswers}</div>
-                                <div class="row">respostas</div>
+                                <div class="row hidden-xs">{$question_subs.numanswers}</div>
+                                <div class="row hidden-xs">respostas</div>
                             </td>
                             <td class="col-md-8">
                                 <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
