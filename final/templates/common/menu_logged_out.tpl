@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav navbar-right pull-right">
     <li class="dropdown">
         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login <strong class="caret"></strong></a>
-        <div class="dropdown-menu" style="width:300%;padding: 15px; padding-bottom: 15px;">
+        <div class="dropdown-menu" style="width:250px;padding: 15px; padding-bottom: 15px;">
             <form action="../../actions/users/login.php" method="post" accept-charset="UTF-8">
                 <input class="form-control" maxlength="25" placeholder="Nome de utilizador" id="user_username" style="margin-bottom: 15px;" type="text" name="username" size="30" />
                 <input class="form-control" maxlength="25" placeholder="Password" id="user_password" style="margin-bottom: 15px;" type="password" name="password" size="30" />
