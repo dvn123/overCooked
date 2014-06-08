@@ -83,7 +83,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" maxlength="1000" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
+            <textarea class="form-control ckeditor" maxlength="10000" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
@@ -287,13 +287,13 @@
         });
     }
     function check(content, title) {
-        if(content.length > 1000) {
+        if(content.length > 10000) {
             if(document.getElementById("content_error") == null)
                 $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteúdo demasiado comprido</div>")
             return false;
         }
         if(title != null) {
-            if(title.length > 25) {
+            if(title.length > 100) {
                 if(document.getElementById("title_error") == null)
                     $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
                 return false;
@@ -322,9 +322,9 @@
 
         var editor;
         if(type == "question") {
-            edit_content.html("<textarea id=\"input4\" maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\" maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             edit_title = element2.parent().find('.title');
-            edit_title.html("<textarea class=\"editor-title title\" maxlength=\"25\" rows=\"1\">{$question.title}</textarea>");
+            edit_title.html("<textarea class=\"editor-title title\" maxlength=\"100\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
             edit_content.html("<textarea id=\"input4\"  maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
