@@ -70,13 +70,15 @@
                 $("#error_messages").append("<div id=\"tag_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Demasiadas Tags</div>")
             return;
         }
-        for(var i = 0; i < tags.length; i++) {
-            if(tags[i].length > 25) {
-                if(document.getElementById("tag_length_error") == null)
-                    $("#error_messages").append("<div id=\"tag_length_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tags demasiado compridas</div>")
-                return;
+        if(tags.length > 0 && tags[0] != "") {
+            for (var i = 0; i < tags.length; i++) {
+                if (tags[i].length > 25) {
+                    if (document.getElementById("tag_length_error") == null)
+                        $("#error_messages").append("<div id=\"tag_length_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Tags demasiado compridas</div>")
+                    return;
+                }
+                data["tag" + i] = tags[i].toLowerCase();
             }
-            data["tag"+i] = tags[i].toLowerCase();
         }
         $.ajax({
             url: BASE_URL + "api/questions/createquestion.php",
@@ -87,7 +89,7 @@
                 var url = BASE_URL + "pages/questions/question.php?idQuestion=" + data;
                 window.location.href = url;
             } else {
-                location.reload();
+               location.reload();
             }
         }).fail(function( jqXHR, textStatus ) {
             console.log( "Request failed: " + textStatus );
