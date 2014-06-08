@@ -122,7 +122,7 @@ function getQuestionsHot($numQuestions, $page) {
 function getNumQuestionsSubscribed($idUser) {
     global $conn;
     $stmt = $conn->prepare("SELECT count(*) FROM QuestionSubscription
-        WHERE QuestionSubscription.idUser = :id ORDER BY idQuestion DESC;");
+        WHERE QuestionSubscription.idUser = :id;");
 
     $stmt->bindParam(":id", $idUser);
     $stmt->execute();

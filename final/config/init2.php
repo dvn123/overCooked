@@ -3,8 +3,8 @@ session_set_cookie_params(3600, '/~lbaw1315');
 
 session_start();
 
-$BASE_DIR = '/opt/lbaw/lbaw1315/public_html/proto/';
-$BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1315/proto/';
+$BASE_DIR = '/opt/lbaw/lbaw1315/public_html/final/';
+$BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1315/final/';
 
 $conn = new PDO('pgsql:host=vdbm;dbname=lbaw1315', 'lbaw1315',
     'oA667ld4');
