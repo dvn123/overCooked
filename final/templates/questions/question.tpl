@@ -327,10 +327,10 @@
             edit_title.html("<textarea class=\"editor-title title\" maxlength=\"100\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
-            edit_content.html("<textarea id=\"input4\"  maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         } else {
-            edit_content.html("<textarea id=\"input4\"  maxlength=\"1000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         }
     }
@@ -346,7 +346,7 @@
         last_edit_type = null;
     }
     function submitEdit() {
-        if(CKEDITOR.instances.input4.getData().length > 1000) {
+        if(CKEDITOR.instances.input4.getData().length > 10000) {
             if(document.getElementById("content_error") == null)
                 $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteudo demasiado comprido</div>")
             return;
