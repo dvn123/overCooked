@@ -1,1 +1,0 @@
-*/1 * * * * php /opt/lbaw/lbaw1315/hot-portable.php
