@@ -1,7 +1,6 @@
 {include file='common/header.tpl'}
 
 <script src="{$BASE_URL}lib/ckeditor/ckeditor.js"></script>
-<link rel="stylesheet" href="{$BASE_URL}lib/ckeditor/skins/moono/editor.css">
 
 <div class="question container center col-md-10 col-md-offset-1">
     <div class="panel panel-default">
@@ -9,7 +8,7 @@
             <h3 class="panel-title">
                 <div class="title">{$question.title}</div>
                 <div class="pull-right panel panel-default">
-                    <div class="panel-body"><img src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"> </img><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
+                    <div class="panel-body"><img alt="user profile picture" src="{$question.userphoto}" style="width:50px;height:50px;margin-top:0px;"><a href="{$question.userlink}">{$question.username}</a> <span class="badge">{$question.userpoints} pts</span>
                     </div>
                 </div>
             </h3>
@@ -27,11 +26,11 @@
                     <span class="glyphicon glyphicon-pushpin"></span>
                 </button>
             </div>
-            <div class="col-xs-8 col-md-9 col-md-offset-0 col-xs-offset-1">
+            <div class="col-xs-8 col-md-8 col-md-offset-0 col-xs-offset-1">
                 <div class="questioncontent">{$question.html}</div>
                 <br/><br/><small>{$question.date}{if $question.date != $question.lastdate}<br>Ultima edição por <a href="{$question.lastuserlink}">{$question.lastusername}</a>  às {$question.lastdate}{/if}</small>
             </div>
-            <div class="pull-right">
+            <div class="pull-right col-md-offset-1">
                 <div>
                     <button type="button" onclick="answerShow();" class="answer-button btn btn-default btn-md" style="width: 100px; margin-bottom: 5px;">
                         Responder
@@ -53,7 +52,7 @@
             </div>
             <div class="col-xs-11 col-xs-offset-1">
             	{foreach $question.tags as $tag}
-                <a href="#" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
+                <a href="{$BASE_URL}pages/lists/questions.php?tag={$tag.name}" style="text-decoration: none"><span class="tag label label-pink">{$tag.name}</span></a>
                 {/foreach}
             </div>
 
@@ -84,7 +83,7 @@
             </h3>
         </div>
         <div class="panel-body">
-            <textarea class="form-control ckeditor" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
+            <textarea class="form-control ckeditor" maxlength="10000" name="contentAnswer" id="inputText3" cols="80"  rows="10"></textarea>
             <button type="button" onclick="submitAnswer();" class="answer-button btn btn-default btn-md" style="margin-top: 5px;" >
                 Submeter
             </button>
@@ -121,7 +120,7 @@
                         <div class="col-xs-8 col-md-11 col-md-offset-0 col-xs-offset-1">
                             <div style="float:right; margin-left:10px;">
                                 <div class="panel panel-default">
-                                    <div class="panel-body"><img src="{$answer.userphoto}" style="width:30px;height:30px;"> <a href="{$answer.userlink}">{$answer.username}</a>
+                                    <div class="panel-body"><img alt="user profile picture" src="{$answer.userphoto}" style="width:30px;height:30px;"> <a href="{$answer.userlink}">{$answer.username}</a>
                                         <span class="badge">{$answer.userpoints} pts</span>
                                     </div>
                                 </div>
@@ -170,6 +169,8 @@
         </div>
     </div>
 </div>
+
+<div class="container col-xs-12"/>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -286,13 +287,13 @@
         });
     }
     function check(content, title) {
-        if(content.length > 1000) {
+        if(content.length > 10000) {
             if(document.getElementById("content_error") == null)
                 $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteúdo demasiado comprido</div>")
             return false;
         }
         if(title != null) {
-            if(title.length > 25) {
+            if(title.length > 100) {
                 if(document.getElementById("title_error") == null)
                     $("#error_messages").append("<div id=\"title_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Titulo demasiado comprido</div>")
                 return false;
@@ -321,15 +322,15 @@
 
         var editor;
         if(type == "question") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\" maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 100%\">" + old_content + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             edit_title = element2.parent().find('.title');
-            edit_title.html("<textarea class=\"editor-title title\" rows=\"1\">{$question.title}</textarea>");
+            edit_title.html("<textarea class=\"editor-title title\" maxlength=\"100\" rows=\"1\">{$question.title}</textarea>");
             {literal}editor = CKEDITOR.replace( 'input4', {resize_enabled: false } );{/literal}
         } else if(type == "questioncomment" || type == "answercomment") {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         } else {
-            edit_content.html("<textarea id=\"input4\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
+            edit_content.html("<textarea id=\"input4\"  maxlength=\"10000\" class=\"editor content\" style=\"resize: none;width: 80%\">" + edit_content.html() + "</textarea><button type=\"button\" onclick=\"submitEdit();\" class=\"comment-button btn btn-default btn-md\" style=\"margin-top: 10px;\">Submeter</button><button type=\"button\" onclick=\"closeEdit();\" class=\"answer-button btn btn-default btn-md\" style=\"margin-left:5px;margin-top: 10px;\">Cancelar</button>");
             {literal}editor = CKEDITOR.replace( 'input4',  {width: '80%', resize_enabled: false } );{/literal}
         }
     }
@@ -342,9 +343,10 @@
         edit_content = null;
         edit_title = null;
         edit_button = null;
+        last_edit_type = null;
     }
     function submitEdit() {
-        if(CKEDITOR.instances.input4.getData().length > 1000) {
+        if(CKEDITOR.instances.input4.getData().length > 10000) {
             if(document.getElementById("content_error") == null)
                 $("#error_messages").append("<div id=\"content_error\" class=\"container\"><div class=\"alert alert-danger fade in\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>Conteudo demasiado comprido</div>")
             return;
@@ -370,6 +372,8 @@
             var idComment = edit_button.parent().parent().parent().attr('id');
             url1 = "CommentQuestion.php";
             data = { idComment: idComment, content:CKEDITOR.instances.input4.getData()};
+        } else {
+            return;
         }
         var url = "{$BASE_URL}api/questions/edit" + url1;
         var request = $.ajax({

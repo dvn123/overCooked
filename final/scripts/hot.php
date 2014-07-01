@@ -1,7 +1,8 @@
 <?php
-include_once('../config/init.php');
-include_once($BASE_DIR .'database/questions.php');
+include_once('/opt/lbaw/lbaw1315/public_html/final/config/init.php');
+include_once('/opt/lbaw/lbaw1315/public_html/final/database/questions.php');
 
 setHot();
+echo "ok";
 
 ?>

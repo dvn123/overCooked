@@ -28,17 +28,13 @@ $about = strip_tags($_POST['about']);
 
 if($_FILES['photo']['size'] != 0) {
     $imagelink=$_GET['username'] .".". $extension;
-    echo 'benfica';
 }
 else {
     $imagelink=$_SESSION['profile_pic'];
-    echo 'campeao';
-
 }
 
 $username = $_GET['username'];
 
-var_dump($_FILES['photo']);
 try {
     updateUserProfile($idUser, $imagelink, $about, $birthdate, $city, $email, $gender, $realname, $idCountry);
     move_uploaded_file($photo["tmp_name"],$BASE_DIR .  "images/users/" . $username . '.' . $extension); // this is dangerous

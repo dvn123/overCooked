@@ -13,12 +13,16 @@
 
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <a href="{$BASE_URL}" class="navbar-brand"><img src="{$BASE_URL}images/food-logo1.png" alt="company logo"></a>
-        <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
+        <a href="{$BASE_URL}" class="navbar-brand hidden-xs"><img src="{$BASE_URL}images/food-logo1.png" alt="company logo"></a>
+        <div class="navbar-header">
+            <a href="{$BASE_URL}" class="navbar-brand visible-xs">OverCooked</a>
+
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right pull-left">
                 <li id="askquestion" ><a href = "{$BASE_URL}pages/questions/askquestion.php">Fazer Pergunta</a></li>

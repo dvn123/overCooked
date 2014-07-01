@@ -18,7 +18,7 @@ if (!isset($_POST['title']) || !isset($_POST['content'])) {
     echo 'e400';
     exit;
 } else {
-    if($_POST['title'] == "" || $_POST['content'] == "" || strlen($_POST['title']) > 25 || strlen($_POST['content']) > 1000) {
+    if($_POST['title'] == "" || $_POST['content'] == "" || strlen($_POST['title']) > 100 || strlen($_POST['content']) > 10000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         $_SESSION['form_values'] = $_POST;
         echo 'e400';

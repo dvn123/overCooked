@@ -1,19 +1,13 @@
 {include file='common/header.tpl'}
-
-<div class="container">
-    <div  class="pull-right">
-        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
-            <div class="right-inner-addon">
-                <i class="glyphicon glyphicon-search"></i>
-                <input name="content" type="search"
-                       class="form-control"
-                       placeholder="Pesquisar" />
-            </div>
-        </form>
-    </div>
+<br/><br/>
+<div class="text-center hidden-xs">
+<img src="{$BASE_URL}images/text.png" style="width: 20%; height: 20%">
 </div>
-
-<div class="container ">
+<div class="text-center visible-xs">
+<img src="{$BASE_URL}images/food-logo2.png" style="width: 40%; height: 40%">
+</div>
+<div class="container hidden-xs">
+<br/>
     <div id="carousel-example-generic" class="carousel slide container" data-ride="carousel" style="padding:0;">
 
         <ol class="carousel-indicators">
@@ -44,6 +38,19 @@
         <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
+    </div>
+<br/><br/>
+</div>
+<div class="container">
+    <div  class="pull-right">
+        <form class="navbar-form navbar-right" role="search" action="{$BASE_URL}pages/questions/search.php" method="get" accept-charset="UTF-8">
+            <div class="right-inner-addon">
+                <i class="glyphicon glyphicon-search"></i>
+                <input name="content" type="search"
+                       class="form-control"
+                       placeholder="Pesquisar" />
+            </div>
+        </form>
     </div>
 </div>
 
@@ -93,7 +100,7 @@
             </div>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=last">Ver mais</a>
             </div>
         </div>
         <div class="tab-pane" id="hot">
@@ -101,12 +108,12 @@
                 {foreach $questions_hot as $question_hot}
                     <tr>
                         <td class="col-md-1 text-center">
-                            <div class="row text-danger">{$question_hot.score}</div>
-                            <div class="row text-danger">votos</div>
+                            <div class="row text-danger hidden-xs">{$question_hot.score}</div>
+                            <div class="row text-danger hidden-xs">votos</div>
                         </td>
                         <td class="col-md-2 text-center text-muted">
-                            <div class="row">{$question_hot.numanswers}</div>
-                            <div class="row">respostas</div>
+                            <div class="row hidden-xs">{$question_hot.numanswers}</div>
+                            <div class="row hidden-xs">respostas</div>
                         </td>
                         <td class="col-md-8">
                             <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_hot.idquestion}"><b>{$question_hot.title}</b></a></div>
@@ -129,7 +136,7 @@
             </table>
 
             <div class="text-center">
-                <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=hot">Ver mais</a>
             </div>
         </div>
         {if $USERNAME}
@@ -138,12 +145,12 @@
                     {foreach $questions_subs as $question_subs}
                         <tr>
                             <td class="col-md-1 text-center">
-                                <div class="row text-danger">{$question_subs.score}</div>
-                                <div class="row text-danger">votos</div>
+                                <div class="row text-danger hidden-xs">{$question_subs.score}</div>
+                                <div class="row text-danger hidden-xs">votos</div>
                             </td>
                             <td class="col-md-2 text-center text-muted">
-                                <div class="row">{$question_subs.numanswers}</div>
-                                <div class="row">respostas</div>
+                                <div class="row hidden-xs">{$question_subs.numanswers}</div>
+                                <div class="row hidden-xs">respostas</div>
                             </td>
                             <td class="col-md-8">
                                 <div class="row"><a class="text-grey" href="{$BASE_URL}pages/questions/question.php?idQuestion={$question_subs.idquestion}"><b>{$question_subs.title}</b></a></div>
@@ -166,7 +173,7 @@
                 </table>
 
                 <div class="text-center">
-                    <a href="#" class="btn btn-info">Ver mais</a>
+                    <a href="{$BASE_URL}pages/lists/questions.php?param=subscription">Ver mais</a>
                 </div>
             </div>
         {/if}

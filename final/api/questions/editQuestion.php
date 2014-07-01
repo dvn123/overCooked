@@ -8,7 +8,7 @@ if (!isset($_POST['idQuestion']) || !isset($_POST['content']) || !isset($_POST['
     echo '400';
     exit;
 } else {
-    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || $_POST['title'] == "" || strlen($_POST['title']) > 25 || strlen($_POST['content']) > 1000) {
+    if($_POST['idQuestion'] == "" || $_POST['content'] == "" || $_POST['title'] == "" || strlen($_POST['title']) > 100 || strlen($_POST['content']) > 10000) {
         $_SESSION['error_messages'][] = 'Campos Invalidos!';
         echo '400';
         exit;
@@ -32,7 +32,7 @@ if($profile['usergroup'] == 'user' && $question['iduser'] != $idUser) {
     exit;
 }
 
-if (changeQuestionContent($idUser, $_POST['idQuestion'], $_POST['content']) && changeQuestionTitle($idUser, $_POST['idQuestion'], $_POST['title'])) {
+if (changeQuestionContent($idUser, $_POST['idQuestion'], $_POST['content']) && changeQuestionTitle($_POST['idQuestion'], $_POST['title'])) {
     $_SESSION['success_messages'][] = 'Edição de pergunta bem sucedida!';
     echo '200';
     exit;

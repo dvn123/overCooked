@@ -3,8 +3,8 @@ session_set_cookie_params(3600, '/~lbaw1315');
 
 session_start();
 
-$BASE_DIR = '/opt/lbaw/lbaw1315/public_html/proto/';
-$BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1315/proto/';
+$BASE_DIR = '/opt/lbaw/lbaw1315/public_html/final/';
+$BASE_URL = 'http://gnomo.fe.up.pt/~lbaw1315/final/';
 
 $conn = new PDO('pgsql:host=vdbm;dbname=lbaw1315', 'lbaw1315',
     'oA667ld4');
@@ -25,6 +25,7 @@ $smarty->assign('FIELD_ERRORS', $_SESSION['field_errors']);
 $smarty->assign('SUCCESS_MESSAGES', $_SESSION['success_messages']);
 $smarty->assign('FORM_VALUES', $_SESSION['form_values']);
 $smarty->assign('USERNAME', $_SESSION['username']);
+$smarty->assign('PROFILE_PIC', $_SESSION['profile_pic']);
 $smarty->assign('USERGROUP', $_SESSION['usergroup']);
 
 unset($_SESSION['success_messages']);
