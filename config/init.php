@@ -3,8 +3,8 @@ session_set_cookie_params(3600, '/~lbaw1315');
 
 session_start();
 
-$BASE_DIR = '../../';
-$BASE_URL = 'http://overcooked.herokuapp.com';
+$BASE_DIR = '/../..';
+$BASE_URL = 'http://overcooked.herokuapp.com/';
 
 $conn = new PDO('pgsql:host=ec2-54-247-82-157.eu-west-1.compute.amazonaws.com;dbname=d73f5hc45fjaph', 'yvguauiyvpejti',
     'uFQEhznoHoeKP_n5hAvxndzc7L');
