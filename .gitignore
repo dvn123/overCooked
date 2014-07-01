@@ -1,4 +1,3 @@
-/config/
 /nbproject/
 /test/
 /.idea/
@@ -7,9 +6,3 @@
 /frmk/templates_c/*
 /proto/templates_c/*
 /final/templates_c/*
-/frmk/config/init.php
-/proto/config/init.php
-/final/config/init.php
-
-final/config/init.php
-final/api/questions/deleteQuestionGet.php
