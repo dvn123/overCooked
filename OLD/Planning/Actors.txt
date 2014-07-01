@@ -1,6 +1,0 @@
-Identifier 		Description 	Examples
-Utilizador 		Utilizador não-registado; pode visualizar perguntas e respostas.
-Visitante 		Utilizador não-registado; pode registar-se ou fazer a autenticação no sistema.
-Leitor/Escritor	Utilizador registado; pode colocar bem como responder a questões, votar em respostas
-Moderador 		Utilizador registado; pode eliminar/editar questões ou respostas.
-Admin 			Utilizador registado; responsável pela gestão dos utilizadores e moderadores e tem poder total na supervisão do sistema.
